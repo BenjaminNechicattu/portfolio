@@ -1,7 +1,7 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -39,4 +39,43 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Avatar styling */
+.avatar-container {
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* Section container */
+.section-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Glass card effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Appear animation */
+.appear-animation {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Light/Dark mode transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

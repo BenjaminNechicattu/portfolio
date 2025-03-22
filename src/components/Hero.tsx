@@ -1,6 +1,7 @@
 
 import { useScrollReveal } from '@/utils/animations';
 import { cn } from '@/lib/utils';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const Hero = () => {
   const { ref, isIntersecting } = useScrollReveal();
@@ -22,6 +23,17 @@ const Hero = () => {
             isIntersecting ? "opacity-100" : "opacity-0"
           )}
         >
+          {/* Profile Image */}
+          <div className="mb-8 flex justify-center">
+            <Avatar className="h-40 w-40 border-4 border-background shadow-xl">
+              <AvatarImage 
+                src="/lovable-uploads/9b4974aa-1ace-4917-9f43-c9e9cf89fdfb.png" 
+                alt="Benjamin G. Nechicattu" 
+              />
+              <AvatarFallback>BN</AvatarFallback>
+            </Avatar>
+          </div>
+          
           <div className="mb-6 inline-block">
             <span className="inline-block px-3 py-1 text-xs font-medium tracking-wider uppercase rounded-full bg-secondary text-secondary-foreground">
               Software Engineer

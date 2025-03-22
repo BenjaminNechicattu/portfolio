@@ -1,6 +1,7 @@
 
 import { useScrollReveal } from '@/utils/animations';
 import { cn } from '@/lib/utils';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const About = () => {
   const { ref, isIntersecting } = useScrollReveal();
@@ -22,18 +23,31 @@ const About = () => {
               Software Engineer & Entrepreneur
             </h2>
             
-            <div className="prose prose-lg dark:prose-invert">
-              <p className="text-lg text-muted-foreground mb-4">
-                I'm a software engineer with extensive experience at Amazon, where I've been leading the development of innovative solutions for cloud computing and distributed systems. My passion lies at the intersection of technology and business, where I strive to create impactful products.
-              </p>
+            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start mb-8">
+              <div className="w-40 h-40 flex-shrink-0">
+                <Avatar className="w-full h-full">
+                  <AvatarImage 
+                    src="/lovable-uploads/9b4974aa-1ace-4917-9f43-c9e9cf89fdfb.png" 
+                    alt="Benjamin G. Nechicattu" 
+                    className="object-cover"
+                  />
+                  <AvatarFallback>BN</AvatarFallback>
+                </Avatar>
+              </div>
               
-              <p className="text-lg text-muted-foreground mb-4">
-                With a strong technical background and entrepreneurial mindset, I've contributed to various projects that have enhanced operational efficiency and created value for customers. I'm deeply interested in cloud technologies, scalable systems, and leveraging technology to solve complex business problems.
-              </p>
-              
-              <p className="text-lg text-muted-foreground mb-8">
-                Beyond my technical work, I'm committed to continuous learning and growth, staying at the forefront of emerging technologies and industry best practices. I believe in collaborative problem-solving and creating elegant, efficient solutions that deliver real-world impact.
-              </p>
+              <div className="prose prose-lg dark:prose-invert">
+                <p className="text-lg text-muted-foreground mb-4">
+                  I'm a software engineer with extensive experience at Amazon, where I've been leading the development of innovative solutions for cloud computing and distributed systems. My passion lies at the intersection of technology and business, where I strive to create impactful products.
+                </p>
+                
+                <p className="text-lg text-muted-foreground mb-4">
+                  With a strong technical background and entrepreneurial mindset, I've contributed to various projects that have enhanced operational efficiency and created value for customers. I'm deeply interested in cloud technologies, scalable systems, and leveraging technology to solve complex business problems.
+                </p>
+                
+                <p className="text-lg text-muted-foreground mb-8">
+                  Beyond my technical work, I'm committed to continuous learning and growth, staying at the forefront of emerging technologies and industry best practices. I believe in collaborative problem-solving and creating elegant, efficient solutions that deliver real-world impact.
+                </p>
+              </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
