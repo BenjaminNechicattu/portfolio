@@ -38,6 +38,8 @@ jobs:
         run: |
           if [ -f CNAME ]; then
             cp CNAME dist/
+          elif [ -f public/CNAME ]; then
+            cp public/CNAME dist/
           fi
 
       - name: Upload artifact
