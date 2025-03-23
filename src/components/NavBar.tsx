@@ -51,7 +51,7 @@ const NavBar = () => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-apple py-4",
-        scrolled ? "bg-white/70 dark:bg-black/70 backdrop-blur-md shadow-sm" : "bg-transparent"
+        scrolled ? "bg-white/70 dark:bg-black/70 backdrop-blur-md shadow-sm" : "bg-white/30 dark:bg-black/30 backdrop-blur-md"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
