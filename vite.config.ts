@@ -5,7 +5,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  // Set the base path to '/' for production and development
+  // Set the base path to './' for production and development
   // This ensures assets are loaded correctly on GitHub Pages
   base: "./",
 
