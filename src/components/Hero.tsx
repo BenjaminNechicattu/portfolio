@@ -27,7 +27,7 @@ const Hero = () => {
           <div className="mb-8 flex justify-center">
             <Avatar className="h-40 w-40 border-4 border-background shadow-xl">
               <AvatarImage 
-                src="assets/img/me2.png" 
+                src="/img/me2.png" 
                 alt="Benjamin G Nechicattu" 
               />
               <AvatarFallback>BEN</AvatarFallback>
