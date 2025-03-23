@@ -7,44 +7,37 @@ interface Project {
   description: string;
   technologies: string[];
   type: string;
+  git?: string;
 }
 
 const projects: Project[] = [
   {
-    title: "Cloud Infrastructure Automation",
-    description: "Developed a comprehensive cloud infrastructure automation system that reduced deployment time by 70% and improved resource utilization.",
-    technologies: ["AWS", "Terraform", "Python", "Docker"],
-    type: "Enterprise"
+    title: "Elements",
+    description: "Elements is a desktop application capable of Editing images over voice commands.",
+    technologies: ["Python", "speech recognition", "OpenCV", "Tkinter", "pillow"],
+    type: "Desktop App",
+    git: "https://github.com/BenjaminNechicattu/Image-Editing-Using-Voice-Commands"
   },
   {
-    title: "Distributed Caching System",
-    description: "Architected and implemented a high-performance distributed caching system supporting millions of transactions per second with sub-millisecond latency.",
-    technologies: ["Java", "Redis", "Spring Boot", "Kubernetes"],
-    type: "Infrastructure"
+    title: "Elsa",
+    description: "Elsa is an assistant that can be used to control your computer using voice commands.",
+    technologies: ["Python", "speech recognition", "nltk"],
+    type: "Desktop App",
+    git: "https://github.com/BenjaminNechicattu/voice-controll-pc-python"
   },
   {
-    title: "E-commerce Platform",
-    description: "Built a scalable e-commerce platform with real-time inventory management and advanced analytics capabilities.",
-    technologies: ["Node.js", "React", "MongoDB", "GraphQL"],
-    type: "Web Application"
+    title: "GoGames",
+    description: "Entertaining games built using GoLang. Includes classic snake and more im progress. Play and enjoy!",
+    technologies: ["GoLang", "speech recognition", "nltk"],
+    type: "CLI App",
+    git: "https://github.com/BenjaminNechicattu/GoGames"
   },
   {
-    title: "Real-time Analytics Dashboard",
-    description: "Designed and implemented a real-time analytics dashboard for monitoring system performance and business metrics.",
-    technologies: ["TypeScript", "D3.js", "ElasticSearch", "Kafka"],
-    type: "Data Visualization"
-  },
-  {
-    title: "Serverless API Gateway",
-    description: "Created a serverless API gateway for managing microservices communication with built-in authentication and rate limiting.",
-    technologies: ["AWS Lambda", "API Gateway", "Node.js", "DynamoDB"],
-    type: "Cloud Native"
-  },
-  {
-    title: "Mobile Payment Solution",
-    description: "Developed a secure mobile payment solution with biometric authentication and end-to-end encryption.",
-    technologies: ["React Native", "Java", "Swift", "Firebase"],
-    type: "Mobile Application"
+    title: "gogenc",
+    description: "Go package for generica math ops(max/min) and string ops(reverse)",
+    technologies: ["GoLang", "speech recognition", "nltk"],
+    type: "go package",
+    git: "https://github.com/BenjaminNechicattu/gogenc"
   }
 ];
 
@@ -64,7 +57,17 @@ const ProjectCard = ({ project, isVisible, index }: { project: Project, isVisibl
           {project.type}
         </span>
       </div>
-      <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+      <div className="flex justify items-center mb-3">
+        <h3 className="text-xl font-bold">{project.title}</h3>
+        {project.git && (
+          <a 
+            href={project.git} 
+            className="px-2 py-1 text-xs rounded-full "
+          >
+        GitHub
+          </a>
+        )}
+      </div>
       <p className="text-muted-foreground mb-4 flex-grow">{project.description}</p>
       <div className="flex flex-wrap gap-2 mt-auto">
         {project.technologies.map((tech, idx) => (
@@ -97,6 +100,7 @@ const Projects = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Featured Work</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               A selection of projects that showcase my technical capabilities and problem-solving approach.
+              Find more on my <a href="https://github.com/BenjaminNechicattu" className="text-primary underline">GitHub</a>.
             </p>
           </div>
           

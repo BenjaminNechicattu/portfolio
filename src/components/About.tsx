@@ -20,15 +20,15 @@ const About = () => {
               About Me
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Software Engineer & Entrepreneur
+            A Tech Enthusiast, A Software Engineer, A Problem Solver
             </h2>
             
             <div className="flex flex-col md:flex-row gap-8 items-center md:items-start mb-8">
               <div className="w-40 h-40 flex-shrink-0">
                 <Avatar className="w-full h-full">
                   <AvatarImage 
-                    src="/lovable-uploads/9b4974aa-1ace-4917-9f43-c9e9cf89fdfb.png" 
-                    alt="Benjamin G. Nechicattu" 
+                    src="assets/img/me.jpg" 
+                    alt="Benjamin G Nechicattu" 
                     className="object-cover"
                   />
                   <AvatarFallback>BN</AvatarFallback>
@@ -37,11 +37,11 @@ const About = () => {
               
               <div className="prose prose-lg dark:prose-invert">
                 <p className="text-lg text-muted-foreground mb-4">
-                  I'm a software engineer with extensive experience at Amazon, where I've been leading the development of innovative solutions for cloud computing and distributed systems. My passion lies at the intersection of technology and business, where I strive to create impactful products.
+                  I'm a software engineer with extensive experience at IBM, where I've been developing solutions to our customers. My passion lies at the intersection of technology and business, where I strive to create impactful products.
                 </p>
                 
                 <p className="text-lg text-muted-foreground mb-4">
-                  With a strong technical background and entrepreneurial mindset, I've contributed to various projects that have enhanced operational efficiency and created value for customers. I'm deeply interested in cloud technologies, scalable systems, and leveraging technology to solve complex business problems.
+                  With a strong technical background, I've contributed to various projects that have enhanced operational efficiency and created value for customers. I'm deeply interested in Ai, cloud technologies, scalable systems, and leveraging technology to solve complex business problems.
                 </p>
                 
                 <p className="text-lg text-muted-foreground mb-8">
@@ -54,16 +54,17 @@ const About = () => {
               <div className="glass-card p-6">
                 <h3 className="text-xl font-semibold mb-2">Education</h3>
                 <p className="text-muted-foreground">
-                  Computer Science & Engineering<br />
-                  Mahatma Gandhi University
+                  Computer Science & Engineering (B.Tech)<br />
+                  St. Joseph's College of Engineering and Technology (SJCET)<br />
+                  <br />
                 </p>
               </div>
               
               <div className="glass-card p-6">
                 <h3 className="text-xl font-semibold mb-2">Location</h3>
                 <p className="text-muted-foreground">
-                  Seattle, Washington<br />
-                  United States
+                  Palai, Kottayam<br />
+                  Kerala India
                 </p>
               </div>
             </div>

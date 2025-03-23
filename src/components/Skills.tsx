@@ -10,22 +10,26 @@ interface SkillCategory {
 const skillCategories: SkillCategory[] = [
   {
     name: "Programming Languages",
-    skills: ["Java", "Python", "JavaScript", "TypeScript", "C++", "Go"]
+    skills: ["Go", "Python", "JavaScript", "TypeScript"]
   },
   {
     name: "Web Technologies",
-    skills: ["React", "Node.js", "Angular", "HTML5", "CSS3", "GraphQL", "REST APIs"]
+    skills: ["Node.js", "HTML5", "CSS3", "GraphQL", "REST APIs", "React"]
   },
   {
     name: "Cloud & DevOps",
-    skills: ["AWS", "Docker", "Kubernetes", "CI/CD", "Terraform", "Microservices"]
+    skills: ["AWS", "GCP", "Docker", "Kubernetes", "CI/CD","Microservices"]
   },
   {
     name: "Databases",
-    skills: ["SQL", "NoSQL", "DynamoDB", "MongoDB", "PostgreSQL", "Redis"]
+    skills: ["SQL", "PostgreSQL", "SqLite", "Cassandra","Redis"]
   },
   {
-    name: "Tools & Methodologies",
+    name: "Other-Tools",
+    skills: ["Kafka", "MQTT", "Nats", "Redis", "RabbitMQ"]
+  },
+  {
+    name: "Methodologies",
     skills: ["Git", "Agile", "Scrum", "JIRA", "Design Patterns", "System Design"]
   }
 ];

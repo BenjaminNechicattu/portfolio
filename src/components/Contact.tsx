@@ -23,21 +23,6 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Message sent",
-        description: "Thanks for reaching out! I'll get back to you soon.",
-      });
-      setFormData({ name: '', email: '', message: '' });
-      setIsSubmitting(false);
-    }, 1500);
-  };
-
   return (
     <section id="contact" className="py-20">
       <div className="section-container" ref={ref}>
@@ -55,131 +40,89 @@ const Contact = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-            <div className="lg:col-span-2 space-y-6">
-              <div className={cn(
-                "glass-card p-6 transition-all duration-500 ease-apple",
-                isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              )}
-                style={{ transitionDelay: isIntersecting ? '100ms' : '0ms' }}
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary/10 p-3 rounded-full">
-                    <Mail className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1">Email</h3>
-                    <a href="mailto:benjamin@example.com" className="text-muted-foreground hover:text-foreground transition-colors">
-                      benjamin@example.com
-                    </a>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+            
+            <div className={cn(
+              "glass-card p-6 transition-all duration-500 ease-apple",
+              isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            )}
+              style={{ transitionDelay: isIntersecting ? '100ms' : '0ms' }}
+            >
+              <div className="flex items-start space-x-4">
+                <div className="bg-primary/10 p-3 rounded-full">
+                  <Mail className="h-6 w-6 text-primary" />
                 </div>
-              </div>
-              
-              <div className={cn(
-                "glass-card p-6 transition-all duration-500 ease-apple",
-                isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              )}
-                style={{ transitionDelay: isIntersecting ? '200ms' : '0ms' }}
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary/10 p-3 rounded-full">
-                    <Linkedin className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1">LinkedIn</h3>
-                    <a 
-                      href="https://www.linkedin.com/in/benjamin-g-nechicattu/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      benjamin-g-nechicattu
-                    </a>
-                  </div>
-                </div>
-              </div>
-              
-              <div className={cn(
-                "glass-card p-6 transition-all duration-500 ease-apple",
-                isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              )}
-                style={{ transitionDelay: isIntersecting ? '300ms' : '0ms' }}
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary/10 p-3 rounded-full">
-                    <Phone className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1">Phone</h3>
-                    <p className="text-muted-foreground">
-                      Available upon request
-                    </p>
-                  </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-1">Email</h3>
+                  <a href="mailto:benjaminnechicattu@gmail.com" className="text-muted-foreground hover:text-foreground transition-colors">
+                    benjaminnechicattu@gmail.com
+                  </a>
                 </div>
               </div>
             </div>
             
             <div className={cn(
-              "lg:col-span-3 glass-card p-6 transition-all duration-500 ease-apple",
+              "glass-card p-6 transition-all duration-500 ease-apple",
+              isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            )}
+              style={{ transitionDelay: isIntersecting ? '200ms' : '0ms' }}
+            >
+              <div className="flex items-start space-x-4">
+                <div className="bg-primary/10 p-3 rounded-full">
+                  <Linkedin className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-1">LinkedIn</h3>
+                  <a 
+                    href="https://www.linkedin.com/in/benjamin-g-nechicattu/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    benjamin-g-nechicattu
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div className={cn(
+              "glass-card p-6 transition-all duration-500 ease-apple",
+              isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            )}
+              style={{ transitionDelay: isIntersecting ? '300ms' : '0ms' }}
+            >
+              <div className="flex items-start space-x-4">
+                <div className="bg-primary/10 p-3 rounded-full">
+                  <Phone className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-1">Phone</h3>
+                  <a href="tel:+919847176142" className="text-muted-foreground hover:text-foreground transition-colors">
+                    +91 9847 17 6142 (preferred)
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className={cn(
+              "glass-card p-6 transition-all duration-500 ease-apple",
               isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             )}
               style={{ transitionDelay: isIntersecting ? '400ms' : '0ms' }}
             >
-              <h3 className="text-xl font-bold mb-6">Send a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-1">
-                    Name
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full"
-                    required
-                  />
+              <div className="flex items-start space-x-4">
+                <div className="bg-primary/10 p-3 rounded-full">
+                  <Phone className="h-6 w-6 text-primary" />
                 </div>
-                
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-1">
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full"
-                    required
-                  />
+                  <h3 className="text-lg font-semibold mb-1">WhatsApp</h3>
+                  <a href="https://wa.me/919847176142" className="text-muted-foreground hover:text-foreground transition-colors">
+                    +91 9847 17 6142 (secondary)
+                  </a>
                 </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-1">
-                    Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full min-h-[120px]"
-                    required
-                  />
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </Button>
-              </form>
+              </div>
             </div>
+            
           </div>
         </div>
       </div>

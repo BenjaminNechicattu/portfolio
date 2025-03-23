@@ -12,7 +12,7 @@ import Footer from '@/components/Footer';
 const Index = () => {
   // Set metadata and title
   useEffect(() => {
-    document.title = "Benjamin G. Nechicattu | Software Engineer";
+    document.title = "Benjamin G Nechicattu | Software Engineer";
   }, []);
 
   return (
