@@ -5,9 +5,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  // Set the base path to '/' for production and development
-  // This ensures assets are loaded correctly on GitHub Pages
-  base: "./",
+  // Using empty string for base path to ensure proper relative paths
+  base: "",
 
   server: {
     host: "::",
@@ -20,6 +19,18 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
+    sourcemap: mode === "development",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
     },
   },
 }));

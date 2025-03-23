@@ -3,7 +3,7 @@ name: Deploy Vite App to GitHub Pages
 
 on:
   push:
-    branches: ["dev"]  # Change this if deploying from another branch
+    branches: ["main"]  # Change this if deploying from another branch
   workflow_dispatch:
 
 permissions:
@@ -33,6 +33,20 @@ jobs:
 
       - name: Build Project
         run: npm run build
+
+      - name: Copy CNAME to dist
+        run: |
+          if [ -f CNAME ]; then
+            cp CNAME dist/
+          elif [ -f public/CNAME ]; then
+            cp public/CNAME dist/
+          fi
+
+      - name: Create 404.html for SPA routing
+        run: cp dist/index.html dist/404.html
+
+      - name: Create .nojekyll file
+        run: touch dist/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
