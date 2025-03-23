@@ -3,7 +3,7 @@ name: Deploy Vite App to GitHub Pages
 
 on:
   push:
-    branches: ["dev"]  # Change this if deploying from another branch
+    branches: ["main"]  # Change this if deploying from another branch
   workflow_dispatch:
 
 permissions:
