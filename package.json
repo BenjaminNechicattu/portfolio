@@ -9,9 +9,8 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "clean": "rm -rf dist && rm -rf node_modules/.cache",
-    "predeploy": "npm run clean && npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "git subtree push --prefix dist origin dev"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
