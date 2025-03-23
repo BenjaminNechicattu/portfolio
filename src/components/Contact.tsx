@@ -23,21 +23,6 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Message sent",
-        description: "Thanks for reaching out! I'll get back to you soon.",
-      });
-      setFormData({ name: '', email: '', message: '' });
-      setIsSubmitting(false);
-    }, 1500);
-  };
-
   return (
     <section id="contact" className="py-20">
       <div className="section-container" ref={ref}>
