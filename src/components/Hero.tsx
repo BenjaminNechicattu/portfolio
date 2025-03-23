@@ -28,7 +28,7 @@ const Hero = () => {
             <Avatar className="h-40 w-40 border-4 border-background shadow-xl">
               <AvatarImage 
                 src="./assets/img/me2.png" 
-                alt="Benjamin G Nechicattu" 
+                alt="Benjamin G Nechicattu u" 
               />
               <AvatarFallback>BN</AvatarFallback>
             </Avatar>
