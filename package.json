@@ -9,8 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "git subtree push --prefix dist origin dev"
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
