@@ -27,8 +27,8 @@ const Hero = () => {
           <div className="mb-8 flex justify-center">
             <Avatar className="h-40 w-40 border-4 border-background shadow-xl">
               <AvatarImage 
-                src="/lovable-uploads/9b4974aa-1ace-4917-9f43-c9e9cf89fdfb.png" 
-                alt="Benjamin G. Nechicattu" 
+                src="assets/img/me2.png" 
+                alt="Benjamin G Nechicattu" 
               />
               <AvatarFallback>BN</AvatarFallback>
             </Avatar>
@@ -41,13 +41,13 @@ const Hero = () => {
           </div>
           
           <h1 className="mb-6 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-            Benjamin G. Nechicattu
+            Benjamin G Nechicattu
           </h1>
           
           <p className="mb-10 text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Building innovative software solutions at Amazon and beyond. 
-            Specializing in cloud computing, distributed systems, and entrepreneurship.
-          </p>
+            Building innovative software solutions at International Business Machines (IBM). 
+            Passionate about technology and creating impactful products. A Tech and Science enthusiast.
+            </p>
           
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
             <a 

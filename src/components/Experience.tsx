@@ -12,39 +12,39 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
-    company: "Amazon",
-    position: "Software Engineer",
-    period: "2016 - Present",
-    description: "Leading development of cloud-based software solutions for AWS infrastructure, focusing on distributed systems and scalable architectures.",
+    company: "International Business Machines (IBM)",
+    position: "System Software Engineer",
+    period: "Dec/2023 - Present",
+    description: "Software Engineer at WatsonX Orchestrate IBM, focusing backend services and ai solutions.",
     highlights: [
-      "Architected and implemented scalable microservices using Java and AWS technologies",
-      "Led cross-functional teams to deliver critical infrastructure components",
-      "Implemented CI/CD pipelines improving deployment efficiency by 40%",
-      "Optimized database operations resulting in 30% performance improvement"
+      "Architected and implemented scalable microservices using Python, Go, Node.js and Ai technologies to deliver an AI chat experience for WatsonX Orchestrate.",
+      "Developed and maintained RESTful APIs for seamless integration with front-end applications, enhancing user experience and system performance.",
+      "Collaborated with cross-functional teams to design and implement robust solutions, ensuring data integrity and accessibility.",
     ]
   },
   {
-    company: "Shopsense Retail Technologies (Fynd)",
-    position: "Software Engineer",
-    period: "2014 - 2016",
-    description: "Developed e-commerce solutions and integrated point-of-sale systems for retail clients.",
+    company: "Intellicar Telematics",
+    position: "Software Systems Engineer",
+    period: "Aug/2022 - Nov/2023",
+    description: "Designed & developed services in Golang. Provided support for the telematics infrastructure.",
     highlights: [
-      "Built and maintained backend services using Node.js and MongoDB",
-      "Implemented real-time inventory management system",
-      "Developed APIs for mobile applications and third-party integrations",
-      "Optimized database queries improving application performance"
+      "Built and maintained backend services using Golang and MySQL to support real-time data processing and analytics for telematics applications.",
+      "Designed and developed a proprietary storage application utilizing Google Cloud Platform's Object Store APls for seamless file management.",
+      "Developed an application resembling a SIM management platform by integrating APls from major ISPs like Airtel and Vodafone significantly enhancing operational efficiency and enabling prompt client interactions.",
+      "Developed email and SMS services using Sendgrid and infobip for multi-factor authentication, enhancing system security.",
+      "Created GoLang, Python and JavaScript client libraries to seamlessly integrate UI with the API's, enhancing user experience and leading to increased customer satisfaction."
     ]
   },
   {
-    company: "Entrepreneurial Ventures",
-    position: "Co-founder & Technical Lead",
-    period: "2012 - 2014",
-    description: "Co-founded technology startups focusing on mobile applications and web services.",
+    company: "Algomox",
+    position: "Software Engineer",
+    period: "Dec/2020 - Jul/2022",
+    description: "Developed AiOps which automates ITOps, which analyses KPIs and Logs to provide insights.",
     highlights: [
-      "Developed full-stack web applications from concept to deployment",
-      "Created mobile apps for Android and iOS platforms",
-      "Managed technical infrastructure and development workflows",
-      "Implemented analytics systems for data-driven decision making"
+      "Engineered applications for the AlOps platform, showcasing adaptability and creativity in addressing intricate operational challenges.",
+      "Developed a robust Ticketing System (CEC) integral to the AlOps Platform, enabling seamless ticket filing and streamlined ticket lifecycle management, further enhancing operational efficiency.",
+      "Orchestrated the development of data-fetching APls, empowering the AlOps Dashboard with real-time insights, and bolstering data-driven decision-making.",
+      "Designed and implemented a dynamic Log Collecting Agent, adept at capturing live logs from diverse systems strengthening system monitoring and diagnostic capabilities."
     ]
   }
 ];
