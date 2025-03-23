@@ -1,10 +1,10 @@
-
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,6 +41,10 @@ const NavBar = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -84,8 +88,7 @@ const NavBar = () => {
           </nav>
           
           <div className="md:hidden">
-            {/* Mobile menu button - not implementing the full mobile menu for simplicity */}
-            <button className="p-2">
+            <button onClick={toggleMenu} className="p-2">
               <span className="sr-only">Open menu</span>
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -94,6 +97,31 @@ const NavBar = () => {
           </div>
         </div>
       </div>
+      {isMenuOpen && (
+        <div className="md:hidden">
+          <nav className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {[
+              { id: 'hero', label: 'Home' },
+              { id: 'about', label: 'About' },
+              { id: 'experience', label: 'Experience' },
+              { id: 'skills', label: 'Skills' },
+              { id: 'projects', label: 'Projects' },
+              { id: 'contact', label: 'Contact' }
+            ].map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  scrollToSection(item.id);
+                  setIsMenuOpen(false);
+                }}
+                className="block text-gray-900 dark:text-white px-3 py-2 rounded-md text-base font-medium"
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
