@@ -27,7 +27,7 @@ const About = () => {
               <div className="w-40 h-40 flex-shrink-0">
                 <Avatar className="w-full h-full">
                   <AvatarImage 
-                    src="assets/img/me.jpg" 
+                    src="./assets/img/me.jpg" 
                     alt="Benjamin G Nechicattu" 
                     className="object-cover"
                   />
