@@ -56,14 +56,14 @@ const Footer = () => {
             &copy; {currentYear} Benjamin G Nechicattu. All rights reserved.
           </p>
           
-          <div className="flex space-x-6">
+          {/* <div className="flex space-x-6">
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Privacy Policy
             </a>
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Terms of Service
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>
