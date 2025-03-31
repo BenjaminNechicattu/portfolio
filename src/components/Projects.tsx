@@ -27,15 +27,15 @@ const projects: Project[] = [
   },
   {
     title: "GoGames",
-    description: "Entertaining games built using GoLang. Includes classic snake, simple cli chess and more in progress. Play and enjoy!",
-    technologies: ["GoLang", "speech recognition", "nltk"],
-    type: "CLI App",
+    description: "Entertaining collection of cli games built using GoLang. Includes classic snake, multiplayer chess and more in progress. Play and enjoy!",
+    technologies: ["GoLang", "CLI", "games"],
+    type: "CLI Apps",
     git: "https://github.com/BenjaminNechicattu/GoGames"
   },
   {
     title: "gogenc",
-    description: "Go package for generica compare ops(max/min), string ops(reverse), GetEnv, and more",
-    technologies: ["GoLang", "speech recognition", "nltk"],
+    description: "Go package for generica compare ops(max/min), string ops(reverse), GetEnv, and more.",
+    technologies: ["GoLang", "package"],
     type: "go package",
     git: "https://github.com/BenjaminNechicattu/gogenc"
   }
