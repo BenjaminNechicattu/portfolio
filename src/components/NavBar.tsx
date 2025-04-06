@@ -18,7 +18,7 @@ const NavBar = () => {
         setScrolled(isScrolled);
       }
 
-      // Determine active section (only on the home page)
+      // Determine active section
       if (location.pathname === '/') {
         const sections = ['hero', 'about', 'experience', 'skills', 'projects', 'contact'];
         for (const section of [...sections].reverse()) {
@@ -31,6 +31,8 @@ const NavBar = () => {
             }
           }
         }
+      } else if (location.pathname === '/blog') {
+        setActiveSection('blog');
       }
     };
 

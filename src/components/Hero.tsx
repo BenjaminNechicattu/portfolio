@@ -1,4 +1,3 @@
-
 import { useScrollReveal } from '@/utils/animations';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
@@ -67,22 +66,24 @@ const Hero = () => {
       </div>
       
       {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-        <span className="text-sm text-muted-foreground mb-2">Scroll</span>
-        <svg 
-          className="w-6 h-6 text-muted-foreground" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth={2} 
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-          />
-        </svg>
+      <div className="absolute bottom-10 w-full flex justify-center">
+        <div className="flex flex-col items-center space-y-1 animate-bounce">
+          <span className="text-sm text-muted-foreground">Scroll</span>
+          <svg 
+            className="w-6 h-6 text-muted-foreground" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
+        </div>
       </div>
     </section>
   );
