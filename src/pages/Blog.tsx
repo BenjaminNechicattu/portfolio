@@ -34,14 +34,17 @@ const Blog = () => {
     const fetchBlogs = async () => {
       const loadedBlogs = await Promise.all(
         blogs.map(async (fileName) => {
-          const response = await fetch(`/src/data/blogs/${fileName}`);
+          const response = await fetch(`https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/main/src/data/blogs/${fileName}`);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch blog: ${fileName}`);
+          }
           return response.json();
         })
       );
       setBlogData(loadedBlogs);
     };
 
-    fetchBlogs();
+    fetchBlogs().catch((error) => console.error(error));
   }, []);
 
   return (
