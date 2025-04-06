@@ -10,7 +10,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
   return (
     <>
       <div className="glass-card p-6 cursor-pointer" onClick={openModal}>
-        <img src={image} alt={title} className="w-full h-48 object-cover mb-4 rounded" />
+        <img src={image} alt={title} className="w-full h-auto max-h-48 object-cover mb-4 rounded" />
         <h2 className="text-xl font-semibold mb-2">{title}</h2>
         <p className="text-muted-foreground mb-2">{description}</p>
         <p className="text-sm text-muted-foreground mb-2">By {author} on {new Date(date).toLocaleDateString()}</p>
@@ -28,7 +28,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
           <div className="overflow-y-auto max-h-[80vh] text-justify p-4">
             <h2 className="text-2xl font-bold mb-4">#{id}</h2>
             <h2 className="text-2xl font-bold mb-4">{title}</h2>
-            <img src={image} alt={title} className="w-full h-64 object-cover mb-4 rounded" />
+            <img src={image} alt={title} className="w-full h-auto max-h-100 object-cover mb-4 rounded" />
             <hr className="my-4" />
             <p><strong>Date:</strong> {new Date(date).toLocaleDateString()}</p>
             <p><strong>Summary:</strong> {description}</p>
