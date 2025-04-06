@@ -32,12 +32,14 @@ const Blog = () => {
           {blogData.map((blog, index) => (
             <BlogCard
               key={index}
+              id={blog.id}
               title={blog.title}
               description={blog.description}
               image={blog.image}
               author={blog.author}
               date={blog.date}
               tags={blog.tags}
+              content={blog.content}
             />
           ))}
         </div>

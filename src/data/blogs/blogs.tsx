@@ -1,6 +1,8 @@
 const blogs = [
-  "blog_1.json",
-//   "blog_2.json",
+  "aliens_1.json",
+  "aliens_1.json",
+  "aliens_1.json",
+  "aliens_1.json",
 ];
 
 export default blogs;
