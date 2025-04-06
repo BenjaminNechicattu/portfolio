@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -140,6 +139,10 @@
   .appear-animation > *:nth-child(8) { animation-delay: 0.8s; }
   .appear-animation > *:nth-child(9) { animation-delay: 0.9s; }
   .appear-animation > *:nth-child(10) { animation-delay: 1s; }
+  
+  .max-w-3xl {
+    max-width: 60rem;
+  }
 }
 
 @keyframes fadeIn {
