@@ -27,6 +27,36 @@ const Contact = () => {
       content: (
         <div className="flex items-start space-x-4">
           <div className="bg-primary/10 p-3 rounded-full">
+            <Phone className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-1">Phone</h3>
+            <a href="tel:+919847176142" className="text-muted-foreground hover:text-foreground transition-colors">
+              +91 9847 17 6142 (preferred)
+            </a>
+          </div>
+        </div>
+      )
+    },
+    {
+      content: (
+        <div className="flex items-start space-x-4">
+          <div className="bg-primary/10 p-3 rounded-full">
+            <Phone className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-1">WhatsApp</h3>
+            <a href="https://wa.me/919847176142" className="text-muted-foreground hover:text-foreground transition-colors">
+              +91 9847 17 6142 (secondary)
+            </a>
+          </div>
+        </div>
+      )
+    },
+    {
+      content: (
+        <div className="flex items-start space-x-4">
+          <div className="bg-primary/10 p-3 rounded-full">
             <Mail className="h-6 w-6 text-primary" />
           </div>
           <div>
@@ -53,36 +83,6 @@ const Contact = () => {
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               benjamin-g-nechicattu
-            </a>
-          </div>
-        </div>
-      )
-    },
-    {
-      content: (
-        <div className="flex items-start space-x-4">
-          <div className="bg-primary/10 p-3 rounded-full">
-            <Phone className="h-6 w-6 text-primary" />
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-1">Phone</h3>
-            <a href="tel:+919847176142" className="text-muted-foreground hover:text-foreground transition-colors">
-              +91 9847 17 6142 (preferred)
-            </a>
-          </div>
-        </div>
-      )
-    },
-    {
-      content: (
-        <div className="flex items-start space-x-4">
-          <div className="bg-primary/10 p-3 rounded-full">
-            <Phone className="h-6 w-6 text-primary" />
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-1">WhatsApp</h3>
-            <a href="https://wa.me/919847176142" className="text-muted-foreground hover:text-foreground transition-colors">
-              +91 9847 17 6142 (secondary)
             </a>
           </div>
         </div>
