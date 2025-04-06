@@ -48,7 +48,7 @@ const Hero = () => {
             Passionate about technology and creating impactful products. A Tech and Science enthusiast.
             </p>
           
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+          <div className="flex flex-row justify-center items-center space-x-4">
             <a 
               href="#contact" 
               className="px-8 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-all duration-300 hover:shadow-lg focus:ring-2 focus:ring-offset-2 focus:ring-primary"
