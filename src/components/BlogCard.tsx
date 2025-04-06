@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
+import ReactMarkdown from 'react-markdown';
 
 const BlogCard = ({ id, title, description, image, author, date, tags = [], content }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +16,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
         <img           src={image}           alt={title}           className="w-full h-auto max-h-48 object-cover mb-4 rounded"         />
         <h2 className="text-xl font-semibold mb-2">{title}</h2>
         <p className="text-muted-foreground mb-2">{description}</p>
-        <p className="text-sm text-muted-foreground mb-2">By {author} on {new Date(date).toLocaleDateString()}</p>
+        <p className="text-sm text-muted-foreground mb-2">{author} on {new Date(date).toLocaleDateString()}</p>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag, index) => (
             <span key={index} className="text-xs bg-blue-100 text-gray-800 px-3 py-1 rounded shadow-sm">
@@ -40,9 +41,10 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
             <p><strong>Date:</strong> {new Date(date).toLocaleDateString()}</p>
             <p><strong>Summary:</strong> {description}</p>
             <hr className="my-4" />
-            <p><strong>Content:</strong> {content}</p>
+            
+            <ReactMarkdown>{content}</ReactMarkdown>
             <hr className="my-4" />
-            <p><strong>Author:</strong> {author}</p>
+            <p>{author}</p>
             <br></br>
             <div className="flex flex-wrap gap-2 mb-4">
               {tags.map((tag, index) => (

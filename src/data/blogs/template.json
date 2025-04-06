@@ -1,0 +1,10 @@
+{
+    "id": 0,
+    "title": "Here Goes the title",
+    "image": "link to image",
+    "date": "2023-11-15",
+    "author": "Benjamin G Nechicattu",
+    "tags": ["Add", "tags", "tag1", "tag2"],
+    "description": "This is the description of the blog.",
+    "content": "This is the content of the blog. Ben_G remember that it suports mark down :)"
+}

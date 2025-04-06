@@ -8,6 +8,8 @@ import Footer from '@/components/Footer';
 const Blog = () => {
   const navigate = useNavigate();
   const [blogData, setBlogData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const blogsPerPage = 6;
 
   const navigateToContact = () => {
     const element = document.getElementById('contact');
@@ -33,23 +35,37 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       const isLocal = window.location.hostname === 'localhost';
-      const loadedBlogs = await Promise.all(
-        blogs.map(async (fileName) => {
-          const url = isLocal 
-            ? `/src/data/blogs/${fileName}` 
-            : `https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/main/src/data/blogs/${fileName}`;
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error(`Failed to fetch blog: ${fileName}`);
-          }
-          return response.json();
-        })
-      );
-      setBlogData(loadedBlogs);
+      const startIndex = (currentPage - 1) * blogsPerPage;
+      const endIndex = startIndex + blogsPerPage;
+      const blogsToFetch = blogs.slice(startIndex, endIndex);
+
+      try {
+        const loadedBlogs = await Promise.all(
+          blogsToFetch.map(async (fileName) => {
+            const url = isLocal 
+              ? `/src/data/blogs/${fileName}` 
+              : `https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/main/src/data/blogs/${fileName}`;
+            const response = await fetch(url);
+            if (!response.ok) {
+              throw new Error(`Failed to fetch blog: ${fileName}`);
+            }
+            return response.json();
+          })
+        );
+        setBlogData(loadedBlogs);
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      }
     };
 
-    fetchBlogs().catch((error) => console.error(error));
-  }, []);
+    fetchBlogs();
+  }, [currentPage]);
+
+  const paginate = (pageNumber) => {
+    if (pageNumber > 0 && pageNumber <= Math.ceil(blogs.length / blogsPerPage)) {
+      setCurrentPage(pageNumber);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -89,7 +105,28 @@ const Blog = () => {
             />
           ))}
         </div>
-        <div className="mt-20">
+        <div className="flex flex-col items-center mt-8 space-y-4">
+          <div className="flex space-x-4">
+            <button
+              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span className="text-sm text-muted-foreground self-center">
+              Page {currentPage} of {Math.ceil(blogs.length / blogsPerPage)}
+            </span>
+            <button
+              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage >= Math.ceil(blogs.length / blogsPerPage)}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+        <div className="mt-20 text-center">
             <p className="text-sm text-muted-foreground mt-4">
             If any content in any of the blog is found offensive or hurtful, please feel free to <span className="text-blue-500 hover:underline cursor-pointer" onClick={navigateToContact}>contact me</span>.
             </p>
