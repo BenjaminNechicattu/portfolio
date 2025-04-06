@@ -1,10 +1,10 @@
 {
     "id": 0,
     "title": "Here Goes the title",
-    "image": "link to image",
+    "image": "https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/refs/heads/main/public/img/imgplaceholder.webp",
     "date": "2023-11-15",
     "author": "Benjamin G Nechicattu",
     "tags": ["Add", "tags", "tag1", "tag2"],
     "description": "This is the description of the blog.",
-    "content": "This is the content of the blog. Ben_G remember that it suports mark down :)"
+    "content": "This is the content of the blog. Ben_G remember that it suports mark down :) ![Inspiring Child and Universe](https://miro.medium.com/v2/resize:fit:640/format:webp/1*FdNIId8uKnp_TEpG3uFNAQ.jpeg)"
 }
