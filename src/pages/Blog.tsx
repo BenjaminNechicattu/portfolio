@@ -32,9 +32,13 @@ const Blog = () => {
 
   useEffect(() => {
     const fetchBlogs = async () => {
+      const isLocal = window.location.hostname === 'localhost';
       const loadedBlogs = await Promise.all(
         blogs.map(async (fileName) => {
-          const response = await fetch(`https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/main/src/data/blogs/${fileName}`);
+          const url = isLocal 
+            ? `/src/data/blogs/${fileName}` 
+            : `https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/main/src/data/blogs/${fileName}`;
+          const response = await fetch(url);
           if (!response.ok) {
             throw new Error(`Failed to fetch blog: ${fileName}`);
           }
