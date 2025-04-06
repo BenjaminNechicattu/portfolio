@@ -32,12 +32,14 @@ const Blog = () => {
     }
   };
 
+  const reversedBlogs = [...blogs].reverse();
+
   useEffect(() => {
     const fetchBlogs = async () => {
       const isLocal = window.location.hostname === 'localhost';
       const startIndex = (currentPage - 1) * blogsPerPage;
       const endIndex = startIndex + blogsPerPage;
-      const blogsToFetch = blogs.slice(startIndex, endIndex);
+      const blogsToFetch = reversedBlogs.slice(startIndex, endIndex);
 
       try {
         const loadedBlogs = await Promise.all(
