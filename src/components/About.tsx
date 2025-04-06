@@ -51,20 +51,20 @@ const About = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+              
+              <div className="glass-card p-6">
+                <h3 className="text-xl font-semibold mb-2">Location</h3>
+                <p className="text-muted-foreground">
+                  Nechicattu House Chelakompu PO Karukachal 686540<br />
+                  Kottayam Kerala India
+                </p>
+              </div>
               <div className="glass-card p-6">
                 <h3 className="text-xl font-semibold mb-2">Education</h3>
                 <p className="text-muted-foreground">
                   Computer Science & Engineering (B.Tech)<br />
                   St. Joseph's College of Engineering and Technology (SJCET)<br />
-                  <br />
-                </p>
-              </div>
-              
-              <div className="glass-card p-6">
-                <h3 className="text-xl font-semibold mb-2">Location</h3>
-                <p className="text-muted-foreground">
-                  Palai, Kottayam<br />
-                  Kerala India
+                  Palai Kerala  India
                 </p>
               </div>
             </div>
