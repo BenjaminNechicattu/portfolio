@@ -15,6 +15,16 @@ const Hero = () => {
       <div className="absolute -top-20 -left-20 w-96 h-96 bg-blue-100 dark:bg-blue-900/20 rounded-full filter blur-3xl opacity-30 animate-pulse" />
       <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-100 dark:bg-purple-900/20 rounded-full filter blur-3xl opacity-30 animate-pulse" />
       
+      <div className="absolute top-20 right-4">
+        <span className="inline-block tex6 sxs font-medium tracking-wider uppercase">
+          <img 
+        src="https://camo.githubusercontent.com/35761d431dc488b7c55fb41896a02b2a55986cfdf149abf22c47ae1024e99a4e/68747470733a2f2f6b6f6d617265762e636f6d2f67687076632f3f757365726e616d653d62656e6e65636869266c6162656c3d56697369746f727326636f6c6f723d306537356236267374796c653d666c6174" 
+        alt="visitor count" 
+        className="h-4"
+          />
+        </span>
+      </div>
+
       <div className="section-container relative z-10">
         <div 
           className={cn(
@@ -34,10 +44,10 @@ const Hero = () => {
           </div>
           
           <div className="mb-6 inline-block">
-            <span className="inline-block px-3 py-1 text-xs font-medium tracking-wider uppercase rounded-full bg-secondary text-secondary-foreground">
+              <span className="inline-block px-3 py-1 text-xs font-medium tracking-wider uppercase rounded-full bg-secondary text-secondary-foreground">
               Software Engineer
-            </span>
-          </div>
+              </span>
+            </div>
           
           <h1 className="mb-6 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             Benjamin G Nechicattu
