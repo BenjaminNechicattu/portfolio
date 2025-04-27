@@ -1,4 +1,3 @@
-
 import { useScrollReveal } from '@/utils/animations';
 import { cn } from '@/lib/utils';
 
@@ -7,7 +6,7 @@ interface Project {
   description: string;
   technologies: string[];
   type: string;
-  git?: string;
+  link?: string;
 }
 
 const projects: Project[] = [
@@ -16,33 +15,40 @@ const projects: Project[] = [
     description: "Elements is a desktop application capable of Editing images over voice commands.",
     technologies: ["Python", "speech recognition", "OpenCV", "Tkinter", "pillow"],
     type: "Desktop App",
-    git: "https://github.com/BenjaminNechicattu/Image-Editing-Using-Voice-Commands"
+    link: "https://github.com/BenjaminNechicattu/Image-Editing-Using-Voice-Commands"
   },
   {
     title: "Elsa",
     description: "Elsa is an assistant that can be used to control your computer using voice commands.",
     technologies: ["Python", "speech recognition", "nltk"],
     type: "Desktop App",
-    git: "https://github.com/BenjaminNechicattu/voice-controll-pc-python"
+    link: "https://github.com/BenjaminNechicattu/voice-controll-pc-python"
   },
   {
     title: "GoGames",
     description: "Entertaining collection of cli games built using GoLang. Includes classic snake, multiplayer chess and more in progress. Play and enjoy!",
     technologies: ["GoLang", "CLI", "games"],
     type: "CLI Apps",
-    git: "https://github.com/BenjaminNechicattu/GoGames"
+    link: "https://github.com/BenjaminNechicattu/GoGames"
   },
   {
     title: "gogenc",
     description: "Go package for generica compare ops(max/min), string ops(reverse), GetEnv, and more.",
     technologies: ["GoLang", "package"],
     type: "go package",
-    git: "https://github.com/BenjaminNechicattu/gogenc"
+    link: "https://github.com/BenjaminNechicattu/gogenc"
+  },
+  {
+    title: "Design Projects",
+    description: "User interface design projects showcasing my skills in creating visually appealing and user-friendly interfaces.",
+    technologies: ["Figma", "UI/UX", "Adobe XD"],
+    type: "UI/UX",
+    link: "https://www.behance.net/benjaminnechicattu"
   }
 ];
 
 const ProjectCard = ({ project, isVisible, index }: { project: Project, isVisible: boolean, index: number }) => {
-  return (
+  const cardContent = (
     <div 
       className={cn(
         "glass-card h-full flex flex-col p-6 transition-all duration-500 ease-apple",
@@ -59,14 +65,7 @@ const ProjectCard = ({ project, isVisible, index }: { project: Project, isVisibl
       </div>
       <div className="flex justify items-center mb-3">
         <h3 className="text-xl font-bold">{project.title}</h3>
-        {project.git && (
-          <a 
-            href={project.git} 
-            className="px-2 py-1 text-xs rounded-full "
-          >
-        GitHub
-          </a>
-        )}
+        {/* Removed "more" link */}
       </div>
       <p className="text-muted-foreground mb-4 flex-grow">{project.description}</p>
       <div className="flex flex-wrap gap-2 mt-auto">
@@ -81,6 +80,18 @@ const ProjectCard = ({ project, isVisible, index }: { project: Project, isVisibl
       </div>
     </div>
   );
+
+  return project.link ? (
+    <a
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block h-full"
+      style={{ textDecoration: 'none' }}
+    >
+      {cardContent}
+    </a>
+  ) : cardContent;
 };
 
 const Projects = () => {
@@ -99,7 +110,7 @@ const Projects = () => {
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Featured Work</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              A selection of projects that showcase my technical capabilities and problem-solving approach.
+              A selection of projects that showcase my technical capabilities and problem-solving approach. click on the project cards to explore them further.
               Find more on my <a href="https://github.com/BenjaminNechicattu" className="text-primary underline">GitHub</a>.
             </p>
           </div>
