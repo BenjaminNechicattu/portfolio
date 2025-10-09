@@ -10,6 +10,7 @@ const blogs = [
   "009_Ai_v1.json",
   "010_badday_v1.json",
   "011_inequality_v1.json",
+  "012_ant_hill_v1.json",
 ];
 
 export default blogs;
