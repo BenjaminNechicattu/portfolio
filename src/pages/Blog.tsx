@@ -75,7 +75,7 @@ const Blog = () => {
       <div className="section-container">
         <div className="flex items-baseline mb-4 space-x-2">
           <button 
-            className="text-3xl text-black hover:underline" 
+            className="text-3xl text-foreground hover:underline" 
             onClick={() => navigate('/')}
           >
             &larr;
@@ -110,7 +110,7 @@ const Blog = () => {
         <div className="flex flex-col items-center mt-8 space-y-4">
           <div className="flex space-x-4">
             <button
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded hover:bg-secondary/80 disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
             >
@@ -120,7 +120,7 @@ const Blog = () => {
               Page {currentPage} of {Math.ceil(blogs.length / blogsPerPage)}
             </span>
             <button
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded hover:bg-secondary/80 disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => paginate(currentPage + 1)}
               disabled={currentPage >= Math.ceil(blogs.length / blogsPerPage)}
             >
