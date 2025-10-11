@@ -71,10 +71,10 @@ const Blog = () => {
   // Filter and sort blogs based on search and sort criteria
   useEffect(() => {
     // Helper function to check if a blog matches the search term
-    const matchesSearch = (blog) => {
+    const matchesSearch = (blog: any) => {
       if (!searchTerm) return true;
       const titleMatch = blog.title?.toLowerCase().includes(searchTerm.toLowerCase());
-      const tagsMatch = blog.tags?.some((tag) => 
+      const tagsMatch = blog.tags?.some((tag: string) => 
         tag.toLowerCase().includes(searchTerm.toLowerCase())
       );
       return titleMatch || tagsMatch;
@@ -83,7 +83,7 @@ const Blog = () => {
     const filtered = allBlogData.filter(matchesSearch);
 
     // Apply sorting (create a new sorted array)
-    const sorted = [...filtered].sort((a, b) => {
+    const sorted = [...filtered].sort((a: any, b: any) => {
       const dateA = new Date(a.date).getTime();
       const dateB = new Date(b.date).getTime();
       
@@ -103,19 +103,19 @@ const Blog = () => {
     setBlogData(sorted.slice(startIndex, endIndex));
   }, [allBlogData, searchTerm, sortOrder, currentPage]);
 
-  const paginate = (pageNumber) => {
+  const paginate = (pageNumber: number) => {
     const totalPages = Math.ceil(filteredCount / blogsPerPage);
     if (pageNumber > 0 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
     }
   };
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     setCurrentPage(1); // Reset to first page when searching
   };
 
-  const handleSortChange = (value) => {
+  const handleSortChange = (value: string) => {
     setSortOrder(value);
     setCurrentPage(1); // Reset to first page when sorting
   };
