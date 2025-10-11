@@ -66,7 +66,7 @@ const Blog = () => {
           
           // Update state progressively as batches are loaded
           // This allows the UI to show blogs as they're loaded rather than waiting for all
-          setAllBlogData(prev => [...prev, ...loadedBatch]);
+          setAllBlogData(prev => prev.concat(loadedBatch));
         }
       } catch (error) {
         console.error('Error fetching blogs:', error);
