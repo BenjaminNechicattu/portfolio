@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Modal from './Modal';
 import ReactMarkdown from 'react-markdown';
 import { Share2, Copy, Check } from 'lucide-react';
@@ -7,10 +7,19 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isImageExpanded, setIsImageExpanded] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const copyTimeoutRef = useRef(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const toggleImageExpand = () => setIsImageExpanded(!isImageExpanded);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) {
+        clearTimeout(copyTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const getBlogUrl = () => {
     const baseUrl = window.location.origin;
@@ -28,7 +37,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
           url: blogUrl,
         });
       } catch (err) {
-        console.log('Error sharing:', err);
+        console.error('Error sharing:', err);
       }
     } else {
       // Fallback to copy to clipboard
@@ -38,10 +47,18 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
 
   const handleCopy = async () => {
     const blogUrl = getBlogUrl();
+    if (!navigator.clipboard) {
+      console.error('Clipboard API not available');
+      return;
+    }
+    
     try {
       await navigator.clipboard.writeText(blogUrl);
       setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000);
+      if (copyTimeoutRef.current) {
+        clearTimeout(copyTimeoutRef.current);
+      }
+      copyTimeoutRef.current = setTimeout(() => setIsCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
