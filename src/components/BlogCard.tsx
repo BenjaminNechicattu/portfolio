@@ -110,8 +110,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
         <Modal onClose={closeModal}>
           <div className="overflow-y-auto max-h-[80vh] text-justify p-4">
             {/* Sticky action buttons */}
-            <div className="sticky top-0 bg-background z-20 pb-4 mb-4 border-b border-border flex justify-between items-start">
-              <h2 className="text-2xl font-bold">#{id}</h2>
+            <div className="sticky top-0 bg-background z-20 pb-4 mb-4 border-b border-border flex justify-end items-start">
               <div className="flex gap-2">
                 <button
                   onClick={handleShare}
@@ -139,6 +138,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
                 </button>
               </div>
             </div>
+            <h2 className="text-2xl font-bold mb-2">#{id}</h2>
             <h2 className="text-2xl font-bold mb-4">{title}</h2>
             <img 
               src={image} 
