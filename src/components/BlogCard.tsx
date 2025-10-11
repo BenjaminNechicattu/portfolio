@@ -5,14 +5,24 @@ import { Share2, Copy, Check } from 'lucide-react';
 
 const COPY_FEEDBACK_DURATION = 2000;
 
-const BlogCard = ({ id, title, description, image, author, date, tags = [], content }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const BlogCard = ({ id, title, description, image, author, date, tags = [], content, isOpen = false, onClose }) => {
+  const [isModalOpen, setIsModalOpen] = useState(isOpen);
   const [isImageExpanded, setIsImageExpanded] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Sync internal state with external prop
+  useEffect(() => {
+    setIsModalOpen(isOpen);
+  }, [isOpen]);
+
   const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    if (onClose) {
+      onClose();
+    }
+  };
   const toggleImageExpand = () => setIsImageExpanded(!isImageExpanded);
 
   useEffect(() => {

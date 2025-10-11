@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
 import blogs from '@/data/blogs/blogs';
 import BlogCard from '@/components/BlogCard';
@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 const Blog = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [blogData, setBlogData] = useState([]);
   const [allBlogData, setAllBlogData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,6 +17,7 @@ const Blog = () => {
   const [sortOrder, setSortOrder] = useState("newest");
   const [filteredCount, setFilteredCount] = useState(0);
   const [blogsPerPage, setBlogsPerPage] = useState(9);
+  const [openModalBlogId, setOpenModalBlogId] = useState<number | null>(null);
 
   const navigateToContact = () => {
     const element = document.getElementById('contact');
@@ -77,6 +79,18 @@ const Blog = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Handle URL parameter to open specific blog modal
+  useEffect(() => {
+    const blogIdParam = searchParams.get('id');
+    if (blogIdParam && allBlogData.length > 0) {
+      const blogId = parseInt(blogIdParam, 10);
+      const blog = allBlogData.find(b => b.id === blogId);
+      if (blog) {
+        setOpenModalBlogId(blogId);
+      }
+    }
+  }, [searchParams, allBlogData]);
+
   // Filter and sort blogs based on search and sort criteria
   useEffect(() => {
     // Helper function to check if a blog matches the search term
@@ -132,6 +146,13 @@ const Blog = () => {
   const handleItemsPerPageChange = (value: string) => {
     setBlogsPerPage(Number(value));
     setCurrentPage(1); // Reset to first page when changing items per page
+  };
+
+  const handleModalClose = () => {
+    setOpenModalBlogId(null);
+    // Remove the id parameter from URL when closing modal
+    searchParams.delete('id');
+    setSearchParams(searchParams);
   };
 
   return (
@@ -209,6 +230,8 @@ const Blog = () => {
               date={blog.date}
               tags={blog.tags}
               content={blog.content}
+              isOpen={openModalBlogId === blog.id}
+              onClose={handleModalClose}
             />
           ))}
         </div>

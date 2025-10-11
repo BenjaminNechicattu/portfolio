@@ -20,8 +20,9 @@ const Modal = ({ onClose, children }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div ref={modalRef} className="bg-background rounded-lg shadow-lg p-2 max-w-3xl w-full relative">
         <button
-          className="absolute top-5 right-10 text-muted-foreground hover:text-foreground"
+          className="absolute top-2 left-2 text-2xl text-muted-foreground hover:text-foreground z-10"
           onClick={onClose}
+          aria-label="Close modal"
         >
           &times;
         </button>
