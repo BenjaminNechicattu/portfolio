@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from './Modal';
 import ReactMarkdown from 'react-markdown';
-import { Share2, Copy, Check } from 'lucide-react';
+import { Share2, Copy, Check, X } from 'lucide-react';
 import { BLOG_ID_PARAM } from '@/constants/blog';
 
 const COPY_FEEDBACK_DURATION = 2000;
@@ -109,7 +109,8 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
       {isModalOpen && (
         <Modal onClose={closeModal}>
           <div className="overflow-y-auto max-h-[80vh] text-justify p-4">
-            <div className="flex justify-between items-start mb-4">
+            {/* Sticky action buttons */}
+            <div className="sticky top-0 bg-background z-20 pb-4 mb-4 border-b border-border flex justify-between items-start">
               <h2 className="text-2xl font-bold">#{id}</h2>
               <div className="flex gap-2">
                 <button
@@ -127,6 +128,14 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
                   aria-label="Copy link"
                 >
                   {isCopied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                </button>
+                <button
+                  onClick={closeModal}
+                  className="p-2 rounded-md bg-secondary hover:bg-secondary/80 transition-colors"
+                  title="Close"
+                  aria-label="Close modal"
+                >
+                  <X className="h-4 w-4" />
                 </button>
               </div>
             </div>
