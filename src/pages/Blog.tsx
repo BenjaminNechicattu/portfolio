@@ -15,7 +15,7 @@ const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("newest");
   const [filteredCount, setFilteredCount] = useState(0);
-  const blogsPerPage = 6;
+  const [blogsPerPage, setBlogsPerPage] = useState(9);
 
   const navigateToContact = () => {
     const element = document.getElementById('contact');
@@ -40,25 +40,37 @@ const Blog = () => {
 
   const reversedBlogs = [...blogs].reverse();
 
-  // Fetch all blogs on component mount
+  // Fetch all blogs on component mount with progressive loading
   useEffect(() => {
     const fetchAllBlogs = async () => {
       const isLocal = window.location.hostname === 'localhost';
-
+      
       try {
-        const loadedBlogs = await Promise.all(
-          reversedBlogs.map(async (fileName) => {
-            const url = isLocal 
-              ? `/src/data/blogs/${fileName}` 
-              : `https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/main/src/data/blogs/${fileName}`;
-            const response = await fetch(url);
-            if (!response.ok) {
-              throw new Error(`Failed to fetch blog: ${fileName}`);
-            }
-            return response.json();
-          })
-        );
-        setAllBlogData(loadedBlogs);
+        // For better performance with large numbers of blogs, load them in batches
+        const batchSize = 10; // Load 10 blogs at a time
+        const allLoadedBlogs: any[] = [];
+        
+        for (let i = 0; i < reversedBlogs.length; i += batchSize) {
+          const batch = reversedBlogs.slice(i, i + batchSize);
+          const loadedBatch = await Promise.all(
+            batch.map(async (fileName) => {
+              const url = isLocal 
+                ? `/src/data/blogs/${fileName}` 
+                : `https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/main/src/data/blogs/${fileName}`;
+              const response = await fetch(url);
+              if (!response.ok) {
+                throw new Error(`Failed to fetch blog: ${fileName}`);
+              }
+              return response.json();
+            })
+          );
+          
+          allLoadedBlogs.push(...loadedBatch);
+          
+          // Update state progressively as batches are loaded
+          // This allows the UI to show blogs as they're loaded rather than waiting for all
+          setAllBlogData([...allLoadedBlogs]);
+        }
       } catch (error) {
         console.error('Error fetching blogs:', error);
       }
@@ -101,7 +113,7 @@ const Blog = () => {
     const startIndex = (currentPage - 1) * blogsPerPage;
     const endIndex = startIndex + blogsPerPage;
     setBlogData(sorted.slice(startIndex, endIndex));
-  }, [allBlogData, searchTerm, sortOrder, currentPage]);
+  }, [allBlogData, searchTerm, sortOrder, currentPage, blogsPerPage]);
 
   const paginate = (pageNumber: number) => {
     const totalPages = Math.ceil(filteredCount / blogsPerPage);
@@ -118,6 +130,11 @@ const Blog = () => {
   const handleSortChange = (value: string) => {
     setSortOrder(value);
     setCurrentPage(1); // Reset to first page when sorting
+  };
+
+  const handleItemsPerPageChange = (value: string) => {
+    setBlogsPerPage(Number(value));
+    setCurrentPage(1); // Reset to first page when changing items per page
   };
 
   return (
@@ -155,16 +172,31 @@ const Blog = () => {
               className="w-full"
             />
           </div>
-          <div className="w-full md:w-48">
-            <Select value={sortOrder} onValueChange={handleSortChange}>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Sort by date" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="newest">Newest First</SelectItem>
-                <SelectItem value="oldest">Oldest First</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="flex gap-4 w-full md:w-auto">
+            <div className="w-full md:w-48">
+              <Select value={sortOrder} onValueChange={handleSortChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Sort by date" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="newest">Newest First</SelectItem>
+                  <SelectItem value="oldest">Oldest First</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="w-full md:w-40">
+              <Select value={blogsPerPage.toString()} onValueChange={handleItemsPerPageChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Items per page" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="6">6 per page</SelectItem>
+                  <SelectItem value="9">9 per page</SelectItem>
+                  <SelectItem value="12">12 per page</SelectItem>
+                  <SelectItem value="18">18 per page</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
 
