@@ -151,7 +151,12 @@ const NavBar = () => {
               <button
                 key={item.id}
                 onClick={() => item.path ? navigate(item.path) : handleNavigation(item.id)}
-                className="block text-gray-900 dark:text-white px-3 py-2 rounded-md text-base font-medium"
+                className={cn(
+                  "block px-3 py-2 rounded-md text-base font-medium transition-all duration-300",
+                  activeSection === item.id
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
               >
                 {item.label}
               </button>
