@@ -3,11 +3,13 @@ import Modal from './Modal';
 import ReactMarkdown from 'react-markdown';
 import { Share2, Copy, Check } from 'lucide-react';
 
+const COPY_FEEDBACK_DURATION = 2000;
+
 const BlogCard = ({ id, title, description, image, author, date, tags = [], content }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isImageExpanded, setIsImageExpanded] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
-  const copyTimeoutRef = useRef(null);
+  const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -58,7 +60,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
       if (copyTimeoutRef.current) {
         clearTimeout(copyTimeoutRef.current);
       }
-      copyTimeoutRef.current = setTimeout(() => setIsCopied(false), 2000);
+      copyTimeoutRef.current = setTimeout(() => setIsCopied(false), COPY_FEEDBACK_DURATION);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
