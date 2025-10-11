@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTheme } from 'next-themes';
+import { Moon, Sun } from 'lucide-react';
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -8,6 +10,7 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,6 +70,10 @@ const NavBar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
   return (
     <header
       className={cn(
@@ -105,13 +112,27 @@ const NavBar = () => {
             ))}
           </nav>
 
-          <div className="md:hidden">
-            <button onClick={toggleMenu} className="p-2">
-              <span className="sr-only">Open menu</span>
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-md text-muted-foreground hover:text-foreground transition-all duration-300"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
             </button>
+            
+            <div className="md:hidden">
+              <button onClick={toggleMenu} className="p-2">
+                <span className="sr-only">Open menu</span>
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
