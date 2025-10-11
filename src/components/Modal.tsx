@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 
-const Modal = ({ onClose, children }) => {
+interface ModalProps {
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+const Modal = ({ onClose, children }: ModalProps) => {
   const modalRef = useRef(null);
 
   const handleClickOutside = useCallback((event) => {
