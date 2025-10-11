@@ -7,6 +7,8 @@ import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+const BLOG_ID_PARAM = 'id';
+
 const Blog = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,7 +19,7 @@ const Blog = () => {
   const [sortOrder, setSortOrder] = useState("newest");
   const [filteredCount, setFilteredCount] = useState(0);
   const [blogsPerPage, setBlogsPerPage] = useState(9);
-  const [openModalBlogId, setOpenModalBlogId] = useState<number | null>(null);
+  const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null);
 
   const navigateToContact = () => {
     const element = document.getElementById('contact');
@@ -81,12 +83,12 @@ const Blog = () => {
 
   // Handle URL parameter to open specific blog modal
   useEffect(() => {
-    const blogIdParam = searchParams.get('id');
+    const blogIdParam = searchParams.get(BLOG_ID_PARAM);
     if (blogIdParam && allBlogData.length > 0) {
       const blogId = parseInt(blogIdParam, 10);
       const blog = allBlogData.find(b => b.id === blogId);
       if (blog) {
-        setOpenModalBlogId(blogId);
+        setSelectedBlogId(blogId);
       }
     }
   }, [searchParams, allBlogData]);
@@ -149,9 +151,9 @@ const Blog = () => {
   };
 
   const handleModalClose = () => {
-    setOpenModalBlogId(null);
+    setSelectedBlogId(null);
     // Remove the id parameter from URL when closing modal
-    searchParams.delete('id');
+    searchParams.delete(BLOG_ID_PARAM);
     setSearchParams(searchParams);
   };
 
@@ -230,7 +232,7 @@ const Blog = () => {
               date={blog.date}
               tags={blog.tags}
               content={blog.content}
-              isOpen={openModalBlogId === blog.id}
+              isOpen={selectedBlogId === blog.id}
               onClose={handleModalClose}
             />
           ))}

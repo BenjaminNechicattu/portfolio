@@ -5,7 +5,20 @@ import { Share2, Copy, Check } from 'lucide-react';
 
 const COPY_FEEDBACK_DURATION = 2000;
 
-const BlogCard = ({ id, title, description, image, author, date, tags = [], content, isOpen = false, onClose }) => {
+interface BlogCardProps {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  author: string;
+  date: string;
+  tags?: string[];
+  content: string;
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+const BlogCard = ({ id, title, description, image, author, date, tags = [], content, isOpen = false, onClose }: BlogCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
   const [isImageExpanded, setIsImageExpanded] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
