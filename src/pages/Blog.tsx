@@ -6,8 +6,7 @@ import BlogCard from '@/components/BlogCard';
 import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-
-const BLOG_ID_PARAM = 'id';
+import { BLOG_ID_PARAM } from '@/constants/blog';
 
 const Blog = () => {
   const navigate = useNavigate();
