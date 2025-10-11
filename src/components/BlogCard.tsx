@@ -1,14 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Modal from './Modal';
 import ReactMarkdown from 'react-markdown';
+import { Share2, Copy, Check } from 'lucide-react';
+
+const COPY_FEEDBACK_DURATION = 2000;
 
 const BlogCard = ({ id, title, description, image, author, date, tags = [], content }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isImageExpanded, setIsImageExpanded] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const toggleImageExpand = () => setIsImageExpanded(!isImageExpanded);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) {
+        clearTimeout(copyTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const getBlogUrl = () => {
+    const baseUrl = window.location.origin;
+    return `${baseUrl}/blog?id=${id}`;
+  };
+
+  const handleShare = async () => {
+    const blogUrl = getBlogUrl();
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: title,
+          text: description,
+          url: blogUrl,
+        });
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      // Fallback to copy to clipboard
+      handleCopy();
+    }
+  };
+
+  const handleCopy = async () => {
+    const blogUrl = getBlogUrl();
+    if (!navigator.clipboard) {
+      console.error('Clipboard API not available');
+      return;
+    }
+    
+    try {
+      await navigator.clipboard.writeText(blogUrl);
+      setIsCopied(true);
+      if (copyTimeoutRef.current) {
+        clearTimeout(copyTimeoutRef.current);
+      }
+      copyTimeoutRef.current = setTimeout(() => setIsCopied(false), COPY_FEEDBACK_DURATION);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
   return (
     <>
@@ -29,7 +85,27 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
       {isModalOpen && (
         <Modal onClose={closeModal}>
           <div className="overflow-y-auto max-h-[80vh] text-justify p-4">
-            <h2 className="text-2xl font-bold mb-4">#{id}</h2>
+            <div className="flex justify-between items-start mb-4">
+              <h2 className="text-2xl font-bold">#{id}</h2>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleShare}
+                  className="p-2 rounded-md bg-secondary hover:bg-secondary/80 transition-colors"
+                  title="Share blog"
+                  aria-label="Share blog"
+                >
+                  <Share2 className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={handleCopy}
+                  className="p-2 rounded-md bg-secondary hover:bg-secondary/80 transition-colors"
+                  title={isCopied ? "Copied!" : "Copy link"}
+                  aria-label="Copy link"
+                >
+                  {isCopied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
             <h2 className="text-2xl font-bold mb-4">{title}</h2>
             <img 
               src={image} 
