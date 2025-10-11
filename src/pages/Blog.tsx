@@ -4,11 +4,17 @@ import NavBar from '@/components/NavBar';
 import blogs from '@/data/blogs/blogs';
 import BlogCard from '@/components/BlogCard';
 import Footer from '@/components/Footer';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const Blog = () => {
   const navigate = useNavigate();
   const [blogData, setBlogData] = useState([]);
+  const [allBlogData, setAllBlogData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("newest");
+  const [filteredCount, setFilteredCount] = useState(0);
   const blogsPerPage = 6;
 
   const navigateToContact = () => {
@@ -34,16 +40,14 @@ const Blog = () => {
 
   const reversedBlogs = [...blogs].reverse();
 
+  // Fetch all blogs on component mount
   useEffect(() => {
-    const fetchBlogs = async () => {
+    const fetchAllBlogs = async () => {
       const isLocal = window.location.hostname === 'localhost';
-      const startIndex = (currentPage - 1) * blogsPerPage;
-      const endIndex = startIndex + blogsPerPage;
-      const blogsToFetch = reversedBlogs.slice(startIndex, endIndex);
 
       try {
         const loadedBlogs = await Promise.all(
-          blogsToFetch.map(async (fileName) => {
+          reversedBlogs.map(async (fileName) => {
             const url = isLocal 
               ? `/src/data/blogs/${fileName}` 
               : `https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/main/src/data/blogs/${fileName}`;
@@ -54,19 +58,66 @@ const Blog = () => {
             return response.json();
           })
         );
-        setBlogData(loadedBlogs);
+        setAllBlogData(loadedBlogs);
       } catch (error) {
         console.error('Error fetching blogs:', error);
       }
     };
 
-    fetchBlogs();
-  }, [currentPage]);
+    fetchAllBlogs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const paginate = (pageNumber) => {
-    if (pageNumber > 0 && pageNumber <= Math.ceil(blogs.length / blogsPerPage)) {
+  // Filter and sort blogs based on search and sort criteria
+  useEffect(() => {
+    // Helper function to check if a blog matches the search term
+    const matchesSearch = (blog: any) => {
+      if (!searchTerm) return true;
+      const titleMatch = blog.title?.toLowerCase().includes(searchTerm.toLowerCase());
+      const tagsMatch = blog.tags?.some((tag: string) => 
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      return titleMatch || tagsMatch;
+    };
+
+    const filtered = allBlogData.filter(matchesSearch);
+
+    // Apply sorting (create a new sorted array)
+    const sorted = [...filtered].sort((a: any, b: any) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      
+      if (sortOrder === "newest") {
+        return dateB - dateA;
+      } else {
+        return dateA - dateB;
+      }
+    });
+
+    // Update filtered count
+    setFilteredCount(sorted.length);
+
+    // Apply pagination
+    const startIndex = (currentPage - 1) * blogsPerPage;
+    const endIndex = startIndex + blogsPerPage;
+    setBlogData(sorted.slice(startIndex, endIndex));
+  }, [allBlogData, searchTerm, sortOrder, currentPage]);
+
+  const paginate = (pageNumber: number) => {
+    const totalPages = Math.ceil(filteredCount / blogsPerPage);
+    if (pageNumber > 0 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
     }
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1); // Reset to first page when searching
+  };
+
+  const handleSortChange = (value: string) => {
+    setSortOrder(value);
+    setCurrentPage(1); // Reset to first page when sorting
   };
 
   return (
@@ -92,6 +143,31 @@ const Blog = () => {
           I hope you enjoy reading them as much as I enjoyed writing them, hope you find something useful here.
           Feel free to find my <a href="https://medium.com/@benjaminnechicattu" className="text-blue-500 hover:underline">medium account</a>.
         </p>
+        
+        {/* Search and Sort Controls */}
+        <div className="mt-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div className="w-full md:w-96">
+            <Input
+              type="text"
+              placeholder="Search by title or tags..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="w-full"
+            />
+          </div>
+          <div className="w-full md:w-48">
+            <Select value={sortOrder} onValueChange={handleSortChange}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Sort by date" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="newest">Newest First</SelectItem>
+                <SelectItem value="oldest">Oldest First</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogData.map((blog, index) => (
             <BlogCard
@@ -117,12 +193,12 @@ const Blog = () => {
               Previous
             </button>
             <span className="text-sm text-muted-foreground self-center">
-              Page {currentPage} of {Math.ceil(blogs.length / blogsPerPage)}
+              Page {currentPage} of {Math.ceil(filteredCount / blogsPerPage) || 1}
             </span>
             <button
               className="px-4 py-2 bg-secondary text-secondary-foreground rounded hover:bg-secondary/80 disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => paginate(currentPage + 1)}
-              disabled={currentPage >= Math.ceil(blogs.length / blogsPerPage)}
+              disabled={currentPage >= Math.ceil(filteredCount / blogsPerPage)}
             >
               Next
             </button>
