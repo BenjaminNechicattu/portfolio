@@ -19,7 +19,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
         <p className="text-sm text-muted-foreground mb-2">{author} on {new Date(date).toLocaleDateString()}</p>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag, index) => (
-            <span key={index} className="text-xs bg-blue-100 text-gray-800 px-3 py-1 rounded shadow-sm">
+            <span key={index} className="text-xs bg-primary/10 text-primary px-3 py-1 rounded shadow-sm">
               {tag}
             </span>
           ))}
@@ -48,7 +48,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
             <br></br>
             <div className="flex flex-wrap gap-2 mb-4">
               {tags.map((tag, index) => (
-                <span key={index} className="text-xs bg-blue-100 text-gray-800 px-3 py-1 rounded shadow-sm">
+                <span key={index} className="text-xs bg-primary/10 text-primary px-3 py-1 rounded shadow-sm">
                   {tag}
                 </span>
               ))}
