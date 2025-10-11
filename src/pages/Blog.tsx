@@ -14,6 +14,7 @@ const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("newest");
+  const [filteredCount, setFilteredCount] = useState(0);
   const blogsPerPage = 6;
 
   const navigateToContact = () => {
@@ -69,21 +70,20 @@ const Blog = () => {
 
   // Filter and sort blogs based on search and sort criteria
   useEffect(() => {
-    let filtered = [...allBlogData];
+    // Helper function to check if a blog matches the search term
+    const matchesSearch = (blog) => {
+      if (!searchTerm) return true;
+      const titleMatch = blog.title?.toLowerCase().includes(searchTerm.toLowerCase());
+      const tagsMatch = blog.tags?.some((tag) => 
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      return titleMatch || tagsMatch;
+    };
 
-    // Apply search filter
-    if (searchTerm) {
-      filtered = filtered.filter((blog) => {
-        const titleMatch = blog.title?.toLowerCase().includes(searchTerm.toLowerCase());
-        const tagsMatch = blog.tags?.some((tag) => 
-          tag.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        return titleMatch || tagsMatch;
-      });
-    }
+    const filtered = allBlogData.filter(matchesSearch);
 
-    // Apply sorting
-    filtered.sort((a, b) => {
+    // Apply sorting (create a new sorted array)
+    const sorted = [...filtered].sort((a, b) => {
       const dateA = new Date(a.date).getTime();
       const dateB = new Date(b.date).getTime();
       
@@ -94,29 +94,20 @@ const Blog = () => {
       }
     });
 
+    // Update filtered count
+    setFilteredCount(sorted.length);
+
     // Apply pagination
     const startIndex = (currentPage - 1) * blogsPerPage;
     const endIndex = startIndex + blogsPerPage;
-    setBlogData(filtered.slice(startIndex, endIndex));
+    setBlogData(sorted.slice(startIndex, endIndex));
   }, [allBlogData, searchTerm, sortOrder, currentPage]);
 
   const paginate = (pageNumber) => {
-    const totalPages = Math.ceil(getFilteredBlogsCount() / blogsPerPage);
+    const totalPages = Math.ceil(filteredCount / blogsPerPage);
     if (pageNumber > 0 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
     }
-  };
-
-  const getFilteredBlogsCount = () => {
-    if (!searchTerm) return allBlogData.length;
-    
-    return allBlogData.filter((blog) => {
-      const titleMatch = blog.title?.toLowerCase().includes(searchTerm.toLowerCase());
-      const tagsMatch = blog.tags?.some((tag) => 
-        tag.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      return titleMatch || tagsMatch;
-    }).length;
   };
 
   const handleSearchChange = (e) => {
@@ -202,12 +193,12 @@ const Blog = () => {
               Previous
             </button>
             <span className="text-sm text-muted-foreground self-center">
-              Page {currentPage} of {Math.ceil(getFilteredBlogsCount() / blogsPerPage) || 1}
+              Page {currentPage} of {Math.ceil(filteredCount / blogsPerPage) || 1}
             </span>
             <button
               className="px-4 py-2 bg-secondary text-secondary-foreground rounded hover:bg-secondary/80 disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => paginate(currentPage + 1)}
-              disabled={currentPage >= Math.ceil(getFilteredBlogsCount() / blogsPerPage)}
+              disabled={currentPage >= Math.ceil(filteredCount / blogsPerPage)}
             >
               Next
             </button>
