@@ -48,7 +48,6 @@ const Blog = () => {
       try {
         // For better performance with large numbers of blogs, load them in batches
         const batchSize = 10; // Load 10 blogs at a time
-        const allLoadedBlogs: any[] = [];
         
         for (let i = 0; i < reversedBlogs.length; i += batchSize) {
           const batch = reversedBlogs.slice(i, i + batchSize);
@@ -65,11 +64,9 @@ const Blog = () => {
             })
           );
           
-          allLoadedBlogs.push(...loadedBatch);
-          
           // Update state progressively as batches are loaded
           // This allows the UI to show blogs as they're loaded rather than waiting for all
-          setAllBlogData([...allLoadedBlogs]);
+          setAllBlogData(prev => [...prev, ...loadedBatch]);
         }
       } catch (error) {
         console.error('Error fetching blogs:', error);
