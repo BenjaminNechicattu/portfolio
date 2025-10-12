@@ -88,9 +88,40 @@ const Blog = () => {
       const blog = allBlogData.find(b => b.id === blogId);
       if (blog) {
         setSelectedBlogId(blogId);
+        
+        // Calculate which page the blog is on and navigate to it
+        // We need to apply the same filtering and sorting as in the main effect
+        const matchesSearch = (blog: any) => {
+          if (!searchTerm) return true;
+          const titleMatch = blog.title?.toLowerCase().includes(searchTerm.toLowerCase());
+          const tagsMatch = blog.tags?.some((tag: string) => 
+            tag.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+          return titleMatch || tagsMatch;
+        };
+
+        const filtered = allBlogData.filter(matchesSearch);
+        const sorted = [...filtered].sort((a: any, b: any) => {
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
+          
+          if (sortOrder === "newest") {
+            return dateB - dateA;
+          } else {
+            return dateA - dateB;
+          }
+        });
+
+        // Find the index of the selected blog in the sorted/filtered list
+        const blogIndex = sorted.findIndex(b => b.id === blogId);
+        if (blogIndex !== -1) {
+          // Calculate the page number (1-indexed)
+          const pageNumber = Math.floor(blogIndex / blogsPerPage) + 1;
+          setCurrentPage(pageNumber);
+        }
       }
     }
-  }, [searchParams, allBlogData]);
+  }, [searchParams, allBlogData, searchTerm, sortOrder, blogsPerPage]);
 
   // Filter and sort blogs based on search and sort criteria
   useEffect(() => {
