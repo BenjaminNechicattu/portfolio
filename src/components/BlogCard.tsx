@@ -110,11 +110,11 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
         <Modal onClose={closeModal}>
           <div className="overflow-y-auto max-h-[80vh] text-justify p-4">
             {/* Sticky action buttons */}
-            <div className="sticky top-0 bg-background z-20 pb-4 mb-4 border-b border-border flex justify-end items-start">
+            <div className="sticky top-0 z-20 pb-4 mb-4 border-b border-border flex justify-end items-start">
               <div className="flex gap-2">
                 <button
                   onClick={handleShare}
-                  className="p-2 rounded-md hover:bg-secondary/20 transition-colors"
+                  className="p-2 rounded-md bg-secondary hover:bg-secondary/80 transition-colors"
                   title="Share blog"
                   aria-label="Share blog"
                 >
@@ -122,7 +122,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
                 </button>
                 <button
                   onClick={handleCopy}
-                  className="p-2 rounded-md hover:bg-secondary/20 transition-colors"
+                  className="p-2 rounded-md bg-secondary hover:bg-secondary/80 transition-colors"
                   title={isCopied ? "Copied!" : "Copy link"}
                   aria-label="Copy link"
                 >
@@ -130,7 +130,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
                 </button>
                 <button
                   onClick={closeModal}
-                  className="p-2 rounded-md hover:bg-secondary/20 transition-colors"
+                  className="p-2 rounded-md bg-secondary hover:bg-secondary/80 transition-colors"
                   title="Close"
                   aria-label="Close modal"
                 >
