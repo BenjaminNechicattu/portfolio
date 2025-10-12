@@ -12,6 +12,7 @@ const blogs = [
   "011_inequality_v1.json",
   "012_ant_hill_v1.json",
   "013_github_copilot_v1.json",
+  "014_fast_no_perfection_v1.json",
 ];
 
 export default blogs;
