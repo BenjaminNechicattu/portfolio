@@ -114,7 +114,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
               <div className="flex gap-2">
                 <button
                   onClick={handleShare}
-                  className="p-2 rounded-md bg-secondary hover:bg-secondary/80 transition-colors"
+                  className="p-2 rounded-md hover:bg-secondary/20 transition-colors"
                   title="Share blog"
                   aria-label="Share blog"
                 >
@@ -122,7 +122,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
                 </button>
                 <button
                   onClick={handleCopy}
-                  className="p-2 rounded-md bg-secondary hover:bg-secondary/80 transition-colors"
+                  className="p-2 rounded-md hover:bg-secondary/20 transition-colors"
                   title={isCopied ? "Copied!" : "Copy link"}
                   aria-label="Copy link"
                 >
@@ -130,7 +130,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
                 </button>
                 <button
                   onClick={closeModal}
-                  className="p-2 rounded-md bg-secondary hover:bg-secondary/80 transition-colors"
+                  className="p-2 rounded-md hover:bg-secondary/20 transition-colors"
                   title="Close"
                   aria-label="Close modal"
                 >
