@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
 import blogs from '@/data/blogs/blogs';
@@ -42,6 +42,32 @@ const Blog = () => {
   };
 
   const reversedBlogs = [...blogs].reverse();
+
+  // Memoize filtered and sorted blogs to avoid recalculation
+  const sortedBlogs = useMemo(() => {
+    const matchesSearch = (blog: any) => {
+      if (!searchTerm) return true;
+      const titleMatch = blog.title?.toLowerCase().includes(searchTerm.toLowerCase());
+      const tagsMatch = blog.tags?.some((tag: string) => 
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      return titleMatch || tagsMatch;
+    };
+
+    const filtered = allBlogData.filter(matchesSearch);
+    const sorted = [...filtered].sort((a: any, b: any) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      
+      if (sortOrder === "newest") {
+        return dateB - dateA;
+      } else {
+        return dateA - dateB;
+      }
+    });
+
+    return sorted;
+  }, [allBlogData, searchTerm, sortOrder]);
 
   // Fetch all blogs on component mount with progressive loading
   useEffect(() => {
@@ -88,44 +114,28 @@ const Blog = () => {
       const blog = allBlogData.find(b => b.id === blogId);
       if (blog) {
         setSelectedBlogId(blogId);
+        
+        // Calculate which page the blog is on and navigate to it
+        const blogIndex = sortedBlogs.findIndex(b => b.id === blogId);
+        if (blogIndex !== -1) {
+          // Calculate the page number (1-indexed)
+          const pageNumber = Math.floor(blogIndex / blogsPerPage) + 1;
+          setCurrentPage(pageNumber);
+        }
       }
     }
-  }, [searchParams, allBlogData]);
+  }, [searchParams, allBlogData, sortedBlogs, blogsPerPage]);
 
   // Filter and sort blogs based on search and sort criteria
   useEffect(() => {
-    // Helper function to check if a blog matches the search term
-    const matchesSearch = (blog: any) => {
-      if (!searchTerm) return true;
-      const titleMatch = blog.title?.toLowerCase().includes(searchTerm.toLowerCase());
-      const tagsMatch = blog.tags?.some((tag: string) => 
-        tag.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      return titleMatch || tagsMatch;
-    };
-
-    const filtered = allBlogData.filter(matchesSearch);
-
-    // Apply sorting (create a new sorted array)
-    const sorted = [...filtered].sort((a: any, b: any) => {
-      const dateA = new Date(a.date).getTime();
-      const dateB = new Date(b.date).getTime();
-      
-      if (sortOrder === "newest") {
-        return dateB - dateA;
-      } else {
-        return dateA - dateB;
-      }
-    });
-
     // Update filtered count
-    setFilteredCount(sorted.length);
+    setFilteredCount(sortedBlogs.length);
 
     // Apply pagination
     const startIndex = (currentPage - 1) * blogsPerPage;
     const endIndex = startIndex + blogsPerPage;
-    setBlogData(sorted.slice(startIndex, endIndex));
-  }, [allBlogData, searchTerm, sortOrder, currentPage, blogsPerPage]);
+    setBlogData(sortedBlogs.slice(startIndex, endIndex));
+  }, [sortedBlogs, currentPage, blogsPerPage]);
 
   const paginate = (pageNumber: number) => {
     const totalPages = Math.ceil(filteredCount / blogsPerPage);
