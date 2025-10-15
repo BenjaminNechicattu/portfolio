@@ -15,12 +15,12 @@ const experiences: ExperienceItem[] = [
     company: "International Business Machines (IBM)",
     position: "System Software Engineer",
     period: "Dec/2023 - Present",
-    description: "Software Engineer at WatsonX Orchestrate, focusing on backend services and agentic AI solutions.",
+    description: "Software Engineer at watsonx Orchestrate, focusing on backend services and agentic AI solutions.",
     highlights: [
-      "Implemented agentic AI capabilities within WatsonX Orchestrate, enabling dynamic reasoning and autonomous task execution through AI-driven agents.",
+      "Implemented agentic AI capabilities within watsonx Orchestrate, enabling dynamic reasoning and autonomous task execution through AI-driven agents.",
       "Designed and developed the Tools Runtime Manager in Go, a robust system for managing and orchestrating complex tool executions.",
       "Built new Orchestrate features supporting file uploads via chat and contextual data passing between tools, enhancing interactivity and workflow efficiency.",
-      "Architected and maintained scalable microservices using Python, Go, and Node.js, powering WatsonX Orchestrate's AI chat experience.",
+      "Architected and maintained scalable microservices using Python, Go, and Node.js, powering watsonx Orchestrate's AI chat experience.",
       "Developed and optimized RESTful APIs for seamless front-end integration, improving performance and user experience.",
       "Collaborated with cross-functional teams to deliver reliable, high-performance backend solutions ensuring data consistency and accessibility.",
     ]
