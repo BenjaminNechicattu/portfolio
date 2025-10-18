@@ -15,26 +15,6 @@ const Hero = () => {
       <div className="absolute -top-20 -left-20 w-96 h-96 bg-blue-100 dark:bg-blue-900/20 rounded-full filter blur-3xl opacity-30 animate-pulse" />
       <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-100 dark:bg-purple-900/20 rounded-full filter blur-3xl opacity-30 animate-pulse" />
       
-      {/* Circuit board pattern overlay */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(59, 130, 246, 0.15) 1px, rgba(59, 130, 246, 0.15) 2px),
-            repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(59, 130, 246, 0.15) 1px, rgba(59, 130, 246, 0.15) 2px),
-            repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(139, 92, 246, 0.1) 8px, rgba(139, 92, 246, 0.1) 16px),
-            repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(139, 92, 246, 0.1) 8px, rgba(139, 92, 246, 0.1) 16px),
-            radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.12), transparent 50%),
-            radial-gradient(circle at 25% 60%, rgba(139, 92, 246, 0.12), transparent 50%),
-            radial-gradient(circle at 10% 80%, rgba(59, 130, 246, 0.08), transparent 50%)
-          `,
-          backgroundSize: '30px 30px, 30px 30px, 60px 60px, 60px 60px, 100% 100%, 100% 100%, 100% 100%',
-          opacity: '0.2',
-          maskImage: 'linear-gradient(to right, black 0%, rgba(0,0,0,0.5) 50%, transparent 80%)',
-          WebkitMaskImage: 'linear-gradient(to right, black 0%, rgba(0,0,0,0.5) 50%, transparent 80%)',
-        }}
-      />
-      
       <div className="absolute top-20 right-4">
         <span className="inline-block tex6 sxs font-medium tracking-wider uppercase">
           <img 
