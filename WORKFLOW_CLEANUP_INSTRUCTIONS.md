@@ -59,9 +59,13 @@ If you want to disable GitHub Copilot automated workflows:
 
 After making these changes:
 
-1. Go to **Actions** tab in your repository
-2. You should only see the "Deploy Vite App to GitHub Pages" workflow running
-3. The other two workflows should no longer appear in new runs
+1. Go to **Actions** tab in your repository: https://github.com/BenjaminNechicattu/portfolio/actions
+2. Make a small change to your repository (e.g., update README.md) and push to main branch
+3. You should only see the "Deploy Vite App to GitHub Pages" workflow running
+4. The `pages-build-deployment` workflow should no longer appear in new runs
+5. If you kept the Copilot agent enabled, it will only run when you use Copilot features
+
+**Note**: Existing workflow runs in your Actions history will remain visible, but new runs of the disabled workflows will not be triggered.
 
 ## Current Workflow Configuration
 
@@ -72,3 +76,28 @@ The "Deploy Vite App to GitHub Pages" workflow (the one you're keeping) is prope
 - Support manual triggering via workflow_dispatch
 
 No changes are needed to this workflow file.
+
+---
+
+## Quick Reference
+
+**Problem**: Two unwanted workflows are running alongside the main deployment workflow
+
+**Root Cause**: GitHub Pages is likely configured to "Deploy from a branch" which triggers the automatic `pages-build-deployment` workflow
+
+**Solution**: Change Settings → Pages → Source to "GitHub Actions"
+
+**Expected Result**: Only the "Deploy Vite App to GitHub Pages" workflow will run on pushes to main
+
+**Time to Fix**: < 2 minutes
+
+---
+
+## Need Help?
+
+If you encounter any issues after following these instructions:
+1. Check that Settings → Pages → Source is set to "GitHub Actions"
+2. Review the Actions tab to confirm which workflows are running
+3. The custom workflow file at `.github/workflows/jekyll-gh-pages.yml` should remain unchanged
+
+After applying these changes, you can safely delete this instruction file (`WORKFLOW_CLEANUP_INSTRUCTIONS.md`).
