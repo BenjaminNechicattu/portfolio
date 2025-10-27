@@ -14,6 +14,7 @@ const blogs = [
   "013_github_copilot_v1.json",
   "014_fast_no_perfection_v1.json",
   "015_what_makes_perfect_v1.json",
+  "016_gods_stereotypes_v1.json",
 ];
 
 export default blogs;
