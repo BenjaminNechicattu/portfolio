@@ -15,6 +15,7 @@ const blogs = [
   "014_fast_no_perfection_v1.json",
   "015_what_makes_perfect_v1.json",
   "016_gods_stereotypes_v1.json",
+  "017_humanoid_robots_agentic_ai_v1.json",
 ];
 
 export default blogs;
