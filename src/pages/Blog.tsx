@@ -82,20 +82,31 @@ const Blog = () => {
           const batch = reversedBlogs.slice(i, i + batchSize);
           const loadedBatch = await Promise.all(
             batch.map(async (fileName) => {
-              const url = isLocal 
-                ? `/src/data/blogs/${fileName}` 
-                : `https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/main/src/data/blogs/${fileName}`;
-              const response = await fetch(url);
-              if (!response.ok) {
-                throw new Error(`Failed to fetch blog: ${fileName}`);
+              try {
+                const url = isLocal 
+                  ? `/src/data/blogs/${fileName}` 
+                  : `https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/main/src/data/blogs/${fileName}`;
+                const response = await fetch(url);
+                if (!response.ok) {
+                  console.error(`Failed to fetch blog: ${fileName}`);
+                  return null;
+                }
+                return await response.json();
+              } catch (error) {
+                console.error(`Error fetching blog ${fileName}:`, error);
+                return null;
               }
-              return response.json();
             })
           );
           
+          // Filter out any failed blog fetches (nulls) before adding to state
+          const successfulBlogs = loadedBatch.filter(blog => blog !== null);
+          
           // Update state progressively as batches are loaded
           // This allows the UI to show blogs as they're loaded rather than waiting for all
-          setAllBlogData(prev => prev.concat(loadedBatch));
+          if (successfulBlogs.length > 0) {
+            setAllBlogData(prev => prev.concat(successfulBlogs));
+          }
         }
       } catch (error) {
         console.error('Error fetching blogs:', error);
