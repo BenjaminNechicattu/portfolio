@@ -54,7 +54,7 @@ const NewYear = () => {
   const getWishMessage = () => {
     if (isSpecialUser) {
       return {
-        title: "Happy New Year!",
+        title: `Happy New Year ${decodedName}!`,
         message: "Wishing you a year filled with joy, success, and endless possibilities! May this new year bring you happiness, health, and prosperity. Of all the people I met this year, Joz, you're the one who stayed on my mind the most. I hope the new year brings you happiness… and I hope it gives me more moments with you. 😊"
       };
     } else if (decodedName) {
