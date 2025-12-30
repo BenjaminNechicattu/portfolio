@@ -66,14 +66,21 @@ const Hero = () => {
             >
               Get in Touch
             </a>
-            <a 
-              href="/resume.pdf"
-              download="Benjamin_Nechicattu_Resume.pdf"
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                const link = document.createElement('a');
+                link.href = '/resume.pdf';
+                link.download = 'Benjamin_Nechicattu_Resume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
               className="px-8 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
               Download Resume
-            </a>
+            </button>
             <a 
               href="#about" 
               className="px-8 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
