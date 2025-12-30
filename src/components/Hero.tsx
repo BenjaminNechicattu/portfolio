@@ -19,12 +19,12 @@ const Hero = () => {
       <div className="absolute -top-20 -left-20 w-96 h-96 bg-blue-100 dark:bg-blue-900/20 rounded-full filter blur-3xl opacity-30 animate-pulse" />
       <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-100 dark:bg-purple-900/20 rounded-full filter blur-3xl opacity-30 animate-pulse" />
       
-      <div className="absolute top-20 right-4">
-        <span className="inline-block tex6 sxs font-medium tracking-wider uppercase">
+      <div className="absolute top-20 right-4 md:right-4">
+        <span className="inline-block text-xs font-medium tracking-wider uppercase">
           <img 
-        src="https://camo.githubusercontent.com/35761d431dc488b7c55fb41896a02b2a55986cfdf149abf22c47ae1024e99a4e/68747470733a2f2f6b6f6d617265762e636f6d2f67687076632f3f757365726e616d653d62656e6e65636869266c6162656c3d56697369746f727326636f6c6f723d306537356236267374796c653d666c6174" 
-        alt="visitor count" 
-        className="h-4"
+            src="https://camo.githubusercontent.com/35761d431dc488b7c55fb41896a02b2a55986cfdf149abf22c47ae1024e99a4e/68747470733a2f2f6b6f6d617265762e636f6d2f67687076632f3f757365726e616d653d62656e6e65636869266c6162656c3d56697369746f727326636f6c6f723d306537356236267374796c653d666c6174" 
+            alt="visitor count" 
+            className="h-3 md:h-4"
           />
         </span>
       </div>
@@ -53,14 +53,14 @@ const Hero = () => {
               </span>
             </div>
           
-          <h1 className="mb-6 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+          <h1 className="mb-6 text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             Benjamin G Nechicattu
           </h1>
           
-          <p className="mb-10 text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="mb-10 text-base md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4 md:px-0">
             Building innovative software solutions at International Business Machines (IBM). 
             Passionate about technology and creating impactful products. A Tech and Science enthusiast, always looking for opertunities.
-            </p>
+          </p>
           
           {showFestiveTheme && (
             <div className="mb-8 flex justify-center">
@@ -68,10 +68,10 @@ const Hero = () => {
             </div>
           )}
           
-          <div className="flex flex-row justify-center items-center space-x-4">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4 px-4 md:px-0">
             <a 
               href="#contact" 
-              className="px-8 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-all duration-300 hover:shadow-lg focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              className="w-full md:w-auto px-8 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-all duration-300 hover:shadow-lg focus:ring-2 focus:ring-offset-2 focus:ring-primary text-center"
             >
               Get in Touch
             </a>
@@ -84,14 +84,14 @@ const Hero = () => {
                 link.click();
                 document.body.removeChild(link);
               }}
-              className="px-8 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary flex items-center gap-2"
+              className="w-full md:w-auto px-8 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4" />
               Download Resume
             </button>
             <a 
               href="#about" 
-              className="px-8 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
+              className="w-full md:w-auto px-8 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary text-center"
             >
               Learn More
             </a>
