@@ -43,13 +43,13 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen relative overflow-hidden bg-background">
       {/* Animated stars background */}
       <div className="absolute inset-0">
         {stars.map((star, i) => (
           <div
             key={i}
-            className="absolute rounded-full bg-white animate-pulse"
+            className="absolute rounded-full bg-foreground/30 animate-pulse"
             style={{
               width: `${star.width}px`,
               height: `${star.height}px`,
@@ -62,9 +62,13 @@ const NotFound = () => {
         ))}
       </div>
 
+      {/* Background gradient circles - matching Hero component */}
+      <div className="absolute -top-20 -left-20 w-96 h-96 bg-blue-100 dark:bg-blue-900/20 rounded-full filter blur-3xl opacity-30 animate-pulse" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-100 dark:bg-purple-900/20 rounded-full filter blur-3xl opacity-30 animate-pulse" />
+
       {/* Floating planets */}
       <div
-        className="absolute top-20 left-1/4 w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 opacity-60 blur-sm animate-bounce"
+        className="absolute top-20 left-1/4 w-32 h-32 rounded-full bg-primary/20 blur-sm animate-bounce"
         style={{
           animationDuration: "6s",
           transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
@@ -72,7 +76,7 @@ const NotFound = () => {
         }}
       />
       <div
-        className="absolute bottom-32 right-1/4 w-24 h-24 rounded-full bg-gradient-to-br from-orange-400 to-pink-600 opacity-50 blur-sm animate-bounce"
+        className="absolute bottom-32 right-1/4 w-24 h-24 rounded-full bg-primary/10 blur-sm animate-bounce"
         style={{
           animationDuration: "8s",
           animationDelay: "1s",
@@ -84,26 +88,26 @@ const NotFound = () => {
       {/* Main content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
         <div className="text-center space-y-8 max-w-2xl">
-          {/* Floating astronaut icon */}
+          {/* Floating rocket icon */}
           <div className="flex justify-center mb-8">
             <div className="relative">
               <Rocket
-                className="w-24 h-24 text-white animate-bounce"
+                className="w-24 h-24 text-foreground animate-bounce"
                 style={{ animationDuration: "3s" }}
               />
-              <div className="absolute -inset-4 bg-white/10 rounded-full blur-xl animate-pulse" />
+              <div className="absolute -inset-4 bg-primary/10 rounded-full blur-xl animate-pulse" />
             </div>
           </div>
 
           {/* 404 Text */}
           <div className="space-y-4">
-            <h1 className="text-8xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-pulse">
+            <h1 className="text-8xl md:text-9xl font-bold text-foreground">
               404
             </h1>
-            <h2 className="text-3xl md:text-4xl font-semibold text-white">
+            <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
               Lost in Space
             </h2>
-            <p className="text-lg md:text-xl text-gray-300 max-w-md mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-md mx-auto leading-relaxed">
               Oops! Looks like you've drifted into the cosmic void. The page
               you're looking for doesn't exist in this universe.
             </p>
@@ -114,7 +118,7 @@ const NotFound = () => {
             <Link to="/">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="px-8 py-3 bg-primary text-primary-foreground hover:shadow-lg transition-all duration-300"
               >
                 <Home className="mr-2 h-5 w-5" />
                 Return to Home
@@ -123,7 +127,7 @@ const NotFound = () => {
           </div>
 
           {/* Fun space fact */}
-          <p className="text-sm text-gray-400 italic mt-12">
+          <p className="text-sm text-muted-foreground italic mt-12">
             "In space, no one can hear you 404"
           </p>
         </div>
@@ -134,7 +138,7 @@ const NotFound = () => {
         {shootingStars.map((star, i) => (
           <div
             key={i}
-            className="absolute h-0.5 w-12 bg-gradient-to-r from-transparent via-white to-transparent"
+            className="absolute h-0.5 w-12 bg-gradient-to-r from-transparent via-foreground/50 to-transparent"
             style={{
               top: `${star.top}%`,
               left: "-12px",
