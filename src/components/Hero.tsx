@@ -59,7 +59,7 @@ const Hero = () => {
           
           <p className="mb-10 text-base md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4 md:px-0">
             Building innovative software solutions at International Business Machines (IBM). 
-            Passionate about technology and creating impactful products. A Tech and Science enthusiast, always looking for opertunities.
+            Passionate about technology and creating impactful products. A Tech and Science enthusiast, always looking for opportunities.
           </p>
           
           {showFestiveTheme && (
