@@ -24,6 +24,18 @@ function base64Decode(str) {
   }
 }
 
+// HTML escape function to prevent XSS
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
+
 // List of names to pre-generate pages for
 // You can add more names here as needed
 const namesToGenerate = [
@@ -46,34 +58,39 @@ function readBaseTemplate() {
 // Generate HTML content with OG meta tags by injecting them into the base template
 function generateHTML(encodedName, decodedName, baseTemplate) {
   const capitalizedName = decodedName.charAt(0).toUpperCase() + decodedName.slice(1);
-  const ogTitle = `Happy New Year ${capitalizedName}! 🎉`;
+  
+  // Escape all values to prevent XSS
+  const safeCapitalizedName = escapeHtml(capitalizedName);
+  const safeEncodedName = escapeHtml(encodedName);
+  
+  const ogTitle = `Happy New Year ${safeCapitalizedName}! 🎉`;
   const ogDescription = "Wishing you a year filled with joy, success, and endless possibilities! May this new year bring you happiness, health, and prosperity.";
   const ogImage = "https://benjaminnechicattu.in/img/b.png";
-  const ogUrl = `https://benjaminnechicattu.in/newyear/${encodedName}`;
+  const ogUrl = `https://benjaminnechicattu.in/newyear/${safeEncodedName}`;
 
   // Create the new OG meta tags
   const newMetaTags = `
     <title>${ogTitle}</title>
-    <meta name="description" content="${ogDescription}">
+    <meta name="description" content="${escapeHtml(ogDescription)}">
     
     <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="${ogTitle}" />
-    <meta property="og:description" content="${ogDescription}" />
+    <meta property="og:title" content="${escapeHtml(ogTitle)}" />
+    <meta property="og:description" content="${escapeHtml(ogDescription)}" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="${ogUrl}" />
+    <meta property="og:url" content="${escapeHtml(ogUrl)}" />
     <meta property="og:site_name" content="Benjamin G Nechicattu" />
-    <meta property="og:image" content="${ogImage}" />
-    <meta property="og:image:secure_url" content="${ogImage}" />
+    <meta property="og:image" content="${escapeHtml(ogImage)}" />
+    <meta property="og:image:secure_url" content="${escapeHtml(ogImage)}" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="2048" />
     <meta property="og:image:height" content="2048" />
-    <meta property="og:image:alt" content="${ogTitle}" />
+    <meta property="og:image:alt" content="${escapeHtml(ogTitle)}" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${ogTitle}" />
-    <meta name="twitter:description" content="${ogDescription}" />
-    <meta name="twitter:image" content="${ogImage}" />
+    <meta name="twitter:title" content="${escapeHtml(ogTitle)}" />
+    <meta name="twitter:description" content="${escapeHtml(ogDescription)}" />
+    <meta name="twitter:image" content="${escapeHtml(ogImage)}" />
 `;
 
   // Remove all existing OG and Twitter meta tags and title
