@@ -48,3 +48,18 @@ export const getTimeUntilNewYear = () => {
 
   return { days, hours, minutes, seconds, hasArrived: false };
 };
+
+export const getDisplayYear = (): number => {
+  const now = new Date();
+  const month = now.getMonth(); // 0-indexed (0 = January, 11 = December)
+  const day = now.getDate();
+  const currentYear = now.getFullYear();
+  
+  // In January 1-5, show current year (the new year that just arrived)
+  if (month === 0 && day <= 5) {
+    return currentYear;
+  }
+  
+  // For all other times (including December 30-31), show next year
+  return currentYear + 1;
+};

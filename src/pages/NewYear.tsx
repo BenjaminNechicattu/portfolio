@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Sparkles, Home, ArrowDown, ArrowLeft } from 'lucide-react';
+import { Sparkles, ArrowDown, ArrowLeft } from 'lucide-react';
+import { getDisplayYear } from '@/utils/festive';
 
 // Firework particle interface
 interface Particle {
@@ -267,25 +268,7 @@ const NewYear = () => {
           </h1>
           
           <p className="text-2xl md:text-4xl text-white/90 mb-4">
-            {(() => {
-              const now = new Date();
-              const month = now.getMonth();
-              const day = now.getDate();
-              const currentYear = now.getFullYear();
-              
-              // On December 30-31, show next year since New Year is coming
-              if (month === 11 && (day === 30 || day === 31)) {
-                return currentYear + 1;
-              }
-              
-              // In January 1-5, show current year (which is the new year)
-              if (month === 0 && day <= 5) {
-                return currentYear;
-              }
-              
-              // Otherwise, show next year
-              return month === 11 ? currentYear + 1 : currentYear;
-            })()}
+            {getDisplayYear()}
           </p>
           
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
