@@ -15,16 +15,25 @@ export const isFestiveSeasonActive = (): boolean => {
 export const getNewYearDate = (): Date => {
   const now = new Date();
   const currentYear = now.getFullYear();
+  const month = now.getMonth();
   
   // If we're in December, target next year's New Year
-  // If we're in January 1-5, target this year's New Year (already passed but for display)
-  const targetYear = now.getMonth() === 11 ? currentYear + 1 : currentYear;
+  // If we're in January 1-5, we still show next year's date but mark as arrived
+  const targetYear = month === 11 ? currentYear + 1 : currentYear;
   
   return new Date(targetYear, 0, 1, 0, 0, 0); // January 1st, 00:00:00
 };
 
 export const getTimeUntilNewYear = () => {
   const now = new Date();
+  const month = now.getMonth();
+  const day = now.getDate();
+  
+  // If we're in January 1-5, New Year has already arrived
+  if (month === 0 && day <= 5) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, hasArrived: true };
+  }
+  
   const newYear = getNewYearDate();
   const diff = newYear.getTime() - now.getTime();
 

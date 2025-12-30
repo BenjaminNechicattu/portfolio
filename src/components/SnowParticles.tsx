@@ -21,8 +21,10 @@ const SnowParticles = () => {
 
     // Set canvas size
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
@@ -85,7 +87,7 @@ const SnowParticles = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-50"
+      className="fixed inset-0 pointer-events-none z-10"
       style={{ mixBlendMode: 'screen' }}
     />
   );

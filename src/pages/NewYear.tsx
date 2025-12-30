@@ -30,11 +30,28 @@ const NewYear = () => {
   }, []);
 
   const shufflePuzzle = () => {
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 0]; // 0 represents empty tile
-    for (let i = numbers.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+    // Start with solved state and make random valid moves to ensure solvability
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+    
+    // Make 100 random valid moves from the solved state
+    let emptyIndex = 8;
+    for (let i = 0; i < 100; i++) {
+      const row = Math.floor(emptyIndex / 3);
+      const col = emptyIndex % 3;
+      const validMoves = [];
+      
+      // Check all four directions
+      if (row > 0) validMoves.push(emptyIndex - 3); // up
+      if (row < 2) validMoves.push(emptyIndex + 3); // down
+      if (col > 0) validMoves.push(emptyIndex - 1); // left
+      if (col < 2) validMoves.push(emptyIndex + 1); // right
+      
+      // Pick a random valid move
+      const moveIndex = validMoves[Math.floor(Math.random() * validMoves.length)];
+      [numbers[emptyIndex], numbers[moveIndex]] = [numbers[moveIndex], numbers[emptyIndex]];
+      emptyIndex = moveIndex;
     }
+    
     return numbers;
   };
 
