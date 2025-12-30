@@ -19,7 +19,8 @@ function base64Encode(str) {
 function base64Decode(str) {
   try {
     return Buffer.from(str, 'base64').toString('utf8');
-  } catch {
+  } catch (error) {
+    console.warn('Failed to decode base64 string:', str, error);
     return '';
   }
 }
@@ -34,6 +35,11 @@ function escapeHtml(text) {
     "'": '&#039;'
   };
   return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+// Escape only quotes for attribute values (URLs, etc.)
+function escapeAttribute(text) {
+  return text.replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
 // List of names to pre-generate pages for
@@ -70,40 +76,45 @@ function generateHTML(encodedName, decodedName, baseTemplate) {
 
   // Create the new OG meta tags
   const newMetaTags = `
-    <title>${ogTitle}</title>
-    <meta name="description" content="${escapeHtml(ogDescription)}">
+    <title>${escapeHtml(ogTitle)}</title>
+    <meta name="description" content="${escapeAttribute(ogDescription)}">
     
     <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="${escapeHtml(ogTitle)}" />
-    <meta property="og:description" content="${escapeHtml(ogDescription)}" />
+    <meta property="og:title" content="${escapeAttribute(ogTitle)}" />
+    <meta property="og:description" content="${escapeAttribute(ogDescription)}" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="${escapeHtml(ogUrl)}" />
+    <meta property="og:url" content="${escapeAttribute(ogUrl)}" />
     <meta property="og:site_name" content="Benjamin G Nechicattu" />
-    <meta property="og:image" content="${escapeHtml(ogImage)}" />
-    <meta property="og:image:secure_url" content="${escapeHtml(ogImage)}" />
+    <meta property="og:image" content="${escapeAttribute(ogImage)}" />
+    <meta property="og:image:secure_url" content="${escapeAttribute(ogImage)}" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="2048" />
     <meta property="og:image:height" content="2048" />
-    <meta property="og:image:alt" content="${escapeHtml(ogTitle)}" />
+    <meta property="og:image:alt" content="${escapeAttribute(ogTitle)}" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${escapeHtml(ogTitle)}" />
-    <meta name="twitter:description" content="${escapeHtml(ogDescription)}" />
-    <meta name="twitter:image" content="${escapeHtml(ogImage)}" />
+    <meta name="twitter:title" content="${escapeAttribute(ogTitle)}" />
+    <meta name="twitter:description" content="${escapeAttribute(ogDescription)}" />
+    <meta name="twitter:image" content="${escapeAttribute(ogImage)}" />
 `;
 
   // Remove all existing OG and Twitter meta tags and title
+  // Note: These patterns are designed for the specific structure of the Vite-generated index.html
   let html = baseTemplate
     .replace(/<title>.*?<\/title>/g, '')
-    .replace(/<meta\s+name="description"[^>]*>/g, '')
-    .replace(/<meta\s+name="keywords"[^>]*>/g, '')
-    .replace(/<meta\s+name="author"[^>]*>/g, '')
-    .replace(/<meta\s+property="og:[^"]*"[^>]*>/g, '')
-    .replace(/<meta\s+name="twitter:[^"]*"[^>]*>/g, '')
+    .replace(/<meta\s+name="description"[^>]*>/gi, '')
+    .replace(/<meta\s+name="keywords"[^>]*>/gi, '')
+    .replace(/<meta\s+name="author"[^>]*>/gi, '')
+    .replace(/<meta\s+property="og:[^"]*"[^>]*>/gi, '')
+    .replace(/<meta\s+name="twitter:[^"]*"[^>]*>/gi, '')
     .replace(/<!--\s*Open Graph for social sharing\s*-->/g, '')
-    .replace(/<!--\s*Twitter Card\s*-->/g, '')
-    .replace(/<!--\s*JSON-LD Structured Data\s*-->[\s\S]*?<\/script>/g, '');
+    .replace(/<!--\s*Twitter Card\s*-->/g, '');
+  
+  // Remove JSON-LD structured data if present
+  // This regex specifically targets the JSON-LD block with its comment marker
+  const jsonLdPattern = /<!--\s*JSON-LD Structured Data\s*-->\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/;
+  html = html.replace(jsonLdPattern, '');
   
   // Inject the new meta tags right after the viewport meta tag
   html = html.replace(
