@@ -37,33 +37,30 @@ const NewYearCountdown = () => {
   return (
     <div 
       onClick={handleClick}
-      className="cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+      className="cursor-pointer bg-gradient-to-r from-blue-600/40 to-purple-600/40 text-white px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
     >
       <div className="flex flex-col items-center gap-2">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4" />
-          <span className="text-sm font-semibold tracking-wide uppercase">New Year Countdown</span>
-          <Sparkles className="w-4 h-4" />
-        </div>
-        <div className="flex gap-4 text-center">
+        <div className="flex gap-2 text-center items-center">
           <div className="flex flex-col">
             <span className="text-3xl font-bold">{timeLeft.days}</span>
             <span className="text-xs opacity-80">Days</span>
           </div>
+          <span className="text-2xl font-bold opacity-60">:</span>
           <div className="flex flex-col">
             <span className="text-3xl font-bold">{timeLeft.hours}</span>
             <span className="text-xs opacity-80">Hours</span>
           </div>
+          <span className="text-2xl font-bold opacity-60">:</span>
           <div className="flex flex-col">
             <span className="text-3xl font-bold">{timeLeft.minutes}</span>
             <span className="text-xs opacity-80">Minutes</span>
           </div>
+          <span className="text-2xl font-bold opacity-60">:</span>
           <div className="flex flex-col">
             <span className="text-3xl font-bold">{timeLeft.seconds}</span>
             <span className="text-xs opacity-80">Seconds</span>
           </div>
         </div>
-        <span className="text-xs opacity-70 mt-1">Click to visit celebration page</span>
       </div>
     </div>
   );

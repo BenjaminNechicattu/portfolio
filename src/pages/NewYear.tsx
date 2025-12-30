@@ -228,9 +228,12 @@ const NewYear = () => {
             <p>✨ Click anywhere to create fireworks! ✨</p>
           </div>
 
-          {/* Scroll indicator */}
-          <div className="mt-12 flex flex-col items-center animate-bounce">
-            <span className="text-white/80 mb-2">Scroll down for a puzzle game</span>
+
+        </div>
+
+        {/* Scroll indicator at bottom */}
+        <div className="absolute bottom-10 w-full flex justify-center pointer-events-none">
+          <div className="flex flex-col items-center animate-bounce">
             <ArrowDown className="w-6 h-6 text-white/80" />
           </div>
         </div>
