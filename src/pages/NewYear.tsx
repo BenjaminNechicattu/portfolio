@@ -223,10 +223,60 @@ const NewYear = () => {
     };
   }, []);
 
-  // Set page title
+  // Set page title and meta tags
   useEffect(() => {
     document.title = "🎉 Happy New Year! 🎊";
-  }, []);
+    
+    // Update Open Graph meta tags dynamically
+    const updateMetaTag = (property: string, content: string) => {
+      let element = document.querySelector(`meta[property="${property}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute('property', property);
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', content);
+    };
+
+    const updateNameMetaTag = (name: string, content: string) => {
+      let element = document.querySelector(`meta[name="${name}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute('name', name);
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', content);
+    };
+
+    // Set personalized Open Graph tags
+    const ogTitle = decodedName 
+      ? `Happy New Year ${decodedName}! 🎉` 
+      : "Happy New Year! 🎉";
+    const ogDescription = "Wishing you a year filled with joy, success, and endless possibilities! May this new year bring you happiness, health, and prosperity.";
+    const ogImage = "https://benjaminnechicattu.in/img/b.png";
+    const ogUrl = decodedName
+      ? `https://benjaminnechicattu.in/newyear/${name}`
+      : "https://benjaminnechicattu.in/newyear";
+
+    updateMetaTag("og:title", ogTitle);
+    updateMetaTag("og:description", ogDescription);
+    updateMetaTag("og:url", ogUrl);
+    updateMetaTag("og:image", ogImage);
+    updateMetaTag("og:image:secure_url", ogImage);
+    updateMetaTag("og:image:type", "image/png");
+    updateMetaTag("og:image:width", "2048");
+    updateMetaTag("og:image:height", "2048");
+    updateMetaTag("og:image:alt", decodedName ? `Happy New Year ${decodedName}!` : "Happy New Year!");
+    updateMetaTag("og:type", "website");
+    updateMetaTag("og:site_name", "Benjamin G Nechicattu");
+    
+    updateNameMetaTag("twitter:title", ogTitle);
+    updateNameMetaTag("twitter:description", ogDescription);
+    updateNameMetaTag("twitter:image", ogImage);
+    updateNameMetaTag("twitter:card", "summary_large_image");
+    
+    updateNameMetaTag("description", ogDescription);
+  }, [decodedName, name]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden">
