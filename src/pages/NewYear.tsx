@@ -40,7 +40,9 @@ const NewYear = () => {
   const decodedName = useMemo(() => {
     if (!name) return "";
     try {
-      return atob(name);
+      const decoded = atob(name);
+      // Capitalize the first letter of the name
+      return decoded.charAt(0).toUpperCase() + decoded.slice(1);
     } catch (error) {
       // If decoding fails, log error and return empty string
       console.error("Failed to decode base64 name from URL:", name, error);
