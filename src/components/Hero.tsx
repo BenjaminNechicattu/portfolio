@@ -67,8 +67,7 @@ const Hero = () => {
               Get in Touch
             </a>
             <button 
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={() => {
                 const link = document.createElement('a');
                 link.href = '/resume.pdf';
                 link.download = 'Benjamin_Nechicattu_Resume.pdf';
