@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Sparkles, Home, ArrowDown } from 'lucide-react';
+import { Sparkles, Home, ArrowDown, ArrowLeft } from 'lucide-react';
 
 // Firework particle interface
 interface Particle {
@@ -247,13 +247,13 @@ const NewYear = () => {
 
       {/* Content */}
       <div className="relative z-20 min-h-screen flex flex-col items-center justify-center p-8 pointer-events-none">
-        {/* Home button */}
+        {/* Home button - responsive: icon only on mobile, full text on desktop */}
         <button
           onClick={() => navigate('/')}
-          className="fixed top-8 left-8 px-6 py-3 bg-white/10 backdrop-blur-md text-white rounded-full hover:bg-white/20 transition-all duration-300 flex items-center gap-2 border border-white/20 pointer-events-auto"
+          className="fixed top-8 left-8 px-4 py-3 md:px-6 bg-white/10 backdrop-blur-md text-white rounded-full hover:bg-white/20 transition-all duration-300 flex items-center gap-2 border border-white/20 pointer-events-auto"
         >
-          <Home className="w-5 h-5" />
-          Back to Home
+          <ArrowLeft className="w-5 h-5" />
+          <span className="hidden md:inline">Back to Home</span>
         </button>
 
         {/* Main content */}
@@ -267,7 +267,25 @@ const NewYear = () => {
           </h1>
           
           <p className="text-2xl md:text-4xl text-white/90 mb-4">
-            {new Date().getFullYear()}
+            {(() => {
+              const now = new Date();
+              const month = now.getMonth();
+              const day = now.getDate();
+              const currentYear = now.getFullYear();
+              
+              // On December 30-31, show next year since New Year is coming
+              if (month === 11 && (day === 30 || day === 31)) {
+                return currentYear + 1;
+              }
+              
+              // In January 1-5, show current year (which is the new year)
+              if (month === 0 && day <= 5) {
+                return currentYear;
+              }
+              
+              // Otherwise, show next year
+              return month === 11 ? currentYear + 1 : currentYear;
+            })()}
           </p>
           
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
