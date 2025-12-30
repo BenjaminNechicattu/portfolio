@@ -36,7 +36,18 @@ const NewYear = () => {
     }
   }, []);
 
-  const isSpecialUser = name && name.toLowerCase() === decodedSpecialName.toLowerCase();
+  // Decode the name from URL parameter (it's base64 encoded)
+  const decodedName = useMemo(() => {
+    if (!name) return "";
+    try {
+      return atob(name);
+    } catch {
+      // If decoding fails, return empty string
+      return "";
+    }
+  }, [name]);
+
+  const isSpecialUser = decodedName && decodedName.toLowerCase() === decodedSpecialName.toLowerCase();
 
   // Get personalized message
   const getWishMessage = () => {
@@ -45,9 +56,9 @@ const NewYear = () => {
         title: "Happy New Year!",
         message: "Wishing you a year filled with joy, success, and endless possibilities! May this new year bring you happiness, health, and prosperity. Of all the people I met this year, Joz, you're the one who stayed on my mind the most. I hope the new year brings you happiness… and I hope it gives me more moments with you. 😊"
       };
-    } else if (name) {
+    } else if (decodedName) {
       return {
-        title: `Happy New Year ${name}!`,
+        title: `Happy New Year ${decodedName}!`,
         message: "Wishing you a year filled with joy, success, and endless possibilities! May this new year bring you happiness, health, and prosperity."
       };
     } else {
