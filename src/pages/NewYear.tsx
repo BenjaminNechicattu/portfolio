@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Sparkles, Home, ArrowDown } from 'lucide-react';
 
@@ -27,16 +27,16 @@ const NewYear = () => {
   // Base64 encoded special name
   const specialUserEncoded = "Sm9zbWk=";
   
-  // Decode and check for special user
-  const getDecodedSpecialName = () => {
+  // Decode and check for special user (memoized)
+  const decodedSpecialName = useMemo(() => {
     try {
       return atob(specialUserEncoded);
     } catch {
       return "";
     }
-  };
+  }, []);
 
-  const isSpecialUser = name && name.toLowerCase() === getDecodedSpecialName().toLowerCase();
+  const isSpecialUser = name && name.toLowerCase() === decodedSpecialName.toLowerCase();
 
   // Get personalized message
   const getWishMessage = () => {
