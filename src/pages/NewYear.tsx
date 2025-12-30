@@ -41,8 +41,9 @@ const NewYear = () => {
     if (!name) return "";
     try {
       return atob(name);
-    } catch {
-      // If decoding fails, return empty string
+    } catch (error) {
+      // If decoding fails, log error and return empty string
+      console.error("Failed to decode base64 name from URL:", name, error);
       return "";
     }
   }, [name]);
