@@ -1,6 +1,7 @@
 import { useScrollReveal } from '@/utils/animations';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Download } from 'lucide-react';
 
 const Hero = () => {
   const { ref, isIntersecting } = useScrollReveal();
@@ -64,6 +65,14 @@ const Hero = () => {
               className="px-8 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-all duration-300 hover:shadow-lg focus:ring-2 focus:ring-offset-2 focus:ring-primary"
             >
               Get in Touch
+            </a>
+            <a 
+              href="/resume.pdf"
+              download="Benjamin_Nechicattu_Resume.pdf"
+              className="px-8 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary flex items-center gap-2"
+            >
+              <Download className="w-4 h-4" />
+              Download Resume
             </a>
             <a 
               href="#about" 
