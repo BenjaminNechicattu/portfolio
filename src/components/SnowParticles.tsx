@@ -50,18 +50,15 @@ const SnowParticles = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Add shadow for better visibility in light theme
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+
       snowflakes.forEach((flake) => {
-        // Add shadow for better visibility in light theme
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-        
         ctx.beginPath();
         ctx.arc(flake.x, flake.y, flake.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${flake.opacity})`;
         ctx.fill();
-
-        // Reset shadow
-        ctx.shadowBlur = 0;
 
         // Update position
         flake.y += flake.speed;
