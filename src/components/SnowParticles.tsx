@@ -54,15 +54,16 @@ const SnowParticles = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Default to light theme if theme is undefined during initial render
       const isDark = theme === 'dark';
 
+      // Draw shadows first
       snowflakes.forEach((flake) => {
-        // Draw the crescent shadow first (assuming light from left)
+        // Draw the crescent shadow (assuming light from left)
         // Shadow appears on the right side of the particle
         const shadowOffset = flake.size * 0.3;
         ctx.save();
         
-        // Shadow - darker in light theme, lighter in dark theme
         ctx.beginPath();
         ctx.arc(
           flake.x + shadowOffset, 
@@ -79,8 +80,14 @@ const SnowParticles = () => {
         }
         ctx.fill();
         ctx.restore();
+      });
 
-        // Draw the main particle
+      // Set shadow properties once for all particles
+      ctx.shadowBlur = isDark ? 3 : 2;
+      ctx.shadowColor = isDark ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.3)';
+
+      // Draw main particles
+      snowflakes.forEach((flake) => {
         ctx.save();
         ctx.beginPath();
         ctx.arc(flake.x, flake.y, flake.size, 0, Math.PI * 2);
@@ -102,9 +109,6 @@ const SnowParticles = () => {
           }
         }
         
-        // Add subtle glow/shadow for depth
-        ctx.shadowBlur = isDark ? 3 : 2;
-        ctx.shadowColor = isDark ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.3)';
         ctx.fill();
         ctx.restore();
 
