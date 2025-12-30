@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog"; // Import the Blog page
+import NewYear from "./pages/NewYear"; // Import the New Year page
 import PageTransition from '@/components/PageTransition';
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/newyear" element={<NewYear />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </PageTransition>
