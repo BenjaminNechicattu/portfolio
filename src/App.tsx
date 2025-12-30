@@ -24,6 +24,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/newyear" element={<NewYear />} />
+              <Route path="/newyear/:name" element={<NewYear />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </PageTransition>

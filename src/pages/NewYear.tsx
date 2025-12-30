@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Sparkles, Home, ArrowDown } from 'lucide-react';
 
 // Firework particle interface
@@ -14,6 +14,7 @@ interface Particle {
 
 const NewYear = () => {
   const navigate = useNavigate();
+  const { name } = useParams<{ name?: string }>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [particles, setParticles] = useState<Particle[]>([]);
@@ -22,6 +23,42 @@ const NewYear = () => {
   const [tiles, setTiles] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
   const [isWon, setIsWon] = useState(false);
+
+  // Base64 encoded special name
+  const specialUserEncoded = "Sm9zbWk=";
+  
+  // Decode and check for special user
+  const getDecodedSpecialName = () => {
+    try {
+      return atob(specialUserEncoded);
+    } catch {
+      return "";
+    }
+  };
+
+  const isSpecialUser = name && name.toLowerCase() === getDecodedSpecialName().toLowerCase();
+
+  // Get personalized message
+  const getWishMessage = () => {
+    if (isSpecialUser) {
+      return {
+        title: "Happy New Year!",
+        message: "Wishing you a year filled with joy, success, and endless possibilities! May this new year bring you happiness, health, and prosperity. Of all the people I met this year, Joz, you're the one who stayed on my mind the most. I hope the new year brings you happiness… and I hope it gives me more moments with you. 😊"
+      };
+    } else if (name) {
+      return {
+        title: `Happy New Year ${name}!`,
+        message: "Wishing you a year filled with joy, success, and endless possibilities! May this new year bring you happiness, health, and prosperity."
+      };
+    } else {
+      return {
+        title: "Happy New Year!",
+        message: "Wishing you a year filled with joy, success, and endless possibilities! May this new year bring you happiness, health, and prosperity."
+      };
+    }
+  };
+
+  const wishMessage = getWishMessage();
 
   // Initialize puzzle
   useEffect(() => {
@@ -212,7 +249,7 @@ const NewYear = () => {
           </div>
           
           <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 animate-bounce-slow">
-            🎊 Happy New Year! 🎉
+            🎊 {wishMessage.title} 🎉
           </h1>
           
           <p className="text-2xl md:text-4xl text-white/90 mb-4">
@@ -220,8 +257,7 @@ const NewYear = () => {
           </p>
           
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
-            Wishing you a year filled with joy, success, and endless possibilities!
-            May this new year bring you happiness, health, and prosperity.
+            {wishMessage.message}
           </p>
 
           <div className="mt-8 text-white/70 text-sm">
