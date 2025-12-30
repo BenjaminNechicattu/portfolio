@@ -263,6 +263,10 @@ const NewYear = () => {
     updateMetaTag("og:url", ogUrl);
     updateMetaTag("og:image", ogImage);
     updateMetaTag("og:image:secure_url", ogImage);
+    updateMetaTag("og:image:type", "image/png");
+    updateMetaTag("og:image:width", "2048");
+    updateMetaTag("og:image:height", "2048");
+    updateMetaTag("og:image:alt", decodedName ? `Happy New Year ${decodedName}!` : "Happy New Year!");
     updateMetaTag("og:type", "website");
     updateMetaTag("og:site_name", "Benjamin G Nechicattu");
     
