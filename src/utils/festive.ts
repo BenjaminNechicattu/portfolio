@@ -23,7 +23,7 @@ export const getNewYearDate = (): Date => {
   return new Date(targetYear, 0, 1, 0, 0, 0); // January 1st, 00:00:00
 };
 
-const isInNewYearCelebrationPeriod = (): boolean => {
+export const isInNewYearCelebrationPeriod = (): boolean => {
   const now = new Date();
   const month = now.getMonth();
   const day = now.getDate();
