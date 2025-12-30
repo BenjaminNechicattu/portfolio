@@ -1,11 +1,32 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Home, Rocket } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Generate stable random values for stars
+  const stars = useMemo(() => {
+    return [...Array(50)].map(() => ({
+      width: Math.random() * 3 + 1,
+      height: Math.random() * 3 + 1,
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+      animationDelay: Math.random() * 3,
+      animationDuration: Math.random() * 3 + 2,
+    }));
+  }, []);
+
+  // Generate stable random values for shooting stars
+  const shootingStars = useMemo(() => {
+    return [...Array(3)].map((_, i) => ({
+      top: Math.random() * 50,
+      animationDuration: Math.random() * 3 + 2,
+      animationDelay: i * 2,
+    }));
+  }, []);
 
   useEffect(() => {
     console.error(
@@ -25,17 +46,17 @@ const NotFound = () => {
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-slate-900 via-purple-900 to-slate-900">
       {/* Animated stars background */}
       <div className="absolute inset-0">
-        {[...Array(50)].map((_, i) => (
+        {stars.map((star, i) => (
           <div
             key={i}
             className="absolute rounded-full bg-white animate-pulse"
             style={{
-              width: Math.random() * 3 + 1 + "px",
-              height: Math.random() * 3 + 1 + "px",
-              top: Math.random() * 100 + "%",
-              left: Math.random() * 100 + "%",
-              animationDelay: Math.random() * 3 + "s",
-              animationDuration: Math.random() * 3 + 2 + "s",
+              width: `${star.width}px`,
+              height: `${star.height}px`,
+              top: `${star.top}%`,
+              left: `${star.left}%`,
+              animationDelay: `${star.animationDelay}s`,
+              animationDuration: `${star.animationDuration}s`,
             }}
           />
         ))}
@@ -110,15 +131,15 @@ const NotFound = () => {
 
       {/* Animated shooting stars */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        {[...Array(3)].map((_, i) => (
+        {shootingStars.map((star, i) => (
           <div
             key={i}
             className="absolute h-0.5 w-12 bg-gradient-to-r from-transparent via-white to-transparent"
             style={{
-              top: Math.random() * 50 + "%",
+              top: `${star.top}%`,
               left: "-12px",
-              animation: `shootingStar ${Math.random() * 3 + 2}s linear infinite`,
-              animationDelay: `${i * 2}s`,
+              animation: `shootingStar ${star.animationDuration}s linear infinite`,
+              animationDelay: `${star.animationDelay}s`,
             }}
           />
         ))}
