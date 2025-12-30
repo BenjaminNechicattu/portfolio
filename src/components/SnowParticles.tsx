@@ -44,7 +44,7 @@ const SnowParticles = () => {
         speed: Math.random() * 1 + 0.5,
         opacity: Math.random() * 0.5 + 0.3,
         drift: Math.random() * 0.5 - 0.25,
-        isGray: Math.random() > 0.7, // 30% of particles are gray
+        isGray: Math.random() > 0.7, // 30% chance to be gray (when random > 0.7)
       });
     }
 
