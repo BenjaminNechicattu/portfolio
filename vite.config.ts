@@ -5,8 +5,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  // Using empty string for base path to ensure proper relative paths
-  base: "",
+  // Using root path for proper asset resolution in SPA routing
+  base: "/",
 
   server: {
     host: "::",
