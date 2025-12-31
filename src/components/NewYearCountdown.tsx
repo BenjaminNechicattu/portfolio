@@ -23,11 +23,11 @@ const NewYearCountdown = () => {
     return (
       <div 
         onClick={handleClick}
-        className="cursor-pointer bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 animate-pulse"
+        className="cursor-pointer bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
       >
         <div className="flex items-center gap-2 justify-center">
           <Sparkles className="w-5 h-5" />
-          <span className="font-bold text-lg">🎉 Happy New Year! Click to Celebrate 🎉</span>
+          <span className="font-bold text-lg">🎉 Happy New Year! 🎉</span>
           <Sparkles className="w-5 h-5" />
         </div>
       </div>
