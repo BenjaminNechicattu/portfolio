@@ -1,6 +1,6 @@
 /**
  * Utility functions for festive New Year features
- * Active from December 20 to January 31 every year
+ * Active from December 20 to January 3 every year
  */
 
 export const isFestiveSeasonActive = (): boolean => {
@@ -8,8 +8,8 @@ export const isFestiveSeasonActive = (): boolean => {
   const month = now.getMonth(); // 0-indexed (0 = January, 11 = December)
   const day = now.getDate();
 
-  // December 20-31 OR entire January
-  return (month === 11 && day >= 20) || (month === 0);
+  // December 20-31 OR January 1-3
+  return (month === 11 && day >= 20) || (month === 0 && day <= 3);
 };
 
 export const getNewYearDate = (): Date => {
@@ -26,13 +26,14 @@ export const getNewYearDate = (): Date => {
 export const isInNewYearCelebrationPeriod = (): boolean => {
   const now = new Date();
   const month = now.getMonth();
-  return month === 0; // Entire January
+  const day = now.getDate();
+  return month === 0 && day <= 3; // January 1-3 only
 };
 
 export const getTimeUntilNewYear = () => {
   const now = new Date();
   
-  // If we're in entire January, New Year has already arrived
+  // If we're in January 1-3, New Year has already arrived
   if (isInNewYearCelebrationPeriod()) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, hasArrived: true };
   }
@@ -56,7 +57,7 @@ export const getDisplayYear = (): number => {
   const now = new Date();
   const currentYear = now.getFullYear();
   
-  // In entire January, show current year (the new year that just arrived)
+  // In January 1-3, show current year (the new year that just arrived)
   if (isInNewYearCelebrationPeriod()) {
     return currentYear;
   }
