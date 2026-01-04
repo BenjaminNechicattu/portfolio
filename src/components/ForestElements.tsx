@@ -7,12 +7,12 @@ interface Leaf {
   rotation: number;
   speed: number;
   drift: number;
-  opacity: number;
   color: string;
 }
 
 const ForestElements = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const grassBladesRef = useRef<Array<{ width: number; height: number; delay: number; duration: number }>>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,6 +20,16 @@ const ForestElements = () => {
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    // Initialize grass blades dimensions once
+    if (grassBladesRef.current.length === 0) {
+      grassBladesRef.current = Array.from({ length: 20 }, () => ({
+        width: Math.random() * 8 + 4,
+        height: Math.random() * 40 + 30,
+        delay: Math.random() * 2,
+        duration: Math.random() * 2 + 3,
+      }));
+    }
 
     // Set canvas size
     const resizeCanvas = () => {
@@ -50,7 +60,6 @@ const ForestElements = () => {
         rotation: Math.random() * Math.PI * 2,
         speed: Math.random() * 0.5 + 0.3,
         drift: Math.random() * 0.5 - 0.25,
-        opacity: Math.random() * 0.4 + 0.3,
         color: leafColors[Math.floor(Math.random() * leafColors.length)],
       });
     }
@@ -123,7 +132,7 @@ const ForestElements = () => {
   return (
     <>
       {/* Decorative forest elements at the bottom */}
-      <div className="fixed bottom-0 left-0 right-0 pointer-events-none z-5">
+      <div className="fixed bottom-0 left-0 right-0 pointer-events-none z-[5]">
         {/* Grass/bushes silhouettes */}
         <div className="relative h-32 overflow-hidden">
           {/* Background layer */}
@@ -131,15 +140,15 @@ const ForestElements = () => {
           
           {/* Grass blades */}
           <div className="absolute bottom-0 left-0 right-0 flex justify-around items-end">
-            {[...Array(20)].map((_, i) => (
+            {grassBladesRef.current.map((blade, i) => (
               <div
                 key={i}
                 className="bg-green-700/30 rounded-t-full animate-sway"
                 style={{
-                  width: `${Math.random() * 8 + 4}px`,
-                  height: `${Math.random() * 40 + 30}px`,
-                  animationDelay: `${Math.random() * 2}s`,
-                  animationDuration: `${Math.random() * 2 + 3}s`,
+                  width: `${blade.width}px`,
+                  height: `${blade.height}px`,
+                  animationDelay: `${blade.delay}s`,
+                  animationDuration: `${blade.duration}s`,
                 }}
               />
             ))}
@@ -150,7 +159,7 @@ const ForestElements = () => {
       {/* Falling leaves canvas */}
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 pointer-events-none z-5"
+        className="fixed inset-0 pointer-events-none z-[5]"
       />
     </>
   );
