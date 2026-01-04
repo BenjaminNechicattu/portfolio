@@ -254,22 +254,6 @@ const NotFound = () => {
             />
           ))}
         </div>
-
-        <style>{`
-          @keyframes shootingStar {
-            0% {
-              transform: translateX(0) translateY(0);
-              opacity: 1;
-            }
-            70% {
-              opacity: 1;
-            }
-            100% {
-              transform: translateX(100vw) translateY(100px);
-              opacity: 0;
-            }
-          }
-        `}</style>
       </div>
     );
   }
@@ -381,22 +365,6 @@ const NotFound = () => {
           />
         ))}
       </div>
-
-      <style>{`
-        @keyframes shootingStar {
-          0% {
-            transform: translateX(0) translateY(0);
-            opacity: 1;
-          }
-          70% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateX(100vw) translateY(100px);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </div>
   );
 };

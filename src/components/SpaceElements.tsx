@@ -376,7 +376,7 @@ const SpaceElements = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [mousePosition]);
+  }, []); // Remove mousePosition dependency to avoid re-initialization
 
   return (
     <>
