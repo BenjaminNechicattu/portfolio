@@ -9,9 +9,14 @@ import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import SnowParticles from '@/components/SnowParticles';
+import ForestElements from '@/components/ForestElements';
+import FlyingInsects from '@/components/FlyingInsects';
 import { isFestiveSeasonActive } from '@/utils/festive';
+import { useCustomTheme } from '@/contexts/CustomThemeContext';
 
 const Index = () => {
+  const { customTheme } = useCustomTheme();
+  
   // Set metadata and title
   useEffect(() => {
     document.title = "Benjamin G Nechicattu | Software Engineer";
@@ -22,6 +27,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {showFestiveTheme && <SnowParticles />}
+      {customTheme === 'nature' && (
+        <>
+          <ForestElements />
+          <FlyingInsects />
+        </>
+      )}
       <NavBar />
       <main>
         <Hero />
