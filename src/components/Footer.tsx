@@ -1,8 +1,17 @@
 
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail, Twitter, Palette } from "lucide-react";
+import { useCustomTheme, CustomTheme } from "@/contexts/CustomThemeContext";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { customTheme, setCustomTheme } = useCustomTheme();
   
   return (
     <footer className="bg-secondary/50 py-12">
@@ -55,6 +64,20 @@ const Footer = () => {
           <p className="text-sm text-muted-foreground mb-4 md:mb-0">
             &copy; {currentYear} Benjamin G Nechicattu. All rights reserved.
           </p>
+          
+          {/* Theme Selector */}
+          <div className="flex items-center space-x-2">
+            <Palette className="h-4 w-4 text-muted-foreground" />
+            <Select value={customTheme} onValueChange={(value) => setCustomTheme(value as CustomTheme)}>
+              <SelectTrigger className="w-[140px] h-9">
+                <SelectValue placeholder="Select theme" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="default">Default</SelectItem>
+                <SelectItem value="nature">Nature</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           
           {/* <div className="flex space-x-6">
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">

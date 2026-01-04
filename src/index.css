@@ -84,6 +84,47 @@
     --sidebar-border: 217 33% 17%;
     --sidebar-ring: 217 91% 60%;
   }
+
+  .theme-nature {
+    --background: 120 40% 98%;
+    --foreground: 140 60% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 140 60% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 140 60% 15%;
+
+    --primary: 140 60% 35%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 120 30% 92%;
+    --secondary-foreground: 140 60% 15%;
+
+    --muted: 120 30% 92%;
+    --muted-foreground: 140 20% 45%;
+
+    --accent: 100 45% 85%;
+    --accent-foreground: 140 60% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 120 20% 85%;
+    --input: 120 20% 85%;
+    --ring: 140 60% 35%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 120 40% 98%;
+    --sidebar-foreground: 140 60% 15%;
+    --sidebar-primary: 140 60% 35%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 120 30% 92%;
+    --sidebar-accent-foreground: 140 60% 15%;
+    --sidebar-border: 120 20% 85%;
+    --sidebar-ring: 140 60% 35%;
+  }
 }
 
 @layer base {
@@ -143,6 +184,11 @@
   .max-w-3xl {
     max-width: 60rem;
   }
+
+  .animate-sway {
+    animation: sway 4s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
 }
 
 @keyframes fadeIn {
@@ -158,6 +204,18 @@
   to { 
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(2deg);
+  }
+  75% {
+    transform: rotate(-2deg);
   }
 }
 

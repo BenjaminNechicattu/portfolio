@@ -4,11 +4,15 @@ import NavBar from '@/components/NavBar';
 import blogs from '@/data/blogs/blogs';
 import BlogCard from '@/components/BlogCard';
 import Footer from '@/components/Footer';
+import ForestElements from '@/components/ForestElements';
+import FlyingInsects from '@/components/FlyingInsects';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { BLOG_ID_PARAM } from '@/constants/blog';
+import { useCustomTheme } from '@/contexts/CustomThemeContext';
 
 const Blog = () => {
+  const { customTheme } = useCustomTheme();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [blogData, setBlogData] = useState([]);
@@ -179,6 +183,12 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {customTheme === 'nature' && (
+        <>
+          <ForestElements />
+          <FlyingInsects />
+        </>
+      )}
       <NavBar />
       <div className="section-container">
         <div className="flex items-baseline mb-4 space-x-2">

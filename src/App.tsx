@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
+import { CustomThemeProvider } from "@/contexts/CustomThemeContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog"; // Import the Blog page
@@ -15,21 +16,23 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <PageTransition>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/newyear" element={<NewYear />} />
-              <Route path="/newyear/:name" element={<NewYear />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </PageTransition>
-        </BrowserRouter>
-      </TooltipProvider>
+      <BrowserRouter>
+        <CustomThemeProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <PageTransition>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/newyear" element={<NewYear />} />
+                <Route path="/newyear/:name" element={<NewYear />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </PageTransition>
+          </TooltipProvider>
+        </CustomThemeProvider>
+      </BrowserRouter>
     </ThemeProvider>
   </QueryClientProvider>
 );
