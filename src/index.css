@@ -388,6 +388,10 @@
     animation: sway 4s ease-in-out infinite;
     transform-origin: bottom center;
   }
+
+  .animate-scan {
+    animation: scan 4s ease-in-out infinite;
+  }
 }
 
 @keyframes fadeIn {
@@ -429,6 +433,15 @@
   100% {
     transform: translateX(100vw) translateY(100px);
     opacity: 0;
+  }
+}
+
+@keyframes scan {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100%;
   }
 }
 
