@@ -367,46 +367,46 @@
     --sidebar-ring: 120 60% 30%;
   }
 
-  /* Terminal Theme - Dark mode (classic green on black) */
+  /* Terminal Theme - Dark mode (orange on black) */
   .theme-terminal.dark {
     --background: 0 0% 0%;
-    --foreground: 120 100% 50%;
+    --foreground: 25 100% 60%;
 
     --card: 0 0% 3%;
-    --card-foreground: 120 100% 50%;
+    --card-foreground: 25 100% 60%;
 
     --popover: 0 0% 3%;
-    --popover-foreground: 120 100% 50%;
+    --popover-foreground: 25 100% 60%;
 
-    --primary: 120 100% 50%;
+    --primary: 25 100% 60%;
     --primary-foreground: 0 0% 0%;
 
     --secondary: 0 0% 5%;
-    --secondary-foreground: 120 100% 60%;
+    --secondary-foreground: 25 100% 70%;
 
     --muted: 0 0% 5%;
-    --muted-foreground: 120 100% 70%;
+    --muted-foreground: 25 100% 75%;
 
     --accent: 0 0% 8%;
-    --accent-foreground: 120 100% 50%;
+    --accent-foreground: 25 100% 60%;
 
     --destructive: 0 100% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 120 100% 25%;
-    --input: 120 100% 25%;
-    --ring: 120 100% 50%;
+    --border: 25 100% 35%;
+    --input: 25 100% 35%;
+    --ring: 25 100% 60%;
 
     --radius: 0rem;
 
     --sidebar-background: 0 0% 0%;
-    --sidebar-foreground: 120 100% 50%;
-    --sidebar-primary: 120 100% 50%;
+    --sidebar-foreground: 25 100% 60%;
+    --sidebar-primary: 25 100% 60%;
     --sidebar-primary-foreground: 0 0% 0%;
     --sidebar-accent: 0 0% 5%;
-    --sidebar-accent-foreground: 120 100% 50%;
-    --sidebar-border: 120 100% 25%;
-    --sidebar-ring: 120 100% 50%;
+    --sidebar-accent-foreground: 25 100% 60%;
+    --sidebar-border: 25 100% 35%;
+    --sidebar-ring: 25 100% 60%;
   }
 }
 
@@ -627,8 +627,8 @@ html {
     background: 
       repeating-linear-gradient(
         0deg,
-        rgba(0, 255, 0, 0.03),
-        rgba(0, 255, 0, 0.03) 1px,
+        rgba(255, 127, 0, 0.03),
+        rgba(255, 127, 0, 0.03) 1px,
         transparent 1px,
         transparent 2px
       ),
@@ -646,10 +646,63 @@ html {
 
 .theme-terminal.dark code,
 .theme-terminal.dark pre {
-  background: rgba(0, 255, 0, 0.05);
-  box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+  background: rgba(255, 127, 0, 0.05);
+  box-shadow: 0 0 5px rgba(255, 127, 0, 0.2);
 }
 
 .section-container {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24;
+}
+
+/* Glitch effect for terminal theme */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes glitch {
+    0% {
+      text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+        -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+        -0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    14% {
+      text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+        -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+        -0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    15% {
+      text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+        0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+        -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    49% {
+      text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+        0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+        -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    50% {
+      text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+        0.05em 0 0 rgba(0, 255, 0, 0.75),
+        0 -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    99% {
+      text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+        0.05em 0 0 rgba(0, 255, 0, 0.75),
+        0 -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    100% {
+      text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+        -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+        -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+  }
+
+  .theme-terminal h1,
+  .theme-terminal h2,
+  .theme-terminal h3 {
+    animation: glitch 500ms infinite;
+  }
+
+  .theme-terminal h1:hover,
+  .theme-terminal h2:hover,
+  .theme-terminal h3:hover {
+    animation: glitch 200ms infinite;
+  }
 }
