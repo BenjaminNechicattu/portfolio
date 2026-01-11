@@ -697,12 +697,15 @@ html {
   .theme-terminal h1,
   .theme-terminal h2,
   .theme-terminal h3 {
-    animation: glitch 500ms infinite;
+    animation: glitch 1s ease-in-out 3;
   }
 
   .theme-terminal h1:hover,
+  .theme-terminal h1:focus,
   .theme-terminal h2:hover,
-  .theme-terminal h3:hover {
-    animation: glitch 200ms infinite;
+  .theme-terminal h2:focus,
+  .theme-terminal h3:hover,
+  .theme-terminal h3:focus {
+    animation: glitch 300ms infinite;
   }
 }
