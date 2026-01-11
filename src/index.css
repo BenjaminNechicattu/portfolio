@@ -536,9 +536,9 @@ html {
 /* Terminal theme specific styling */
 .theme-terminal,
 .theme-terminal *:not(svg):not(path):not(circle):not(rect):not(line):not(polyline):not(polygon) {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* Terminal theme text glow effect */
@@ -610,53 +610,44 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.03),
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 2px
-    );
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.03),
+        rgba(0, 0, 0, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+      ),
+      radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
     pointer-events: none;
-    z-index: 50;
+    z-index: 1;
   }
 
   .theme-terminal.dark::before {
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(0, 255, 0, 0.03),
-      rgba(0, 255, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-  }
-
-  /* Add a subtle CRT screen curvature effect */
-  .theme-terminal::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
-    pointer-events: none;
-    z-index: 49;
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.03),
+        rgba(0, 255, 0, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+      ),
+      radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
   }
 }
 
 /* Terminal theme special styling for code and pre elements */
 .theme-terminal code,
 .theme-terminal pre {
-  background: rgba(0, 0, 0, 0.1) !important;
-  border: 1px solid currentColor !important;
-  padding: 2px 4px !important;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid currentColor;
+  padding: 2px 4px;
 }
 
 .theme-terminal.dark code,
 .theme-terminal.dark pre {
-  background: rgba(0, 255, 0, 0.05) !important;
-  box-shadow: 0 0 5px rgba(0, 255, 0, 0.2) !important;
+  background: rgba(0, 255, 0, 0.05);
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
 }
 
 .section-container {
