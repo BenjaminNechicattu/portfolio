@@ -324,6 +324,90 @@
     --sidebar-border: 210 20% 12%;
     --sidebar-ring: 174 100% 48%;
   }
+
+  /* Terminal Theme - Light mode (green on black) */
+  .theme-terminal {
+    --background: 0 0% 0%;
+    --foreground: 120 100% 50%;
+
+    --card: 0 0% 3%;
+    --card-foreground: 120 100% 50%;
+
+    --popover: 0 0% 3%;
+    --popover-foreground: 120 100% 50%;
+
+    --primary: 120 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 3%;
+    --secondary-foreground: 120 100% 75%;
+
+    --muted: 0 0% 3%;
+    --muted-foreground: 120 100% 75%;
+
+    --accent: 0 0% 5%;
+    --accent-foreground: 120 100% 50%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 120 100% 33%;
+    --input: 120 100% 33%;
+    --ring: 120 100% 50%;
+
+    --radius: 0rem;
+
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 120 100% 50%;
+    --sidebar-primary: 120 100% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 3%;
+    --sidebar-accent-foreground: 120 100% 50%;
+    --sidebar-border: 120 100% 33%;
+    --sidebar-ring: 120 100% 50%;
+  }
+
+  /* Terminal Theme - Dark mode (amber on black for variation) */
+  .theme-terminal.dark {
+    --background: 0 0% 0%;
+    --foreground: 45 100% 50%;
+
+    --card: 0 0% 3%;
+    --card-foreground: 45 100% 50%;
+
+    --popover: 0 0% 3%;
+    --popover-foreground: 45 100% 50%;
+
+    --primary: 45 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 3%;
+    --secondary-foreground: 45 100% 75%;
+
+    --muted: 0 0% 3%;
+    --muted-foreground: 45 100% 75%;
+
+    --accent: 0 0% 5%;
+    --accent-foreground: 45 100% 50%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 45 100% 33%;
+    --input: 45 100% 33%;
+    --ring: 45 100% 50%;
+
+    --radius: 0rem;
+
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 45 100% 50%;
+    --sidebar-primary: 45 100% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 3%;
+    --sidebar-accent-foreground: 45 100% 50%;
+    --sidebar-border: 45 100% 33%;
+    --sidebar-ring: 45 100% 50%;
+  }
 }
 
 @layer base {
@@ -447,6 +531,54 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Terminal theme specific styling */
+.theme-terminal * {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Terminal theme cursor effect */
+.theme-terminal .cursor-blink::after {
+  content: '▮';
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Terminal theme scanline effect (subtle) */
+.theme-terminal::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 0, 0.03),
+    rgba(0, 255, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.theme-terminal.dark::before {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 191, 0, 0.03),
+    rgba(255, 191, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
 }
 
 .section-container {

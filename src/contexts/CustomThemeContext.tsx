@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-export type CustomTheme = 'default' | 'nature' | 'space' | 'cyber';
+export type CustomTheme = 'default' | 'nature' | 'space' | 'cyber' | 'terminal';
 
 interface CustomThemeContextType {
   customTheme: CustomTheme;
@@ -15,12 +15,12 @@ export const CustomThemeProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [customTheme, setCustomThemeState] = useState<CustomTheme>(() => {
     // Check URL parameter first
     const urlTheme = searchParams.get('theme') as CustomTheme;
-    if (urlTheme === 'nature' || urlTheme === 'default' || urlTheme === 'space' || urlTheme === 'cyber') {
+    if (urlTheme === 'nature' || urlTheme === 'default' || urlTheme === 'space' || urlTheme === 'cyber' || urlTheme === 'terminal') {
       return urlTheme;
     }
     // Check localStorage
     const savedTheme = localStorage.getItem('customTheme') as CustomTheme;
-    if (savedTheme === 'nature' || savedTheme === 'default' || savedTheme === 'space' || savedTheme === 'cyber') {
+    if (savedTheme === 'nature' || savedTheme === 'default' || savedTheme === 'space' || savedTheme === 'cyber' || savedTheme === 'terminal') {
       return savedTheme;
     }
     return 'default';
@@ -45,7 +45,7 @@ export const CustomThemeProvider: React.FC<{ children: React.ReactNode }> = ({ c
     const root = document.documentElement;
     
     // Remove all theme classes
-    root.classList.remove('theme-default', 'theme-nature', 'theme-space', 'theme-cyber');
+    root.classList.remove('theme-default', 'theme-nature', 'theme-space', 'theme-cyber', 'theme-terminal');
     
     // Add current theme class
     root.classList.add(`theme-${customTheme}`);

@@ -77,6 +77,7 @@ const Footer = () => {
                 <SelectItem value="nature">Nature</SelectItem>
                 <SelectItem value="space">Space</SelectItem>
                 <SelectItem value="cyber">Cyber</SelectItem>
+                <SelectItem value="terminal">Terminal</SelectItem>
               </SelectContent>
             </Select>
           </div>
