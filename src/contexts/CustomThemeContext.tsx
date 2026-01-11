@@ -3,6 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 
 export type CustomTheme = 'default' | 'nature' | 'space' | 'cyber' | 'terminal' | 'sketch';
 
+const VALID_THEMES: CustomTheme[] = ['default', 'nature', 'space', 'cyber', 'terminal', 'sketch'];
+
+const isValidTheme = (theme: string | null): theme is CustomTheme => {
+  return theme !== null && VALID_THEMES.includes(theme as CustomTheme);
+};
+
 interface CustomThemeContextType {
   customTheme: CustomTheme;
   setCustomTheme: (theme: CustomTheme) => void;
@@ -14,13 +20,13 @@ export const CustomThemeProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [searchParams, setSearchParams] = useSearchParams();
   const [customTheme, setCustomThemeState] = useState<CustomTheme>(() => {
     // Check URL parameter first
-    const urlTheme = searchParams.get('theme') as CustomTheme;
-    if (urlTheme === 'nature' || urlTheme === 'default' || urlTheme === 'space' || urlTheme === 'cyber' || urlTheme === 'terminal' || urlTheme === 'sketch') {
+    const urlTheme = searchParams.get('theme');
+    if (isValidTheme(urlTheme)) {
       return urlTheme;
     }
     // Check localStorage
-    const savedTheme = localStorage.getItem('customTheme') as CustomTheme;
-    if (savedTheme === 'nature' || savedTheme === 'default' || savedTheme === 'space' || savedTheme === 'cyber' || savedTheme === 'terminal' || savedTheme === 'sketch') {
+    const savedTheme = localStorage.getItem('customTheme');
+    if (isValidTheme(savedTheme)) {
       return savedTheme;
     }
     return 'default';
@@ -45,7 +51,7 @@ export const CustomThemeProvider: React.FC<{ children: React.ReactNode }> = ({ c
     const root = document.documentElement;
     
     // Remove all theme classes
-    root.classList.remove('theme-default', 'theme-nature', 'theme-space', 'theme-cyber', 'theme-terminal', 'theme-sketch');
+    VALID_THEMES.forEach(theme => root.classList.remove(`theme-${theme}`));
     
     // Add current theme class
     root.classList.add(`theme-${customTheme}`);
