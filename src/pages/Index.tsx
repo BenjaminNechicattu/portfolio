@@ -12,6 +12,7 @@ import SnowParticles from '@/components/SnowParticles';
 import ForestElements from '@/components/ForestElements';
 import FlyingInsects from '@/components/FlyingInsects';
 import SpaceElements from '@/components/SpaceElements';
+import CyberElements from '@/components/CyberElements';
 import { isFestiveSeasonActive } from '@/utils/festive';
 import { useCustomTheme } from '@/contexts/CustomThemeContext';
 
@@ -35,6 +36,7 @@ const Index = () => {
         </>
       )}
       {customTheme === 'space' && <SpaceElements />}
+      {customTheme === 'cyber' && <CyberElements />}
       <NavBar />
       <main>
         <Hero />
