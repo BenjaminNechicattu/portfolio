@@ -325,8 +325,50 @@
     --sidebar-ring: 174 100% 48%;
   }
 
-  /* Terminal Theme - Light mode (green on black) */
+  /* Terminal Theme - Light mode (dark green on light green) */
   .theme-terminal {
+    --background: 120 30% 95%;
+    --foreground: 120 100% 20%;
+
+    --card: 120 20% 98%;
+    --card-foreground: 120 100% 20%;
+
+    --popover: 120 20% 98%;
+    --popover-foreground: 120 100% 20%;
+
+    --primary: 120 60% 30%;
+    --primary-foreground: 120 30% 95%;
+
+    --secondary: 120 20% 88%;
+    --secondary-foreground: 120 100% 20%;
+
+    --muted: 120 20% 88%;
+    --muted-foreground: 120 40% 35%;
+
+    --accent: 120 30% 85%;
+    --accent-foreground: 120 100% 20%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 120 30% 75%;
+    --input: 120 30% 75%;
+    --ring: 120 60% 30%;
+
+    --radius: 0rem;
+
+    --sidebar-background: 120 30% 95%;
+    --sidebar-foreground: 120 100% 20%;
+    --sidebar-primary: 120 60% 30%;
+    --sidebar-primary-foreground: 120 30% 95%;
+    --sidebar-accent: 120 20% 88%;
+    --sidebar-accent-foreground: 120 100% 20%;
+    --sidebar-border: 120 30% 75%;
+    --sidebar-ring: 120 60% 30%;
+  }
+
+  /* Terminal Theme - Dark mode (classic green on black) */
+  .theme-terminal.dark {
     --background: 0 0% 0%;
     --foreground: 120 100% 50%;
 
@@ -339,20 +381,20 @@
     --primary: 120 100% 50%;
     --primary-foreground: 0 0% 0%;
 
-    --secondary: 0 0% 3%;
-    --secondary-foreground: 120 100% 75%;
+    --secondary: 0 0% 5%;
+    --secondary-foreground: 120 100% 60%;
 
-    --muted: 0 0% 3%;
-    --muted-foreground: 120 100% 75%;
+    --muted: 0 0% 5%;
+    --muted-foreground: 120 100% 70%;
 
-    --accent: 0 0% 5%;
+    --accent: 0 0% 8%;
     --accent-foreground: 120 100% 50%;
 
     --destructive: 0 100% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 120 100% 33%;
-    --input: 120 100% 33%;
+    --border: 120 100% 25%;
+    --input: 120 100% 25%;
     --ring: 120 100% 50%;
 
     --radius: 0rem;
@@ -361,52 +403,10 @@
     --sidebar-foreground: 120 100% 50%;
     --sidebar-primary: 120 100% 50%;
     --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 3%;
+    --sidebar-accent: 0 0% 5%;
     --sidebar-accent-foreground: 120 100% 50%;
-    --sidebar-border: 120 100% 33%;
+    --sidebar-border: 120 100% 25%;
     --sidebar-ring: 120 100% 50%;
-  }
-
-  /* Terminal Theme - Dark mode (amber on black for variation) */
-  .theme-terminal.dark {
-    --background: 0 0% 0%;
-    --foreground: 45 100% 50%;
-
-    --card: 0 0% 3%;
-    --card-foreground: 45 100% 50%;
-
-    --popover: 0 0% 3%;
-    --popover-foreground: 45 100% 50%;
-
-    --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 0%;
-
-    --secondary: 0 0% 3%;
-    --secondary-foreground: 45 100% 75%;
-
-    --muted: 0 0% 3%;
-    --muted-foreground: 45 100% 75%;
-
-    --accent: 0 0% 5%;
-    --accent-foreground: 45 100% 50%;
-
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 45 100% 33%;
-    --input: 45 100% 33%;
-    --ring: 45 100% 50%;
-
-    --radius: 0rem;
-
-    --sidebar-background: 0 0% 0%;
-    --sidebar-foreground: 45 100% 50%;
-    --sidebar-primary: 45 100% 50%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 3%;
-    --sidebar-accent-foreground: 45 100% 50%;
-    --sidebar-border: 45 100% 33%;
-    --sidebar-ring: 45 100% 50%;
   }
 }
 
@@ -541,17 +541,63 @@ html {
   box-shadow: none !important;
 }
 
-/* Terminal theme cursor effect */
+/* Terminal theme text glow effect */
+.theme-terminal h1,
+.theme-terminal h2,
+.theme-terminal h3,
+.theme-terminal h4,
+.theme-terminal h5,
+.theme-terminal h6 {
+  text-shadow: 0 0 8px currentColor;
+}
+
+.theme-terminal.dark h1,
+.theme-terminal.dark h2,
+.theme-terminal.dark h3,
+.theme-terminal.dark h4,
+.theme-terminal.dark h5,
+.theme-terminal.dark h6 {
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+}
+
+/* Terminal theme cursor effect on headings */
 @media (prefers-reduced-motion: no-preference) {
-  .theme-terminal .cursor-blink::after {
+  .theme-terminal h1::after,
+  .theme-terminal h2::after {
     content: '▮';
     animation: blink 1s step-end infinite;
-    margin-left: 2px;
+    margin-left: 4px;
+    opacity: 0.8;
   }
 
   @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
+  }
+}
+
+/* Terminal theme hover effects */
+.theme-terminal a:hover,
+.theme-terminal button:hover {
+  text-shadow: 0 0 8px currentColor;
+  transition: text-shadow 0.2s ease;
+}
+
+.theme-terminal.dark a:hover,
+.theme-terminal.dark button:hover {
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+}
+
+/* Terminal theme flicker effect on interactive elements */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-terminal button:active,
+  .theme-terminal a:active {
+    animation: flicker 0.1s ease-in-out;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
   }
 }
 
@@ -566,8 +612,8 @@ html {
     height: 100%;
     background: repeating-linear-gradient(
       0deg,
-      rgba(0, 255, 0, 0.03),
-      rgba(0, 255, 0, 0.03) 1px,
+      rgba(0, 0, 0, 0.03),
+      rgba(0, 0, 0, 0.03) 1px,
       transparent 1px,
       transparent 2px
     );
@@ -578,12 +624,39 @@ html {
   .theme-terminal.dark::before {
     background: repeating-linear-gradient(
       0deg,
-      rgba(255, 191, 0, 0.03),
-      rgba(255, 191, 0, 0.03) 1px,
+      rgba(0, 255, 0, 0.03),
+      rgba(0, 255, 0, 0.03) 1px,
       transparent 1px,
       transparent 2px
     );
   }
+
+  /* Add a subtle CRT screen curvature effect */
+  .theme-terminal::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+    pointer-events: none;
+    z-index: 49;
+  }
+}
+
+/* Terminal theme special styling for code and pre elements */
+.theme-terminal code,
+.theme-terminal pre {
+  background: rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid currentColor !important;
+  padding: 2px 4px !important;
+}
+
+.theme-terminal.dark code,
+.theme-terminal.dark pre {
+  background: rgba(0, 255, 0, 0.05) !important;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.2) !important;
 }
 
 .section-container {
