@@ -286,9 +286,11 @@ const ModernClock = () => {
     const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     drawRing(195, days, day, offsets.day);
 
-    // Draw hours ring (1-12)
+    // Draw hours ring (12, 1, 2, 3, ..., 11)
     const hourLabels = Array.from({ length: 12 }, (_, i) => String(i === 0 ? 12 : i));
-    drawRing(165, hourLabels, hours === 0 ? 11 : hours - 1, offsets.hours);
+    // Convert hours (0-11) to index: hour 0 (12 AM) -> index 0, hour 1 -> index 1, etc.
+    const hourIndex = hours === 0 ? 0 : hours;
+    drawRing(165, hourLabels, hourIndex, offsets.hours);
 
     // Draw minutes ring (0-59, show every 5)
     const minuteLabels = Array.from({ length: 12 }, (_, i) => String(i * 5));
