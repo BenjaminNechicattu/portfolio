@@ -25,6 +25,16 @@ const ModernClock = () => {
     date: 0,
   });
 
+  // Ring radius constants for interaction detection
+  const RING_RADII = {
+    date: { min: 240, max: 270 },
+    month: { min: 210, max: 240 },
+    day: { min: 180, max: 210 },
+    hours: { min: 150, max: 180 },
+    minutes: { min: 120, max: 150 },
+    seconds: { min: 90, max: 120 },
+  };
+
   // Update actual time every second
   useEffect(() => {
     const timer = setInterval(() => {
@@ -65,14 +75,14 @@ const ModernClock = () => {
     const centerY = canvas.height / 2;
     const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
 
-    // Determine which ring was clicked based on distance
+    // Determine which ring was clicked based on distance using named constants
     let ring = null;
-    if (distance > 240 && distance < 270) ring = 'date';
-    else if (distance > 210 && distance < 240) ring = 'month';
-    else if (distance > 180 && distance < 210) ring = 'day';
-    else if (distance > 150 && distance < 180) ring = 'hours';
-    else if (distance > 120 && distance < 150) ring = 'minutes';
-    else if (distance > 90 && distance < 120) ring = 'seconds';
+    if (distance > RING_RADII.date.min && distance < RING_RADII.date.max) ring = 'date';
+    else if (distance > RING_RADII.month.min && distance < RING_RADII.month.max) ring = 'month';
+    else if (distance > RING_RADII.day.min && distance < RING_RADII.day.max) ring = 'day';
+    else if (distance > RING_RADII.hours.min && distance < RING_RADII.hours.max) ring = 'hours';
+    else if (distance > RING_RADII.minutes.min && distance < RING_RADII.minutes.max) ring = 'minutes';
+    else if (distance > RING_RADII.seconds.min && distance < RING_RADII.seconds.max) ring = 'seconds';
 
     if (ring) {
       const angle = getAngleFromPoint(centerX, centerY, x, y);
@@ -109,6 +119,76 @@ const ModernClock = () => {
       ...prev,
       currentAngle: angle,
     }));
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    if (e.touches.length !== 1) return;
+    const touch = e.touches[0];
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+
+    // Determine which ring was touched
+    let ring = null;
+    if (distance > RING_RADII.date.min && distance < RING_RADII.date.max) ring = 'date';
+    else if (distance > RING_RADII.month.min && distance < RING_RADII.month.max) ring = 'month';
+    else if (distance > RING_RADII.day.min && distance < RING_RADII.day.max) ring = 'day';
+    else if (distance > RING_RADII.hours.min && distance < RING_RADII.hours.max) ring = 'hours';
+    else if (distance > RING_RADII.minutes.min && distance < RING_RADII.minutes.max) ring = 'minutes';
+    else if (distance > RING_RADII.seconds.min && distance < RING_RADII.seconds.max) ring = 'seconds';
+
+    if (ring) {
+      const angle = getAngleFromPoint(centerX, centerY, x, y);
+      setDragState({
+        isDragging: true,
+        ring,
+        startAngle: angle,
+        currentAngle: angle,
+      });
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    if (!dragState.isDragging || !dragState.ring || e.touches.length !== 1) return;
+    e.preventDefault();
+
+    const touch = e.touches[0];
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const angle = getAngleFromPoint(centerX, centerY, x, y);
+
+    const angleDiff = angle - dragState.startAngle;
+
+    setOffsets((prev) => ({
+      ...prev,
+      [dragState.ring as string]: angleDiff,
+    }));
+
+    setDragState((prev) => ({
+      ...prev,
+      currentAngle: angle,
+    }));
+  };
+
+  const handleTouchEnd = () => {
+    setDragState({
+      isDragging: false,
+      ring: null,
+      startAngle: 0,
+      currentAngle: 0,
+    });
   };
 
   const handleMouseUp = () => {
@@ -268,8 +348,13 @@ const ModernClock = () => {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         className="cursor-pointer"
         style={{ touchAction: 'none' }}
+        aria-label="Interactive clock with draggable rings showing current time. Click and drag any ring to rotate it."
+        role="img"
       />
     </div>
   );
