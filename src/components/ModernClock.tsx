@@ -64,6 +64,16 @@ const ModernClock = () => {
     return Math.atan2(y - centerY, x - centerX);
   };
 
+  const getRingFromDistance = (distance: number): string | null => {
+    if (distance > RING_RADII.date.min && distance < RING_RADII.date.max) return 'date';
+    if (distance > RING_RADII.month.min && distance < RING_RADII.month.max) return 'month';
+    if (distance > RING_RADII.day.min && distance < RING_RADII.day.max) return 'day';
+    if (distance > RING_RADII.hours.min && distance < RING_RADII.hours.max) return 'hours';
+    if (distance > RING_RADII.minutes.min && distance < RING_RADII.minutes.max) return 'minutes';
+    if (distance > RING_RADII.seconds.min && distance < RING_RADII.seconds.max) return 'seconds';
+    return null;
+  };
+
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -75,14 +85,7 @@ const ModernClock = () => {
     const centerY = canvas.height / 2;
     const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
 
-    // Determine which ring was clicked based on distance using named constants
-    let ring = null;
-    if (distance > RING_RADII.date.min && distance < RING_RADII.date.max) ring = 'date';
-    else if (distance > RING_RADII.month.min && distance < RING_RADII.month.max) ring = 'month';
-    else if (distance > RING_RADII.day.min && distance < RING_RADII.day.max) ring = 'day';
-    else if (distance > RING_RADII.hours.min && distance < RING_RADII.hours.max) ring = 'hours';
-    else if (distance > RING_RADII.minutes.min && distance < RING_RADII.minutes.max) ring = 'minutes';
-    else if (distance > RING_RADII.seconds.min && distance < RING_RADII.seconds.max) ring = 'seconds';
+    const ring = getRingFromDistance(distance);
 
     if (ring) {
       const angle = getAngleFromPoint(centerX, centerY, x, y);
@@ -134,14 +137,7 @@ const ModernClock = () => {
     const centerY = canvas.height / 2;
     const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
 
-    // Determine which ring was touched
-    let ring = null;
-    if (distance > RING_RADII.date.min && distance < RING_RADII.date.max) ring = 'date';
-    else if (distance > RING_RADII.month.min && distance < RING_RADII.month.max) ring = 'month';
-    else if (distance > RING_RADII.day.min && distance < RING_RADII.day.max) ring = 'day';
-    else if (distance > RING_RADII.hours.min && distance < RING_RADII.hours.max) ring = 'hours';
-    else if (distance > RING_RADII.minutes.min && distance < RING_RADII.minutes.max) ring = 'minutes';
-    else if (distance > RING_RADII.seconds.min && distance < RING_RADII.seconds.max) ring = 'seconds';
+    const ring = getRingFromDistance(distance);
 
     if (ring) {
       const angle = getAngleFromPoint(centerX, centerY, x, y);

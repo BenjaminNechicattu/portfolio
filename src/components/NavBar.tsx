@@ -42,6 +42,8 @@ const NavBar = () => {
         }
       } else if (location.pathname === '/blog') {
         setActiveSection('blog');
+      } else if (location.pathname === '/time') {
+        setActiveSection('time');
       }
     };
 
