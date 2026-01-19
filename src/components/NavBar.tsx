@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from 'next-themes';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, ChevronDown } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -36,6 +42,8 @@ const NavBar = () => {
         }
       } else if (location.pathname === '/blog') {
         setActiveSection('blog');
+      } else if (location.pathname === '/time') {
+        setActiveSection('time');
       }
     };
 
@@ -110,6 +118,24 @@ const NavBar = () => {
                 {item.label}
               </button>
             ))}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  className={cn(
+                    "text-sm font-medium px-2 py-1 rounded-md transition-all duration-300 relative flex items-center gap-1",
+                    "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  More
+                  <ChevronDown className="h-4 w-4" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => navigate('/time')}>
+                  Time
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           <div className="flex items-center space-x-2">
@@ -161,6 +187,12 @@ const NavBar = () => {
                 {item.label}
               </button>
             ))}
+            <button
+              onClick={() => navigate('/time')}
+              className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground transition-all duration-300"
+            >
+              Time
+            </button>
           </nav>
         </div>
       )}

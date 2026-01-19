@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog"; // Import the Blog page
 import NewYear from "./pages/NewYear"; // Import the New Year page
+import Clock from "./pages/Clock"; // Import the Clock page
 import PageTransition from '@/components/PageTransition';
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/time" element={<Clock />} />
                 <Route path="/newyear" element={<NewYear />} />
                 <Route path="/newyear/:name" element={<NewYear />} />
                 <Route path="*" element={<NotFound />} />
