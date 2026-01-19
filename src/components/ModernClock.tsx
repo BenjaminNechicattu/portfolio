@@ -144,10 +144,10 @@ const ModernClock = () => {
     const date = time.getDate();
 
     const isDark = document.documentElement.classList.contains('dark');
-    const bgColor = isDark ? '#000000' : '#ffffff';
-    const textColor = isDark ? '#ffffff' : '#000000';
-    const ringColor = isDark ? '#333333' : '#e5e5e5';
-    const highlightColor = isDark ? '#666666' : '#cccccc';
+    const bgColor = isDark ? '#1a1a1a' : '#f5f5f5';
+    const textColor = isDark ? '#e0e0e0' : '#2a2a2a';
+    const ringColor = isDark ? '#2a2a2a' : '#d0d0d0';
+    const highlightColor = isDark ? '#4ade80' : '#22c55e';
 
     // Fill background
     ctx.fillStyle = bgColor;
@@ -173,11 +173,11 @@ const ModernClock = () => {
         ctx.rotate(angle + Math.PI / 2);
 
         if (highlightCurrent && index === currentIndex) {
-          ctx.fillStyle = highlightCurrent ? (isDark ? '#4ade80' : '#22c55e') : textColor;
-          ctx.font = 'bold 14px Arial';
+          ctx.fillStyle = highlightColor;
+          ctx.font = 'bold 16px Arial';
         } else {
-          ctx.fillStyle = isDark ? '#888888' : '#666666';
-          ctx.font = '12px Arial';
+          ctx.fillStyle = isDark ? '#606060' : '#888888';
+          ctx.font = '13px Arial';
         }
 
         ctx.textAlign = 'center';
@@ -188,7 +188,7 @@ const ModernClock = () => {
 
       // Draw ring circle
       ctx.strokeStyle = ringColor;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
       ctx.stroke();
@@ -219,7 +219,7 @@ const ModernClock = () => {
     drawRing(105, secondLabels, Math.floor(seconds / 5), offsets.seconds);
 
     // Draw center circle
-    ctx.fillStyle = ringColor;
+    ctx.fillStyle = isDark ? '#2a2a2a' : '#d0d0d0';
     ctx.beginPath();
     ctx.arc(centerX, centerY, 80, 0, Math.PI * 2);
     ctx.fill();
@@ -230,31 +230,31 @@ const ModernClock = () => {
 
     // Hour hand
     ctx.strokeStyle = textColor;
-    ctx.lineWidth = 6;
+    ctx.lineWidth = 8;
     ctx.lineCap = 'round';
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.lineTo(
-      centerX + Math.cos(hoursAngle) * 40,
-      centerY + Math.sin(hoursAngle) * 40
+      centerX + Math.cos(hoursAngle) * 45,
+      centerY + Math.sin(hoursAngle) * 45
     );
     ctx.stroke();
 
     // Minute hand
     ctx.strokeStyle = textColor;
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 6;
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
     ctx.lineTo(
-      centerX + Math.cos(minutesAngle) * 60,
-      centerY + Math.sin(minutesAngle) * 60
+      centerX + Math.cos(minutesAngle) * 65,
+      centerY + Math.sin(minutesAngle) * 65
     );
     ctx.stroke();
 
     // Center dot
-    ctx.fillStyle = isDark ? '#4ade80' : '#22c55e';
+    ctx.fillStyle = highlightColor;
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 8, 0, Math.PI * 2);
+    ctx.arc(centerX, centerY, 10, 0, Math.PI * 2);
     ctx.fill();
   }, [time, offsets]);
 
