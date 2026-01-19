@@ -1,0 +1,278 @@
+import { useEffect, useRef, useState } from 'react';
+
+interface DragState {
+  isDragging: boolean;
+  ring: string | null;
+  startAngle: number;
+  currentAngle: number;
+}
+
+const ModernClock = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [time, setTime] = useState(new Date());
+  const [dragState, setDragState] = useState<DragState>({
+    isDragging: false,
+    ring: null,
+    startAngle: 0,
+    currentAngle: 0,
+  });
+  const [offsets, setOffsets] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    day: 0,
+    month: 0,
+    date: 0,
+  });
+
+  // Update actual time every second
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Reset offsets when dragging stops
+  useEffect(() => {
+    if (!dragState.isDragging && dragState.ring) {
+      const timer = setTimeout(() => {
+        setOffsets({
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          day: 0,
+          month: 0,
+          date: 0,
+        });
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [dragState.isDragging, dragState.ring]);
+
+  const getAngleFromPoint = (centerX: number, centerY: number, x: number, y: number): number => {
+    return Math.atan2(y - centerY, x - centerX);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+
+    // Determine which ring was clicked based on distance
+    let ring = null;
+    if (distance > 240 && distance < 270) ring = 'date';
+    else if (distance > 210 && distance < 240) ring = 'month';
+    else if (distance > 180 && distance < 210) ring = 'day';
+    else if (distance > 150 && distance < 180) ring = 'hours';
+    else if (distance > 120 && distance < 150) ring = 'minutes';
+    else if (distance > 90 && distance < 120) ring = 'seconds';
+
+    if (ring) {
+      const angle = getAngleFromPoint(centerX, centerY, x, y);
+      setDragState({
+        isDragging: true,
+        ring,
+        startAngle: angle,
+        currentAngle: angle,
+      });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (!dragState.isDragging || !dragState.ring) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const angle = getAngleFromPoint(centerX, centerY, x, y);
+
+    const angleDiff = angle - dragState.startAngle;
+
+    setOffsets((prev) => ({
+      ...prev,
+      [dragState.ring as string]: angleDiff,
+    }));
+
+    setDragState((prev) => ({
+      ...prev,
+      currentAngle: angle,
+    }));
+  };
+
+  const handleMouseUp = () => {
+    setDragState({
+      isDragging: false,
+      ring: null,
+      startAngle: 0,
+      currentAngle: 0,
+    });
+  };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const width = canvas.width;
+    const height = canvas.height;
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+
+    // Get current time values
+    const hours = time.getHours() % 12;
+    const minutes = time.getMinutes();
+    const seconds = time.getSeconds();
+    const day = time.getDay();
+    const month = time.getMonth();
+    const date = time.getDate();
+
+    const isDark = document.documentElement.classList.contains('dark');
+    const bgColor = isDark ? '#000000' : '#ffffff';
+    const textColor = isDark ? '#ffffff' : '#000000';
+    const ringColor = isDark ? '#333333' : '#e5e5e5';
+    const highlightColor = isDark ? '#666666' : '#cccccc';
+
+    // Fill background
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, width, height);
+
+    // Helper function to draw a ring
+    const drawRing = (
+      radius: number,
+      items: string[],
+      currentIndex: number,
+      offset: number,
+      highlightCurrent: boolean = true
+    ) => {
+      const anglePerItem = (Math.PI * 2) / items.length;
+      
+      items.forEach((item, index) => {
+        const angle = index * anglePerItem - Math.PI / 2 + offset;
+        const x = centerX + Math.cos(angle) * radius;
+        const y = centerY + Math.sin(angle) * radius;
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle + Math.PI / 2);
+
+        if (highlightCurrent && index === currentIndex) {
+          ctx.fillStyle = highlightCurrent ? (isDark ? '#4ade80' : '#22c55e') : textColor;
+          ctx.font = 'bold 14px Arial';
+        } else {
+          ctx.fillStyle = isDark ? '#888888' : '#666666';
+          ctx.font = '12px Arial';
+        }
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(item, 0, 0);
+        ctx.restore();
+      });
+
+      // Draw ring circle
+      ctx.strokeStyle = ringColor;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.stroke();
+    };
+
+    // Draw outermost ring - Date (1-31)
+    const dates = Array.from({ length: 31 }, (_, i) => String(i + 1));
+    drawRing(255, dates, date - 1, offsets.date);
+
+    // Draw month ring
+    const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    drawRing(225, months, month, offsets.month);
+
+    // Draw day of week ring
+    const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    drawRing(195, days, day, offsets.day);
+
+    // Draw hours ring (1-12)
+    const hourLabels = Array.from({ length: 12 }, (_, i) => String(i === 0 ? 12 : i));
+    drawRing(165, hourLabels, hours === 0 ? 11 : hours - 1, offsets.hours);
+
+    // Draw minutes ring (0-59, show every 5)
+    const minuteLabels = Array.from({ length: 12 }, (_, i) => String(i * 5));
+    drawRing(135, minuteLabels, Math.floor(minutes / 5), offsets.minutes);
+
+    // Draw seconds ring (0-59, show every 5)
+    const secondLabels = Array.from({ length: 12 }, (_, i) => String(i * 5));
+    drawRing(105, secondLabels, Math.floor(seconds / 5), offsets.seconds);
+
+    // Draw center circle
+    ctx.fillStyle = ringColor;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 80, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Draw clock hands
+    const hoursAngle = ((hours + minutes / 60) * 30 - 90) * (Math.PI / 180) + offsets.hours;
+    const minutesAngle = ((minutes + seconds / 60) * 6 - 90) * (Math.PI / 180) + offsets.minutes;
+
+    // Hour hand
+    ctx.strokeStyle = textColor;
+    ctx.lineWidth = 6;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(
+      centerX + Math.cos(hoursAngle) * 40,
+      centerY + Math.sin(hoursAngle) * 40
+    );
+    ctx.stroke();
+
+    // Minute hand
+    ctx.strokeStyle = textColor;
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(
+      centerX + Math.cos(minutesAngle) * 60,
+      centerY + Math.sin(minutesAngle) * 60
+    );
+    ctx.stroke();
+
+    // Center dot
+    ctx.fillStyle = isDark ? '#4ade80' : '#22c55e';
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 8, 0, Math.PI * 2);
+    ctx.fill();
+  }, [time, offsets]);
+
+  return (
+    <div className="flex justify-center items-center py-8">
+      <canvas
+        ref={canvasRef}
+        width={600}
+        height={600}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        className="cursor-pointer"
+        style={{ touchAction: 'none' }}
+      />
+    </div>
+  );
+};
+
+export default ModernClock;
