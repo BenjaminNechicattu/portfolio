@@ -19,16 +19,6 @@ const Hero = () => {
       <div className="absolute -top-20 -left-20 w-96 h-96 bg-blue-100 dark:bg-blue-900/20 rounded-full filter blur-3xl opacity-30 animate-pulse" />
       <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-100 dark:bg-purple-900/20 rounded-full filter blur-3xl opacity-30 animate-pulse" />
       
-      <div className="absolute top-20 right-4 md:right-4">
-        <span className="inline-block text-xs font-medium tracking-wider uppercase">
-          <img 
-            src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fbenjaminnechicattu.in&count_bg=%230E75B6&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Visitors&edge_flat=false" 
-            alt="visitor count" 
-            className="h-3 md:h-4"
-          />
-        </span>
-      </div>
-
       <div className="section-container relative z-10">
         <div 
           className={cn(
