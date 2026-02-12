@@ -10,11 +10,22 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { BLOG_ID_PARAM } from '@/constants/blog';
 import { useCustomTheme } from '@/contexts/CustomThemeContext';
 
+interface BlogPost {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  author: string;
+  date: string;
+  tags: string[];
+  content: string;
+}
+
 const Blog = () => {
   const { customTheme } = useCustomTheme();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [blogData, setBlogData] = useState<any[]>([]);
+  const [blogData, setBlogData] = useState<BlogPost[]>([]);
   const [totalBlogs, setTotalBlogs] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [blogsPerPage, setBlogsPerPage] = useState(9);
