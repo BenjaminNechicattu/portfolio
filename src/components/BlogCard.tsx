@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Modal from './Modal';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import { Share2, Copy, Check, X } from 'lucide-react';
 import { BLOG_ID_PARAM } from '@/constants/blog';
 
@@ -151,7 +152,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
             <p><strong>Summary:</strong> {description}</p>
             <hr className="my-4" />
             
-            <ReactMarkdown>{content}</ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
             <hr className="my-4" />
             <p>{author}</p>
             <br></br>
