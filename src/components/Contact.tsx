@@ -110,7 +110,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className="py-12">
       <div className="section-container" ref={ref}>
         <div className="max-w-5xl mx-auto">
           <div className={cn(

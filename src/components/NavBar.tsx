@@ -36,6 +36,10 @@ const NavBar = () => {
         }
       } else if (location.pathname === '/blog') {
         setActiveSection('blog');
+      } else if (location.pathname === '/services') {
+        setActiveSection('services');
+      } else if (location.pathname === '/contact') {
+        setActiveSection('contact');
       }
     };
 
@@ -63,6 +67,29 @@ const NavBar = () => {
           behavior: 'smooth',
         });
       }
+    }
+  };
+
+  const handleNavItemClick = (item: { id: string; path?: string }) => {
+    if (item.id === 'contact') {
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById('contact');
+          if (element) {
+            window.scrollTo({
+              top: element.offsetTop - 80,
+              behavior: 'smooth',
+            });
+          }
+        }, 100);
+      } else {
+        handleNavigation('contact');
+      }
+    } else if (item.path) {
+      navigate(item.path);
+    } else {
+      handleNavigation(item.id);
     }
   };
 
@@ -94,12 +121,13 @@ const NavBar = () => {
               { id: 'experience', label: 'Experience' },
               { id: 'skills', label: 'Skills' },
               { id: 'projects', label: 'Projects' },
-              { id: 'contact', label: 'Contact' },
+              { id: 'contact', label: 'Contact', path: '/contact' },
+              { id: 'services', label: 'Services', path: '/services' },
               { id: 'blog', label: 'Blog', path: '/blog' },
             ].map((item) => (
               <button
                 key={item.id}
-                onClick={() => item.path ? navigate(item.path) : handleNavigation(item.id)}
+                onClick={() => handleNavItemClick(item)}
                 className={cn(
                   "text-sm font-medium px-2 py-1 rounded-md transition-all duration-300 relative",
                   activeSection === item.id
@@ -145,12 +173,13 @@ const NavBar = () => {
               { id: 'experience', label: 'Experience' },
               { id: 'skills', label: 'Skills' },
               { id: 'projects', label: 'Projects' },
-              { id: 'contact', label: 'Contact' },
+              { id: 'contact', label: 'Contact', path: '/contact' },
+              { id: 'services', label: 'Services', path: '/services' },
               { id: 'blog', label: 'Blog', path: '/blog' },
             ].map((item) => (
               <button
                 key={item.id}
-                onClick={() => item.path ? navigate(item.path) : handleNavigation(item.id)}
+                onClick={() => handleNavItemClick(item)}
                 className={cn(
                   "block px-3 py-2 rounded-md text-base font-medium transition-all duration-300",
                   activeSection === item.id
