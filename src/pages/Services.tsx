@@ -63,7 +63,7 @@ const serviceOptions = [
         description: 'Logo and brand identity designs' },
       { title: 'Ad Design', type: 'image', url: 'https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/refs/heads/main/public/img/svcimg/5.png',
         description: 'Better ad designs for your marketing needs' },
-      { title: 'Poster Design', type: 'image', url: '                                                                   ',
+      { title: 'Poster Design', type: 'image', url: 'https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/refs/heads/main/public/img/svcimg/8.png',
         description: 'Eye-catchingdesigns for events, promotions and brand' },
     ],
     icon: Target,
