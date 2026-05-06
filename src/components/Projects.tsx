@@ -98,7 +98,7 @@ const Projects = () => {
   const { ref, isIntersecting } = useScrollReveal();
 
   return (
-    <section id="projects" className="py-20 bg-secondary/30">
+    <section id="projects" className="py-12 bg-secondary/30">
       <div className="section-container" ref={ref}>
         <div className="max-w-6xl mx-auto">
           <div className={cn(

@@ -61,7 +61,7 @@ const Hero = () => {
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 px-4 md:px-0">
             <a 
               href="#contact" 
-              className="w-full md:w-auto px-8 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-all duration-300 hover:shadow-lg focus:ring-2 focus:ring-offset-2 focus:ring-primary text-center"
+              className="w-full md:w-auto px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium transition-all duration-300 hover:shadow-lg focus:ring-2 focus:ring-offset-2 focus:ring-primary text-center"
             >
               Get in Touch
             </a>
@@ -74,16 +74,16 @@ const Hero = () => {
                 link.click();
                 document.body.removeChild(link);
               }}
-              className="w-full md:w-auto px-8 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary flex items-center justify-center gap-2"
+              className="w-full md:w-auto px-8 py-3 rounded-full bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4" />
               Download Resume
             </button>
-            <a 
-              href="#about" 
-              className="w-full md:w-auto px-8 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary text-center"
+            <a
+              href="/services"
+              className="w-full md:w-auto px-8 py-3 rounded-full bg-secondary text-secondary-foreground font-medium transition-all duration-300 hover:shadow hover:bg-secondary/80 focus:ring-2 focus:ring-offset-2 focus:ring-secondary text-center"
             >
-              Learn More
+              Services
             </a>
           </div>
         </div>
