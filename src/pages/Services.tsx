@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 const serviceOptions = [
   {
     id: 'paintings',
-    label: 'Paintings',
+    label: 'Painting',
     title: 'Portraits/Paintings/ Art',
     subheading: 'Pencil/Acrylic Art',
     link: 'https://www.instagram.com/shades_and_pixels/',
@@ -162,8 +162,34 @@ const Services = () => {
             <span className="inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-secondary-foreground mb-5">
               Services
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-              Artist + Designer + Developer = Rare Solutions
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 leading-tight">
+              <span
+                className={cn(
+                  'transition-all duration-300 px-2 py-1 rounded-xl',
+                  activeService === 'paintings' && 'text-muted-foreground border-border'
+                )}
+              >
+                Artist
+              </span>{' '}
+              +{' '}
+              <span
+                className={cn(
+                  'transition-all duration-300 px-2 py-1 rounded-xl',
+                  activeService === 'design' && 'text-muted-foreground'
+                )}
+              >
+                Designer
+              </span>{' '}
+              +{' '}
+              <span
+                className={cn(
+                  'transition-all duration-300 px-2 py-1 rounded-xl',
+                  activeService === 'dev' && 'text-muted-foreground'
+                )}
+              >
+                Developer
+              </span>{' '}
+              = Rare Solutions
             </h1>
             <p className="mx-auto max-w-3xl text-lg text-muted-foreground sm:text-xl">
               Creative + Technical solutions in one place.
