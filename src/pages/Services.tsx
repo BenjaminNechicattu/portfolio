@@ -63,7 +63,7 @@ const serviceOptions = [
         description: 'Logo and brand identity designs' },
       { title: 'Ad Design', type: 'image', url: 'https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/refs/heads/main/public/img/svcimg/5.png',
         description: 'Better ad designs for your marketing needs' },
-      { title: 'Poster Design', type: 'image', url: 'https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/refs/heads/main/public/img/svcimg/8.png',
+      { title: 'Poster Design', type: 'image', url: '                                                                   ',
         description: 'Eye-catchingdesigns for events, promotions and brand' },
     ],
     icon: Target,
@@ -87,9 +87,9 @@ const serviceOptions = [
     ],
     extra: 'Make your brand available in internet with a stunning website',
     visuals: [
-      { title: 'Backend Systems', type: 'image', url: 'https://img-c.udemycdn.com/course/480x270/3629932_6904_2.jpg', 
+      { title: 'Backend Systems', type: 'image', url: 'https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/refs/heads/main/public/img/svcimg/10.png', 
         description: 'Api development and integrations' },
-      { title: 'Web Development', type: 'image', url: 'https://i.pinimg.com/736x/18/90/26/189026e13500ea29e709299c4a3d430d.jpg',
+      { title: 'Web Development', type: 'image', url: 'https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/refs/heads/main/public/img/svcimg/9.png',
         description: 'Stunning websites for your business' },
   
   ],
