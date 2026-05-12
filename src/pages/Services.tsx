@@ -5,6 +5,7 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 
 const serviceOptions = [
   {
@@ -126,11 +127,30 @@ const getInstagramEmbedUrl = (url: string) => {
 
 const Services = () => {
   const [activeService, setActiveService] = useState(serviceOptions[0].id);
+  const [isManualSelection, setIsManualSelection] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Services | Benjamin G Nechicattu';
   }, []);
+
+  useEffect(() => {
+    if (isManualSelection) return;
+
+    const interval = setInterval(() => {
+      setActiveService((prev) => {
+        const currentIndex = serviceOptions.findIndex(
+          (service) => service.id === prev
+        );
+
+        const nextIndex = (currentIndex + 1) % serviceOptions.length;
+
+        return serviceOptions[nextIndex].id;
+      });
+    }, 4000);
+
+  return () => clearInterval(interval);
+}, [isManualSelection]);
 
   const active = serviceOptions.find((service) => service.id === activeService) ?? serviceOptions[0];
 
@@ -211,18 +231,44 @@ const Services = () => {
                 return (
                   <button
                     key={service.id}
-                    onClick={() => setActiveService(service.id)}
+                    onClick={() => {
+                      setActiveService(service.id);
+                      setIsManualSelection(true);
+                    }}
                     className={cn(
-                      'min-w-[180px] rounded-full border px-5 py-3 text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary group',
-                      isActive
-                        ? 'bg-primary text-primary-foreground border-transparent shadow-lg hover:bg-primary/90'
-                        : 'bg-secondary text-secondary-foreground border-border/60 hover:shadow hover:bg-secondary/80'
+                      'relative min-w-[180px] overflow-hidden rounded-full px-5 py-3 text-sm font-medium transition-all duration-300 focus:outline-none',
+                      !isActive &&
+                        'bg-secondary border border-border/50 shadow-sm hover:bg-secondary/80'
                     )}
                   >
-                    <span className="inline-flex items-center gap-2">
-                      <Icon className={cn('h-4 w-4 transition-colors duration-300', isActive && colorClasses.active, colorClasses.hover, 'group-hover:animate-pulse')} />
-                      {service.label}
-                    </span>
+                    {/* Animated neumorphic background */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeServiceBubble"
+                        transition={{
+                          type: 'spring',
+                          stiffness: 260,
+                          damping: 20,
+                        }}
+                        className="absolute inset-0 rounded-full bg-primary shadow-[8px_8px_20px_rgba(0,0,0,0.15),-8px_-8px_20px_rgba(255,255,255,0.05)]"
+                      />
+                    )}
+                <span
+                  className={cn(
+                    'relative z-10 inline-flex items-center gap-2 transition-colors duration-300',
+                    isActive ? 'text-white' : 'text-foreground'
+                  )}
+                >
+                  <Icon
+                    className={cn(
+                      'h-4 w-4 transition-colors duration-300',
+                      isActive
+                        ? colorClasses.active
+                        : colorClasses.hover
+                    )}
+                  />
+                  {service.label}
+                </span>
                   </button>
                 );
               })}
