@@ -21,9 +21,12 @@ const serviceOptions = [
       'Handcrafted color, line, and detail work',
     ],
     packages: [
-      'Basic: ₹699 (A5 simple)',
-      'Standard: ₹1,499 (A4 detailed)',
-      'Premium: ₹4,999+ (ultra-realistic)',
+      'Portrait Basic : ₹699 (A5)' ,
+      'Portrait Standard : ₹899+ (A4)',
+      'Portrait Premium : ₹1,499+ (depends on size and detail)',
+      'Carving : ₹1,599+ (depends on complexity)',
+      'Quilling : ₹1,599+ (depends on size and complexity)',
+      'Acrylic : ₹899+ (depends on canvas size and detail)',
     ],
     extra: 'Perfect for gifts, birthday, weddings',
     visuals: [
