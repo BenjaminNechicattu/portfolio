@@ -11,6 +11,13 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Portfolio",
+    description: "My personal portfolio website built with Next.js, showcasing my projects, skills, and experience in a clean and modern design.",
+    technologies: ["Next.js", "TypeScript"],
+    type: "Web App",
+    link: "https://github.com/BenjaminNechicattu/portfolio"
+  },
+  {
     title: "gogenc",
     description: "Go package for generica compare ops(max/min), string ops(reverse), GetEnv, and more.",
     technologies: ["GoLang", "package"],
