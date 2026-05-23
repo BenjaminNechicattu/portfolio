@@ -11,18 +11,11 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Elements",
-    description: "Elements is a desktop application capable of Editing images over voice commands.",
-    technologies: ["Python", "speech recognition", "OpenCV", "Tkinter", "pillow"],
-    type: "Desktop App",
-    link: "https://github.com/BenjaminNechicattu/Image-Editing-Using-Voice-Commands"
-  },
-  {
-    title: "Elsa",
-    description: "Elsa is an assistant that can be used to control your computer using voice commands.",
-    technologies: ["Python", "speech recognition", "nltk"],
-    type: "Desktop App",
-    link: "https://github.com/BenjaminNechicattu/voice-controll-pc-python"
+    title: "gogenc",
+    description: "Go package for generica compare ops(max/min), string ops(reverse), GetEnv, and more.",
+    technologies: ["GoLang", "package"],
+    type: "go package",
+    link: "https://github.com/BenjaminNechicattu/gogenc"
   },
   {
     title: "GoGames",
@@ -32,11 +25,25 @@ const projects: Project[] = [
     link: "https://github.com/BenjaminNechicattu/GoGames"
   },
   {
-    title: "gogenc",
-    description: "Go package for generica compare ops(max/min), string ops(reverse), GetEnv, and more.",
-    technologies: ["GoLang", "package"],
-    type: "go package",
-    link: "https://github.com/BenjaminNechicattu/gogenc"
+    title: "Elements",
+    description: "Elements is a desktop application capable of Editing images over voice commands.",
+    technologies: ["Python", "speech recognition", "OpenCV", "Tkinter", "pillow"],
+    type: "Desktop App",
+    link: "https://github.com/BenjaminNechicattu/Image-Editing-Using-Voice-Commands"
+  },
+  {
+    title: "GoStick",
+    description: "GoStick is a native Linux desktop controller interface that transforms an Xbox controller into a low-latency mouse, keyboard, and scrolling input system using evdev and uinput.",
+    technologies: ["Go", "Linux", "uinput", "evdev", "Wayland", "Systray"],
+    type: "Desktop App",
+    link: "https://github.com/BenjaminNechicattu/gostick"
+  },
+  {
+    title: "Elsa",
+    description: "Elsa is an assistant that can be used to control your computer using voice commands.",
+    technologies: ["Python", "speech recognition", "nltk"],
+    type: "Desktop App",
+    link: "https://github.com/BenjaminNechicattu/voice-controll-pc-python"
   },
   {
     title: "Design Projects",
