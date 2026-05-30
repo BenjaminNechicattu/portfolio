@@ -1,0 +1,93 @@
+.transmission-container {
+  position: relative;
+  z-index: 2;
+  margin-left: 10%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 1.5rem;
+
+  width: 100%;
+  max-width: 900px;
+
+  animation: terminalFadeIn 1s ease;
+}
+
+.transmission-line {
+  font-family:
+    "JetBrains Mono",
+    "Fira Code",
+    "Courier New",
+    monospace;
+
+  color: #d7aa58;
+
+  text-align: flex-start;
+
+  letter-spacing: 0.03em;
+  line-height: 1.8;
+
+  text-shadow:
+    0 0 3px rgba(215, 170, 88, 0.7),
+    0 0 10px rgba(215, 170, 88, 0.35),
+    0 0 25px rgba(215, 170, 88, 0.15);
+
+  font-size: 1.1rem;
+}
+
+.terminal-header {
+  text-align: flex-start;
+
+  margin-bottom: 2rem;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  color: rgba(215, 170, 88, 0.6);
+
+  letter-spacing: 0.25em;
+
+  text-transform: uppercase;
+
+  font-size: 1rem;
+}
+
+.terminal-command {
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  color: #8bc34a;
+
+  text-align: left;
+
+  letter-spacing: 0.03em;
+
+  text-shadow:
+    0 0 4px rgba(139, 195, 74, 0.5);
+
+  margin-bottom: 0.5rem;
+}
+
+.transmission-line {
+  color: #d7aa58;
+}
+
+.cursor {
+  margin-left: 2px;
+
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.terminal-spacer {
+  height: 1.5rem;
+}
