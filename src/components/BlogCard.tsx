@@ -152,7 +152,11 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
             <p><strong>Summary:</strong> {description}</p>
             <hr className="my-4" />
             
-            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
+            <div className="prose prose-lg dark:prose-invert max-w-3xl mx-auto">
+              <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                {content}
+              </ReactMarkdown>
+            </div>
             <hr className="my-4" />
             <p>{author}</p>
             <br></br>

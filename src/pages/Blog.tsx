@@ -193,7 +193,7 @@ const Blog = () => {
         </div>
         <h1 className="text-4xl font-bold mb-6">Blog</h1>
         <p className="text-lg text-muted-foreground">
-          Hi, If you are seeing this, you probably know me, well, I'm Ben_G. This is where I share my journey, experiences, thoughts and insights.
+          Hi,     d   If you are seeing this, you probably know me, well, I'm Ben_G. This is where I share my journey, experiences, thoughts and insights.
           I always like to write and share my thoughts with the world. Some might be about my life, some might be about my work.
           For sure it might involve aliens, technology, short stories, Ai and some random stuff.
           I hope you enjoy reading them as much as I enjoyed writing them, hope you find something useful here.
