@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Modal from './Modal';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
 import { Share2, Copy, Check, X } from 'lucide-react';
 import { BLOG_ID_PARAM } from '@/constants/blog';
 
@@ -30,6 +31,32 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
   useEffect(() => {
     setIsModalOpen(isOpen);
   }, [isOpen]);
+
+  const [markdownContent, setMarkdownContent] = useState("");
+
+  useEffect(() => {
+    const loadContent = async () => {
+      try {
+
+        const isGithubRaw = /^https:\/\/raw\.githubusercontent\.com\//.test(content);
+
+        if (
+          isGithubRaw
+        ) {
+          const response = await fetch(content);
+          const text = await response.text();
+          setMarkdownContent(text);
+        } else {
+          setMarkdownContent(content);
+        }
+      } catch (err) {
+        console.error("Failed to load markdown:", err);
+        setMarkdownContent(content);
+      }
+    };
+
+    loadContent();
+  }, [content]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
@@ -153,8 +180,11 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
             <hr className="my-4" />
             
             <div className="prose prose-lg dark:prose-invert max-w-3xl mx-auto">
-              <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                {content}
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+              >
+                {markdownContent}
               </ReactMarkdown>
             </div>
             <hr className="my-4" />
