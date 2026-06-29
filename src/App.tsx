@@ -11,6 +11,7 @@ import Blog from "./pages/Blog"; // Import the Blog page
 import NewYear from "./pages/NewYear"; // Import the New Year page
 import Services from "./pages/Services";
 import Joy from "./pages/Joy";
+import Moon from "./pages/Moon";
 import ContactPage from "./pages/Contact";
 import PageTransition from '@/components/PageTransition';
 
@@ -30,6 +31,7 @@ const App = () => (
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/joy" element={<Joy />} />
+                <Route path="/moon" element={<Moon />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/newyear" element={<NewYear />} />
                 <Route path="/newyear/:name" element={<NewYear />} />
