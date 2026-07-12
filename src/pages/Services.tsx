@@ -95,6 +95,8 @@ const serviceOptions = [
         description: 'Api development and integrations' },
       { title: 'Web Development', type: 'image', url: 'https://raw.githubusercontent.com/BenjaminNechicattu/portfolio/refs/heads/main/public/img/svcimg/9.png',
         description: 'Stunning websites for your business' },
+      { title: 'Android App', type: 'image', url: 'https://github.com/BenjaminNechicattu/HabitTracker/raw/main/docs/design.png',
+        description: 'Beautifully crafted Android applications' },
   
   ],
     icon: Laptop,
