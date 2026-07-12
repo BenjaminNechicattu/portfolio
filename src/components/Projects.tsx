@@ -32,18 +32,18 @@ const projects: Project[] = [
     link: "https://github.com/BenjaminNechicattu/GoGames"
   },
   {
+    title: "Habbity",
+    description: "A beautifully crafted habit tracker designed to help you build consistency through simple routines.",
+    technologies: ["React Native", "Expo SDK 57", "TypeScript", "AsyncStorage"],
+    type: "Android App",
+    link: "https://github.com/BenjaminNechicattu/HabitTracker/tree/main"
+  },
+  {
     title: "Elements",
     description: "Elements is a desktop application capable of Editing images over voice commands.",
     technologies: ["Python", "speech recognition", "OpenCV", "Tkinter", "pillow"],
     type: "Desktop App",
     link: "https://github.com/BenjaminNechicattu/Image-Editing-Using-Voice-Commands"
-  },
-  {
-    title: "GoStick",
-    description: "GoStick is a native Linux desktop controller interface that transforms an Xbox controller into a low-latency mouse, keyboard, and scrolling input system using evdev and uinput.",
-    technologies: ["Go", "Linux", "uinput", "evdev", "Wayland", "Systray"],
-    type: "Desktop App",
-    link: "https://github.com/BenjaminNechicattu/gostick"
   },
   {
     title: "Elsa",
@@ -53,12 +53,19 @@ const projects: Project[] = [
     link: "https://github.com/BenjaminNechicattu/voice-controll-pc-python"
   },
   {
+    title: "GoStick",
+    description: "GoStick is a native Linux desktop controller interface that transforms an Xbox controller into a low-latency mouse, keyboard, and scrolling input system using evdev and uinput.",
+    technologies: ["Go", "Linux", "uinput", "evdev", "Wayland", "Systray"],
+    type: "Desktop App",
+    link: "https://github.com/BenjaminNechicattu/gostick"
+  },
+  {
     title: "Design Projects",
     description: "User interface design projects showcasing my skills in creating visually appealing and user-friendly interfaces.",
     technologies: ["Figma", "UI/UX", "Adobe XD"],
     type: "UI/UX",
     link: "https://www.behance.net/benjaminnechicattu"
-  }
+  },
 ];
 
 const ProjectCard = ({ project, isVisible, index }: { project: Project, isVisible: boolean, index: number }) => {
