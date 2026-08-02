@@ -37,13 +37,25 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
   useEffect(() => {
     const loadContent = async () => {
       try {
-
         const isGithubRaw = /^https:\/\/raw\.githubusercontent\.com\//.test(content);
+        const isLocalHost = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
 
-        if (
-          isGithubRaw
-        ) {
-          const response = await fetch(content);
+        if (isGithubRaw) {
+          let contentUrl = content;
+
+          if (isLocalHost) {
+            const localPathMatch = content.match(
+              /^https:\/\/raw\.githubusercontent\.com\/[\w.-]+\/[\w.-]+\/(?:refs\/heads\/[^/]+|[^/]+)\/(src\/data\/blogs\/.*)$/
+            );
+            if (localPathMatch) {
+              contentUrl = `/${localPathMatch[1]}`;
+            }
+          }
+
+          const response = await fetch(contentUrl);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch markdown (${response.status})`);
+          }
           const text = await response.text();
           setMarkdownContent(text);
         } else {
@@ -118,13 +130,26 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
     }
   };
 
+  const formatDateDDMMYYYY = (dateValue: string) => {
+    const parsedDate = new Date(dateValue);
+    if (Number.isNaN(parsedDate.getTime())) {
+      return dateValue;
+    }
+
+    const day = String(parsedDate.getDate()).padStart(2, '0');
+    const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
+    const year = parsedDate.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <>
       <div className="glass-card p-6 cursor-pointer" onClick={openModal}>
         <img           src={image}           alt={title}           className="w-full h-auto max-h-48 object-cover mb-4 rounded"         />
         <h2 className="text-xl font-semibold mb-2">{title}</h2>
         <p className="text-muted-foreground mb-2">{description}</p>
-        <p className="text-sm text-muted-foreground mb-2">{author} on {new Date(date).toLocaleDateString()}</p>
+        <p className="text-sm text-muted-foreground mb-2">{author} on {formatDateDDMMYYYY(date)}</p>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag, index) => (
             <span key={index} className="text-xs bg-primary/10 text-primary px-3 py-1 rounded shadow-sm">
@@ -175,7 +200,7 @@ const BlogCard = ({ id, title, description, image, author, date, tags = [], cont
               onClick={toggleImageExpand} 
             />
             <hr className="my-4" />
-            <p><strong>Date:</strong> {new Date(date).toLocaleDateString()}</p>
+            <p><strong>Date:</strong> {formatDateDDMMYYYY(date)}</p>
             <p><strong>Summary:</strong> {description}</p>
             <hr className="my-4" />
             
