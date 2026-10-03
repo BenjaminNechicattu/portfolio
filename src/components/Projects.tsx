@@ -32,11 +32,11 @@ const projects: Project[] = [
     link: "https://github.com/BenjaminNechicattu/GoGames"
   },
   {
-    title: "Habbity",
+    title: "Habitty",
     description: "A beautifully crafted habit tracker designed to help you build consistency through simple routines.",
-    technologies: ["React Native", "Expo SDK 57", "TypeScript", "AsyncStorage"],
-    type: "Android App",
-    link: "https://github.com/BenjaminNechicattu/HabitTracker/tree/main"
+    technologies: ["React Native Web", "Expo SDK 57", "TypeScript", "AsyncStorage"],
+    type: "Web App",
+    link: "/habitty"
   },
   {
     title: "Elements",
@@ -69,6 +69,8 @@ const projects: Project[] = [
 ];
 
 const ProjectCard = ({ project, isVisible, index }: { project: Project, isVisible: boolean, index: number }) => {
+  const isExternalLink = project.link ? /^https?:\/\//.test(project.link) : false;
+
   const cardContent = (
     <div 
       className={cn(
@@ -105,8 +107,8 @@ const ProjectCard = ({ project, isVisible, index }: { project: Project, isVisibl
   return project.link ? (
     <a
       href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={isExternalLink ? "_blank" : undefined}
+      rel={isExternalLink ? "noopener noreferrer" : undefined}
       className="block h-full"
       style={{ textDecoration: 'none' }}
     >
