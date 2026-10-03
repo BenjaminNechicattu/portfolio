@@ -2,12 +2,12 @@
   "name": "Habitty",
   "short_name": "Habitty",
   "description": "Habitty helps you track your daily routines and stay consistent.",
-  "start_url": ".",
+  "start_url": "/habitty/index.html",
   "display": "standalone",
   "background_color": "#F3F5F9",
   "theme_color": "#2F6FEB",
   "orientation": "portrait",
-  "scope": "./",
+  "scope": "/habitty/",
   "lang": "en",
   "icons": [
     {

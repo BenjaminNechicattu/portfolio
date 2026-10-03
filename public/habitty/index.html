@@ -28,11 +28,84 @@
         height: 100%;
         flex: 1;
       }
+
+      @font-face {
+        font-family: 'Ionicons';
+        src: url('/habitty/assets/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.b4eb097d35f44ed943676fd56f6bdc51.ttf') format('truetype');
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      #install-habitty {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        z-index: 2147483647;
+        border: 0;
+        border-radius: 9999px;
+        padding: 10px 16px;
+        font: 600 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: #0f172a;
+        color: #ffffff;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.3);
+        display: none;
+      }
+
+      #install-habitty-tip {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        z-index: 2147483646;
+        border-radius: 12px;
+        padding: 10px 12px;
+        font: 500 12px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        color: #0f172a;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.16);
+        display: none;
+      }
     </style>
   <meta name="theme-color" content="#2F6FEB">
 <link rel="icon" href="./favicon.ico"/></head>
   <body>
     <div id="root"></div>
+    <button id="install-habitty" type="button">Install Habitty</button>
+    <div id="install-habitty-tip">Install Habitty: open browser menu and choose "Add to Home screen".</div>
   <script src="./_expo/static/js/web/index-f0422effbaa12e4d015856ae12c25e2f.js" defer></script>
+  <script>
+    (() => {
+      let deferredPrompt = null;
+      const installButton = document.getElementById('install-habitty');
+      const installTip = document.getElementById('install-habitty-tip');
+
+      if (!installButton || !installTip) return;
+
+      window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        deferredPrompt = event;
+        installButton.style.display = 'inline-flex';
+      });
+
+      installButton.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        installButton.style.display = 'none';
+      });
+
+      window.addEventListener('appinstalled', () => {
+        installButton.style.display = 'none';
+        installTip.style.display = 'none';
+      });
+
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+      const isAppleMobile = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      if (isAppleMobile && !isStandalone) {
+        installTip.style.display = 'block';
+      }
+    })();
+  </script>
 </body>
 </html>

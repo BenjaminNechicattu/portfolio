@@ -14,7 +14,7 @@ import Joy from "./pages/Joy";
 import Moon from "./pages/Moon";
 import Inspire from "./pages/Inspire";
 import ContactPage from "./pages/Contact";
-import Habitty from "./pages/Habitty";
+import HabittyRedirect from "./pages/HabittyRedirect";
 import PageTransition from '@/components/PageTransition';
 
 const queryClient = new QueryClient();
@@ -36,7 +36,7 @@ const App = () => (
                 <Route path="/moon" element={<Moon />} />
                 <Route path="/inspire" element={<Inspire />} />
                 <Route path="/contact" element={<ContactPage />} />
-                <Route path="/habitty" element={<Habitty />} />
+                <Route path="/habitty" element={<HabittyRedirect />} />
                 <Route path="/newyear" element={<NewYear />} />
                 <Route path="/newyear/:name" element={<NewYear />} />
                 <Route path="*" element={<NotFound />} />
