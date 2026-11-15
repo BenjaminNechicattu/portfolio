@@ -8,15 +8,8 @@ import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import ForestElements from '@/components/ForestElements';
-import FlyingInsects from '@/components/FlyingInsects';
-import SpaceElements from '@/components/SpaceElements';
-import CyberElements from '@/components/CyberElements';
-import { useCustomTheme } from '@/contexts/CustomThemeContext';
 
 const Index = () => {
-  const { customTheme } = useCustomTheme();
-  
   // Set metadata and title
   useEffect(() => {
     document.title = "Benjamin G Nechicattu | Software Engineer";
@@ -24,14 +17,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {customTheme === 'nature' && (
-        <>
-          <ForestElements />
-          <FlyingInsects />
-        </>
-      )}
-      {customTheme === 'space' && <SpaceElements />}
-      {customTheme === 'cyber' && <CyberElements />}
       <NavBar />
       <main>
         <Hero />

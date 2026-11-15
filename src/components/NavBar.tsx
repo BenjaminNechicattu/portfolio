@@ -3,6 +3,14 @@ import { cn } from '@/lib/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from 'next-themes';
 import { Moon, Sun } from 'lucide-react';
+import { useCustomTheme, CustomTheme } from '@/contexts/CustomThemeContext';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -11,6 +19,7 @@ const NavBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
+  const { customTheme, setCustomTheme } = useCustomTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -152,6 +161,18 @@ const NavBar = () => {
                 <Moon className="h-5 w-5" />
               )}
             </button>
+
+            <div className="hidden md:block">
+              <Select value={customTheme} onValueChange={(value) => setCustomTheme(value as CustomTheme)}>
+                <SelectTrigger className="h-9 w-[120px] rounded-md border border-border bg-background/60 text-xs font-medium text-foreground shadow-sm hover:bg-background">
+                  <SelectValue placeholder="Theme" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="terminal">Terminal</SelectItem>
+                  <SelectItem value="sketch">Sketch</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             
             <div className="md:hidden">
               <button onClick={toggleMenu} className="p-2">

@@ -7,6 +7,21 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Linkedin, Mail, Phone } from "lucide-react";
 
+const particles = [
+  { left: '10%', top: '18%', size: 4 },
+  { left: '22%', top: '52%', size: 3 },
+  { left: '34%', top: '64%', size: 5 },
+  { left: '46%', top: '28%', size: 4 },
+  { left: '58%', top: '48%', size: 3 },
+  { left: '68%', top: '38%', size: 5 },
+  { left: '78%', top: '56%', size: 4 },
+  { left: '88%', top: '30%', size: 3 },
+  { left: '16%', top: '78%', size: 4 },
+  { left: '38%', top: '82%', size: 3 },
+  { left: '62%', top: '80%', size: 5 },
+  { left: '84%', top: '74%', size: 3 },
+];
+
 const Contact = () => {
   const { ref, isIntersecting } = useScrollReveal();
   const { toast } = useToast();
@@ -110,18 +125,52 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-12">
-      <div className="section-container" ref={ref}>
+    <section
+      id="contact"
+      className="relative overflow-hidden py-12"
+      style={{
+        backgroundColor: 'hsl(var(--background))',
+        color: 'hsl(var(--foreground))',
+      }}
+    >
+      <div
+        className="contact-particles absolute inset-0"
+        aria-hidden="true"
+        style={{ backgroundColor: 'hsl(var(--background))' }}
+      >
+        {particles.map((particle, index) => (
+          <span
+            key={index}
+            className="contact-particle"
+            style={{
+              left: particle.left,
+              top: particle.top,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              backgroundColor: 'hsl(var(--foreground) / 0.24)',
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="section-container relative z-10" ref={ref}>
         <div className="max-w-5xl mx-auto">
           <div className={cn(
             "mb-12 text-center transition-all duration-500 ease-apple",
             isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           )}>
-            <span className="inline-block px-3 py-1 text-xs font-medium tracking-wider uppercase rounded-full bg-secondary text-secondary-foreground mb-4">
+            <span
+              className="inline-block px-3 py-1 text-xs font-medium tracking-wider uppercase rounded-full mb-4"
+              style={{
+                backgroundColor: 'hsl(var(--card))',
+                color: 'hsl(var(--foreground))',
+                border: '1px solid hsl(var(--border))',
+              }}
+            >
               Contact
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Get In Touch</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'hsl(var(--foreground))' }}>Get In Touch</h2>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'hsl(var(--muted-foreground))' }}>
               Interested in working together or have a question? Feel free to reach out.
             </p>
           </div>
@@ -135,7 +184,12 @@ const Contact = () => {
                   isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
                   cards.length % 2 !== 0 && index === cards.length - 1 ? "md:col-span-2 md:mx-auto" : ""
                 )}
-                style={{ transitionDelay: isIntersecting ? `${(index + 1) * 100}ms` : '0ms' }}
+                style={{
+                  transitionDelay: isIntersecting ? `${(index + 1) * 100}ms` : '0ms',
+                  backgroundColor: 'hsl(var(--card))',
+                  borderColor: 'hsl(var(--border))',
+                  color: 'hsl(var(--foreground))',
+                }}
               >
                 {card.content}
               </div>

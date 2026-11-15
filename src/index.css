@@ -560,6 +560,22 @@
   }
 }
 
+.contact-particles {
+  background-image: radial-gradient(hsl(var(--foreground) / 0.22) 1px, transparent 1.35px);
+  background-size: 14px 14px;
+  opacity: 0.75;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+}
+
+.contact-particle {
+  position: absolute;
+  display: block;
+  border-radius: 9999px;
+  background: hsl(var(--foreground) / 0.26);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -642,7 +658,6 @@ html {
   text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
 }
 
-/* Terminal theme cursor effect on headings */
 @media (prefers-reduced-motion: no-preference) {
   .theme-terminal h1::after,
   .theme-terminal h2::after {

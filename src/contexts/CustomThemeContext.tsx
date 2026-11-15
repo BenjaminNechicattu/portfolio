@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useTheme } from 'next-themes';
 
-export type CustomTheme = 'default' | 'nature' | 'space' | 'cyber' | 'terminal' | 'sketch';
+export type CustomTheme = 'terminal' | 'sketch';
 
-const VALID_THEMES: CustomTheme[] = ['default', 'nature', 'space', 'cyber', 'terminal', 'sketch'];
+const VALID_THEMES: CustomTheme[] = ['terminal', 'sketch'];
 
 const isValidTheme = (theme: string | null): theme is CustomTheme => {
   return theme !== null && VALID_THEMES.includes(theme as CustomTheme);
@@ -18,6 +19,7 @@ const CustomThemeContext = createContext<CustomThemeContextType | undefined>(und
 
 export const CustomThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { setTheme } = useTheme();
   const [customTheme, setCustomThemeState] = useState<CustomTheme>(() => {
     // Check URL parameter first
     const urlTheme = searchParams.get('theme');
@@ -29,20 +31,19 @@ export const CustomThemeProvider: React.FC<{ children: React.ReactNode }> = ({ c
     if (isValidTheme(savedTheme)) {
       return savedTheme;
     }
-    return 'default';
+    return 'sketch';
   });
 
   const setCustomTheme = (theme: CustomTheme) => {
     setCustomThemeState(theme);
     localStorage.setItem('customTheme', theme);
+    if (theme === 'terminal') {
+      setTheme('dark');
+    }
     
     // Update URL parameter
     const newSearchParams = new URLSearchParams(searchParams);
-    if (theme === 'default') {
-      newSearchParams.delete('theme');
-    } else {
-      newSearchParams.set('theme', theme);
-    }
+    newSearchParams.set('theme', theme);
     setSearchParams(newSearchParams, { replace: true });
   };
 
@@ -56,6 +57,12 @@ export const CustomThemeProvider: React.FC<{ children: React.ReactNode }> = ({ c
     // Add current theme class
     root.classList.add(`theme-${customTheme}`);
   }, [customTheme]);
+
+  useEffect(() => {
+    if (customTheme === 'terminal' && localStorage.getItem('theme') === null) {
+      setTheme('dark');
+    }
+  }, [customTheme, setTheme]);
 
   return (
     <CustomThemeContext.Provider value={{ customTheme, setCustomTheme }}>
