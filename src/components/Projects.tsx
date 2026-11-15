@@ -36,7 +36,7 @@ const projects: Project[] = [
     description: "A beautifully crafted habit tracker designed to help you build consistency through simple routines.",
     technologies: ["React Native Web", "Expo SDK 57", "TypeScript", "AsyncStorage"],
     type: "Web App",
-    link: "/habitty"
+    link: "https://github.com/BenjaminNechicattu/HabitTracker"
   },
   {
     title: "Elements",
