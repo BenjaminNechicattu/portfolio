@@ -44,7 +44,10 @@ const Hero = () => {
             </div>
           
           <h1 className="mb-6 text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-            Benjamin G Nechicattu
+            Benjamin G{' '}
+            <span className="font-[Arial,sans-serif] font-bold tracking-normal text-transparent [-webkit-text-stroke:1px_hsl(var(--foreground))] [text-shadow:none]">
+              Nechicattu
+            </span>
           </h1>
           
           <p className="mb-10 text-base md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4 md:px-0">
