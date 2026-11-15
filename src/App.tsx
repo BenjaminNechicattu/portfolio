@@ -8,7 +8,6 @@ import { CustomThemeProvider } from "@/contexts/CustomThemeContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog"; // Import the Blog page
-import NewYear from "./pages/NewYear"; // Import the New Year page
 import Services from "./pages/Services";
 import Joy from "./pages/Joy";
 import Moon from "./pages/Moon";
@@ -35,8 +34,6 @@ const App = () => (
                 <Route path="/moon" element={<Moon />} />
                 <Route path="/inspire" element={<Inspire />} />
                 <Route path="/contact" element={<ContactPage />} />
-                <Route path="/newyear" element={<NewYear />} />
-                <Route path="/newyear/:name" element={<NewYear />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </PageTransition>

@@ -2,12 +2,9 @@ import { useScrollReveal } from '@/utils/animations';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Download } from 'lucide-react';
-import { isFestiveSeasonActive } from '@/utils/festive';
-import NewYearCountdown from './NewYearCountdown';
 
 const Hero = () => {
   const { ref, isIntersecting } = useScrollReveal();
-  const showFestiveTheme = isFestiveSeasonActive();
 
   return (
     <section 
@@ -54,12 +51,6 @@ const Hero = () => {
             Building innovative software solutions at International Business Machines (IBM). 
             Passionate about technology and creating impactful products. A Tech and Science enthusiast, always looking for opportunities.
           </p>
-          
-          {showFestiveTheme && (
-            <div className="mb-8 flex justify-center">
-              <NewYearCountdown />
-            </div>
-          )}
           
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 px-4 md:px-0">
             <a 

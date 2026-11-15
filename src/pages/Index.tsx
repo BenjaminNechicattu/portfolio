@@ -8,12 +8,10 @@ import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import SnowParticles from '@/components/SnowParticles';
 import ForestElements from '@/components/ForestElements';
 import FlyingInsects from '@/components/FlyingInsects';
 import SpaceElements from '@/components/SpaceElements';
 import CyberElements from '@/components/CyberElements';
-import { isFestiveSeasonActive } from '@/utils/festive';
 import { useCustomTheme } from '@/contexts/CustomThemeContext';
 
 const Index = () => {
@@ -24,11 +22,8 @@ const Index = () => {
     document.title = "Benjamin G Nechicattu | Software Engineer";
   }, []);
 
-  const showFestiveTheme = isFestiveSeasonActive();
-
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {showFestiveTheme && <SnowParticles />}
       {customTheme === 'nature' && (
         <>
           <ForestElements />
