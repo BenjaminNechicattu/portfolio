@@ -649,6 +649,12 @@ html {
   text-shadow: 0 0 8px currentColor;
 }
 
+.theme-terminal #hero h1 span {
+  color: hsl(var(--foreground));
+  -webkit-text-fill-color: hsl(var(--foreground));
+  -webkit-text-stroke: 0;
+}
+
 .theme-terminal.dark h1,
 .theme-terminal.dark h2,
 .theme-terminal.dark h3,
@@ -804,5 +810,20 @@ html {
   .theme-terminal h3:hover,
   .theme-terminal h3:focus {
     animation: glitch 300ms infinite;
+  }
+
+  .theme-terminal .appear-animation > h1,
+  .theme-terminal .appear-animation > h2,
+  .theme-terminal .appear-animation > h3 {
+    animation: appearAnimation 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, glitch 1s ease-in-out 3;
+  }
+
+  .theme-terminal .appear-animation > h1:hover,
+  .theme-terminal .appear-animation > h1:focus,
+  .theme-terminal .appear-animation > h2:hover,
+  .theme-terminal .appear-animation > h2:focus,
+  .theme-terminal .appear-animation > h3:hover,
+  .theme-terminal .appear-animation > h3:focus {
+    animation: appearAnimation 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, glitch 300ms infinite;
   }
 }
